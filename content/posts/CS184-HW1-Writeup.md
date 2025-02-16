@@ -43,7 +43,7 @@ repost:
 # Write up for HW1
 
 > Group members: Xize Duan, Phoenix Ye.
-> Link to the page itself: [https://alexdwastaken.github.io/Blog/posts/eeccd09/](https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html)
+> Link to the page itself: [https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html](https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html)
 
 ## Overview
 
@@ -54,9 +54,9 @@ We fisrt assume a counter-clockwise winding order.
 Then the following is the condition for point inside triangle:
 
 $$
-- (y1 - y0) (x - x0) + (x1 - x0) (y - y0) \geq 0 \\
-- (y2 - y1) (x - x1) + (x2 - x1) (y - y1) \geq 0 \\
-- (y0 - y2) (x - x2) + (x0 - x2) (y - y2) \geq 0
+(y1 - y0) (x - x0) + (x1 - x0) (y - y0) \geq 0 \newline
+(y2 - y1) (x - x1) + (x2 - x1) (y - y1) \geq 0 \newline
+(y0 - y2) (x - x2) + (x0 - x2) (y - y2) \geq 0
 $$
 
 If the winding order is clockwise, simply change the direction of the signs.

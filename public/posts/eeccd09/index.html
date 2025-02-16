@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en-us">
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>CS184 HW1 Writeup - My New Hugo Site</title><meta name="author" content="DY">
-<meta name="description" content="Write up for HW1 Overview Question 1 To rasterize a triangle, what we fisrt did is to perform a point-in-triangle test. The test is accomplished by performing a cross product $(p_1-p_0)\times (p_2-p_1) \cdot k$. If the result is negative, then the winding order is clockwise, otherwise counterclockwise. The final result will never be zero for a well-defined triangle. We fisrt assume a counter-clockwise winding order. Then the following is the condition for point inside triangle:
+    <title>CS184 HW1 Writeup - My New Hugo Site</title><meta name="author" content="Xize Duan">
+<meta name="description" content="Write up for HW1 Group members: Xize Duan, Phoenix Ye. Link to the page itself: https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html
 "><meta name="keywords" content='CS184'>
   <meta itemprop="name" content="CS184 HW1 Writeup">
-  <meta itemprop="description" content="Write up for HW1 Overview Question 1 To rasterize a triangle, what we fisrt did is to perform a point-in-triangle test. The test is accomplished by performing a cross product $(p_1-p_0)\times (p_2-p_1) \cdot k$. If the result is negative, then the winding order is clockwise, otherwise counterclockwise. The final result will never be zero for a well-defined triangle. We fisrt assume a counter-clockwise winding order. Then the following is the condition for point inside triangle:">
+  <meta itemprop="description" content="Write up for HW1 Group members: Xize Duan, Phoenix Ye. Link to the page itself: https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html">
   <meta itemprop="datePublished" content="2025-02-08T00:05:27-08:00">
   <meta itemprop="dateModified" content="2025-02-08T00:05:27-08:00">
-  <meta itemprop="wordCount" content="472">
-  <meta itemprop="keywords" content="CS184"><meta property="og:url" content="https://example.org/posts/eeccd09/">
+  <meta itemprop="wordCount" content="1579">
+  <meta itemprop="keywords" content="CS184"><meta property="og:url" content="http://localhost:1313/posts/eeccd09/">
   <meta property="og:site_name" content="My New Hugo Site">
   <meta property="og:title" content="CS184 HW1 Writeup">
-  <meta property="og:description" content="Write up for HW1 Overview Question 1 To rasterize a triangle, what we fisrt did is to perform a point-in-triangle test. The test is accomplished by performing a cross product $(p_1-p_0)\times (p_2-p_1) \cdot k$. If the result is negative, then the winding order is clockwise, otherwise counterclockwise. The final result will never be zero for a well-defined triangle. We fisrt assume a counter-clockwise winding order. Then the following is the condition for point inside triangle:">
+  <meta property="og:description" content="Write up for HW1 Group members: Xize Duan, Phoenix Ye. Link to the page itself: https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -26,11 +26,11 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="CS184 HW1 Writeup">
-  <meta name="twitter:description" content="Write up for HW1 Overview Question 1 To rasterize a triangle, what we fisrt did is to perform a point-in-triangle test. The test is accomplished by performing a cross product $(p_1-p_0)\times (p_2-p_1) \cdot k$. If the result is negative, then the winding order is clockwise, otherwise counterclockwise. The final result will never be zero for a well-defined triangle. We fisrt assume a counter-clockwise winding order. Then the following is the condition for point inside triangle:">
+  <meta name="twitter:description" content="Write up for HW1 Group members: Xize Duan, Phoenix Ye. Link to the page itself: https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html">
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://example.org/posts/eeccd09/" title="CS184 HW1 Writeup - My New Hugo Site" /><link rel="alternate" type="text/markdown" href="https://example.org/posts/eeccd09/index.md" title="CS184 HW1 Writeup - My New Hugo Site"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/eeccd09/" title="CS184 HW1 Writeup - My New Hugo Site" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/eeccd09/index.md" title="CS184 HW1 Writeup - My New Hugo Site"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -40,13 +40,13 @@
     "inLanguage": "en-us",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https:\/\/example.org\/posts\/eeccd09\/"
-    },"genre": "posts","keywords": "CS184","wordcount":  472 ,
-    "url": "https:\/\/example.org\/posts\/eeccd09\/","datePublished": "2025-02-08T00:05:27-08:00","dateModified": "2025-02-08T00:05:27-08:00","publisher": {
+      "@id": "http:\/\/localhost:1313\/posts\/eeccd09\/"
+    },"genre": "posts","keywords": "CS184","wordcount":  1579 ,
+    "url": "http:\/\/localhost:1313\/posts\/eeccd09\/","datePublished": "2025-02-08T00:05:27-08:00","dateModified": "2025-02-08T00:05:27-08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
-        "name": "DY"
+        "name": "Xize Duan"
       },"description": ""
   }
   </script><script src="/js/head/color-scheme.min.js"></script></head>
@@ -84,7 +84,7 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="Repost" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>CS184 HW1 Writeup</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      DY</span></span><span class="post-included-in">&nbsp;included in <a href="/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="post-meta-line"><span title="published on 2025-02-08 00:05:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-02-08">2025-02-08</time></span>&nbsp;<span title="472 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 500 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>3 minutes</span>&nbsp;</div>
+      Xize Duan</span></span><span class="post-included-in">&nbsp;included in <a href="/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="post-meta-line"><span title="published on 2025-02-08 00:05:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-02-08">2025-02-08</time></span>&nbsp;<span title="1579 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1600 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>8 minutes</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -95,12 +95,32 @@
     <li><a href="#overview">Overview</a></li>
     <li><a href="#question-1">Question 1</a></li>
   </ul>
+
+  <ul>
+    <li><a href="#explanation">Explanation</a></li>
+    <li><a href="#screenshot">Screenshot</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#explanation-1">Explanation</a></li>
+    <li><a href="#comparison">Comparison</a></li>
+    <li><a href="#relative-differences">Relative Differences</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#explanation-2">Explanation</a></li>
+    <li><a href="#comparison-1">Comparison</a></li>
+    <li><a href="#demonestration">Demonestration</a></li>
+  </ul>
 </nav></div>
       </div><div class="content" id="content"><h2 id="write-up-for-hw1" class="heading-element"><span>Write up for HW1</span>
   <a href="#write-up-for-hw1" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><h2 id="overview" class="heading-element"><span>Overview</span>
+</h2><blockquote>
+<p>Group members: Xize Duan, Phoenix Ye.
+Link to the page itself: <a href="https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html"target="_blank" rel="external nofollow noopener noreferrer">https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html</a></p></blockquote>
+<h2 id="overview" class="heading-element"><span>Overview</span>
   <a href="#overview" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
@@ -111,13 +131,11 @@
 </h2><p>To rasterize a triangle, what we fisrt did is to perform a point-in-triangle test. The test is accomplished by performing a cross product $(p_1-p_0)\times (p_2-p_1) \cdot k$. If the result is negative, then the winding order is clockwise, otherwise counterclockwise. The final result will never be zero for a well-defined triangle.
 We fisrt assume a counter-clockwise winding order.
 Then the following is the condition for point inside triangle:</p>
-<p>$$</p>
-<ul>
-<li>(y1 - y0) (x - x0) + (x1 - x0) (y - y0) \geq 0 \</li>
-<li>(y2 - y1) (x - x1) + (x2 - x1) (y - y1) \geq 0 \</li>
-<li>(y0 - y2) (x - x2) + (x0 - x2) (y - y2) \geq 0
-$$</li>
-</ul>
+<p>$$
+(y1 - y0) (x - x0) + (x1 - x0) (y - y0) \geq 0 \newline
+(y2 - y1) (x - x1) + (x2 - x1) (y - y1) \geq 0 \newline
+(y0 - y2) (x - x2) + (x0 - x2) (y - y2) \geq 0
+$$</p>
 <p>If the winding order is clockwise, simply change the direction of the signs.</p>
 <p>The next thing we do is to enumerate across every row in the bounding box of the triangle, and color the pixel if the point inside the triangle. What we did to optimize this operation is that we keep track whether we have left the triangle. If we have left the triangle, then the rest of the picture on this row will never skip to the next row, so it is safe to escape to the next row.</p>
 <p>We timed the rendering time of the dragon picture. The naive method which we enumerated every pixel in the bounding box took around 0.0078 second on average, and the one which we kept track of whether we have left the triangle took 0.0067 second on average.</p>
@@ -128,6 +146,233 @@ $$</li>
 </h2><p>In summary, the supersampling algorithm improves image quality by working in a higher-resolution space and then averaging down to the final image. The modifications sums up to three steps—using a larger sample buffer, scaling coordinates, and adding a resolve step.</p>
 <p>We changed the size of sample buffer each time. One subtle difference is that if the total image is supersampled by $n$, then its coordinate is only scaled by $\sqrt{n}$, which is crucial in correctly sample everything. During the sampling process, instead of marking an entire pixel as either inside or outside, we check multiple subpixel sample locations especially on edge places.. For example, when we supersample by a factor of 4, the coordinates are scaled by a factor of 2. We also modified the function that&rsquo;s used to erase and rewrite sample buffer by a factor of $n$.</p>
 <p>For each triangle, we write this into a bigger version of the sample buffer. When finally writing the sampled image onto the frame buffer, we take average of the corresponding pixel values to resolve to the final value. By capturing more detail about how a primitive covers a pixel, supersampling reduces the jagged edges (aliasing) that would otherwise appear when a pixel’s single sample is forced into a binary decision.</p>
+<p>Below are two examples of the rendering results of <code>basic/test4.svg</code> under different parameters.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Samplerate = 1</th>
+          <th>Samplerate = 4</th>
+          <th>Samplerate = 4</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1.png" alt="Q2_1" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1.png?size=large 2x" data-title="Q2_1" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4.png" alt="Q2_4" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4.png?size=large 2x" data-title="Q2_4" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16.png" alt="Q2_16" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16.png?size=large 2x" data-title="Q2_16" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+      <tr>
+          <th>Samplerate = 1</th>
+          <th>Samplerate = 4</th>
+          <th>Samplerate = 4</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1-2.png" alt="Q2_1-2" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1-2.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1-2.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1-2.png?size=large 2x" data-title="Q2_1-2" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4-2.png" alt="Q2_4-2" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4-2.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4-2.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4-2.png?size=large 2x" data-title="Q2_4-2" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16-2.png" alt="Q2_16-2" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16-2.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16-2.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16-2.png?size=large 2x" data-title="Q2_16-2" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<p>We observed that, as the sample rate goes up, the thin angle becomes less sharp but more continuous, and better represents the &ldquo;real&rdquo; triangle. This is because a higher sample rate increases the resolution of the sampled data, allowing for a more accurate approximation of the true shape of the triangle. At lower sample rates, the sampled points are more sparsely distributed, leading to a jagged or stepped representation of sharp angles. As the sample rate increases, more points are captured along the edges, smoothing out the transitions and reducing aliasing effects, which results in a more continuous and precise representation of the original shape.</p>
+<h2 id="question-3" class="heading-element"><span>Question 3</span>
+  <a href="#question-3" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>We implemented the transform functions by generating corresponding transform matrix. We altered the svg so that the little people is now doing exercies by stretching their arms.</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-15%20at%2010.29.43%E2%80%AFPM.png" alt="Screenshot 2025-02-15 at 10.29.43 PM" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-15%20at%2010.29.43%E2%80%AFPM.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-15%20at%2010.29.43%E2%80%AFPM.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-15%20at%2010.29.43%E2%80%AFPM.png?size=large 2x" data-title="Screenshot 2025-02-15 at 10.29.43 PM" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<p>The SVG file can be downloaded here. <a href="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/my_robot.svg"target="_blank" rel="external nofollow noopener noreferrer">Q3_svg</a></p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/my_robot.svg" alt="Q3_svg" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/my_robot.svg?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/my_robot.svg?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/my_robot.svg?size=large 2x" data-title="Q3_svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<h2 id="question-4" class="heading-element"><span>Question 4</span>
+  <a href="#question-4" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="explanation" class="heading-element"><span>Explanation</span>
+  <a href="#explanation" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Barycentric coordinates are a way of describing a point&rsquo;s position inside a triangle (or a higher-dimensional simplex) using weighted averages of the triangle’s vertices. Every point inside the triangle is represented by three numbers (weights), corresponding to the triangle&rsquo;s vertices A, B, C. The berycentric coordinates can be intepreted as the ratio of the area of a small triangles with respect to the area of the full triangle. The closer P is to a vertex, the larger the corresponding subtriangle’s area, and thus the larger the associated barycentric coordinate. See the picture below for a detailed illustration.</p>
+<img src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250215224622798.png" alt="image-20250215224622798" style="zoom:33%;" />
+<p>Berycentric coordinates can effectively be used for intropolation. For a point with coordinates ($\lambda_A, \lambda_B, \lambda_C$), its color can be intepreted as ($\lambda_A \cdot c_A+ \lambda_B \cdot c_B, \lambda_C\cdot c_C$). See the picture below for a illustration of a triangle interpolated with berycentric coordinates.</p>
+<img src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ4_demonestration.png" alt="Q4_demonestration" style="zoom:50%;" />
+<h2 id="screenshot" class="heading-element"><span>Screenshot</span>
+  <a href="#screenshot" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Here is a png screenshot of <code>svg/basic/test7.svg</code> with default viewing parameters and sample rate 1.</p>
+<img src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ4_color_wheel.jpg" alt="Q4_color_wheel" style="zoom:50%;" />
+<h2 id="question-5" class="heading-element"><span>Question 5</span>
+  <a href="#question-5" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="explanation-1" class="heading-element"><span>Explanation</span>
+  <a href="#explanation-1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Pixel sampling is the process of determining the color of a pixel by fetching texture data from a texture map. When implementing texture mapping, I used pixel sampling to fetch the correct texel color based on texture coordinates (u,v), which are continuous values ranging from 0 to 1. The range of u, v needs to be converted to the actual coordinates of the mipmap, or otherwise we will be constantly sampling the (0, 0) pixel. My inplementation can be factorized into two steps: Frrstly, we mapped the (u, v) coordinates to the texture image’s pixel grid. After that, colors can be effectively fetched from the uv coordinates.</p>
+<p>Now we explain the difference of the two sample methods. The nearest method simply rounds the non-integer coordinates to the nearest integer values, while bilinear method interpolates color from the four nearest pixels. These can be formulated as follows:</p>
+<p><strong>Nearest Neighbor Sampling</strong></p>
+<ul>
+<li>Convert (u, v) to texture space:<br>
+$$
+x = \text{round}(u \times \text{texture width})
+$$
+$$
+y = \text{round}(v \times \text{texture height})
+$$</li>
+<li>Fetch the texel at $(x, y)$.</li>
+</ul>
+<p><strong>Bilinear Sampling</strong></p>
+<ul>
+<li>
+<p>Compute the surrounding texel indices and their fractional offsets:<br>
+$$
+x = u \times \text{texture width}, \quad y = v \times \text{texture height}
+$$
+$$
+x_0 = \lfloor x \rfloor, \quad x_1 = x_0 + 1
+$$
+$$
+y_0 = \lfloor y \rfloor, \quad y_1 = y_0 + 1
+$$</p>
+</li>
+<li>
+<p>Retrieve the four texels at $(x_0, y_0)$, $(x_0, y_1)$, $(x_1, y_0)$, $(x_1, y_1)$.</p>
+</li>
+<li>
+<p>Perform linear interpolation first along x, then along y.</p>
+</li>
+</ul>
+<h2 id="comparison" class="heading-element"><span>Comparison</span>
+  <a href="#comparison" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Here are the example renderings of different methods. Notice the gradient int the transition, how bilinear is more smooth, and how supersampling further enhances the render results. Also, nearest  sampling renders a little faster.</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Nearest</th>
+          <th>Bilinear</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1 Sample</td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_N_1.png" alt="Q5_N_1" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_N_1.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_N_1.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_N_1.png?size=large 2x" data-title="Q5_N_1" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Bi_1.png" alt="Q5_Bi_1" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Bi_1.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Bi_1.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Bi_1.png?size=large 2x" data-title="Q5_Bi_1" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>16 Samples</td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_N_16.png" alt="Q5_N_16" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_N_16.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_N_16.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_N_16.png?size=large 2x" data-title="Q5_N_16" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Bi_16.png" alt="Q5_Bi_16" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Bi_16.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Bi_16.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Bi_16.png?size=large 2x" data-title="Q5_Bi_16" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<p>In the following example, bilinear clearly defeats nearest. The color of nearest sampling has visible jaggies, while the bilinear methods is way more smooth.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Bilinear</th>
+          <th>Nearest</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Comparison_Bi.png" alt="Q5_Comparison_Bi" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Comparison_Bi.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Comparison_Bi.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Comparison_Bi.png?size=large 2x" data-title="Q5_Comparison_Bi" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Comparison_N.png" alt="Q5_Comparison_N" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Comparison_N.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Comparison_N.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ5_Comparison_N.png?size=large 2x" data-title="Q5_Comparison_N" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="relative-differences" class="heading-element"><span>Relative Differences</span>
+  <a href="#relative-differences" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>The difference of the two methods can be summed as follows:</p>
+<ul>
+<li>Nearest sampling is fast but produces rough, pixelated results.</li>
+<li>Bilinear sampling smooths textures but requires more computation.</li>
+</ul>
+<p>For better quality, bilinear sampling is preferred, especially when textures are scaled.</p>
+<p>There will be a large difference when textures are magnified or skewed, in which nearest sampling will result in jaggies; also when there are high-frequency details, nearest will cause aliasing and bilinear will be a little better. In general, bilinear filtering improves visual quality in cases of scaling and transformation, while nearest sampling retains sharp texel boundaries but can lead to noticeable artifacts.</p>
+<h2 id="question-6" class="heading-element"><span>Question 6</span>
+  <a href="#question-6" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="explanation-2" class="heading-element"><span>Explanation</span>
+  <a href="#explanation-2" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Level sampling is a technique used in texture mapping to determine the appropriate level of detail (LOD) for a texture based on the screen-space size of the mapped surface. Instead of directly using a high-resolution texture for all cases (results in aliasing), level sampling selects a lower-resolution version of the texture when the object is far away or viewed at a sharp angle. This helps maintain visual quality and performance because it is equivalent to pre-apply a low-resolution box filter.</p>
+<p>The idea is to precompute multiple levels of a texture where each level is a downsampled version of the original texture. During rendering, the appropriate level is chosen based on how much the texture is being scaled or minified.</p>
+<p>Our realization can be broken down into three steps. Firstly, compute the correspodning mipmaps. Then, according to the transformation and scaling factor, chooes the mipmap to sample from. At last, we fetch the color from the correponding mipmaps.</p>
+<h2 id="comparison-1" class="heading-element"><span>Comparison</span>
+  <a href="#comparison-1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Here’s a comparison of the tradeoffs between different sampling methods.</p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Technique</strong></th>
+          <th><strong>Speed</strong></th>
+          <th><strong>Memory Usage</strong></th>
+          <th><strong>Antialiasing Power</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Pixel Sampling</td>
+          <td>Fast (samples one texture level at a time)</td>
+          <td>Low (only needs one texture fetch)</td>
+          <td>Low (prone to aliasing, especially at minified scales)</td>
+      </tr>
+      <tr>
+          <td>Level Sampling</td>
+          <td>Moderate (needs to compute LOD and may interpolate between MIP levels)</td>
+          <td>Moderate (requires multiple MIP map levels)</td>
+          <td>Good (reduces aliasing caused by minification)</td>
+      </tr>
+      <tr>
+          <td>Supersampling</td>
+          <td>Slow (increases rendering cost significantly)</td>
+          <td>High (multiple texture fetches per pixel)</td>
+          <td>Excellent (best at reducing jagged edges and flickering)</td>
+      </tr>
+  </tbody>
+</table>
+<p>To sum up, Pixel Sampling is the fastest and most memory-efficient but can introduce aliasing, especially at extreme minifications or magnifications; Level Sampling balances performance and quality by using precomputed MIP maps, reducing aliasing without a massive performance hit, and Supersampling provides the highest quality but at the cost of significant performance and memory usage.</p>
+<h2 id="demonestration" class="heading-element"><span>Demonestration</span>
+  <a href="#demonestration" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Here is a set of comparison of for sampling methods where we mainly focused on antialiasing power with pixel inspector on the upper-right corner. (Photo credit: Armand Khoury from Unsplash).</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>P_NEAREST</th>
+          <th>P_LINEAR</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>L_ZERO</td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.07%E2%80%AFAM.png" alt="Screenshot 2025-02-16 at 12.01.07 AM" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.07%E2%80%AFAM.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.07%E2%80%AFAM.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.07%E2%80%AFAM.png?size=large 2x" data-title="Screenshot 2025-02-16 at 12.01.07 AM" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.11%E2%80%AFAM.png" alt="Screenshot 2025-02-16 at 12.01.11 AM" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.11%E2%80%AFAM.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.11%E2%80%AFAM.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.11%E2%80%AFAM.png?size=large 2x" data-title="Screenshot 2025-02-16 at 12.01.11 AM" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>L_NEAREST</td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.00%E2%80%AFAM.png" alt="Screenshot 2025-02-16 at 12.01.00 AM" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.00%E2%80%AFAM.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.00%E2%80%AFAM.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.01.00%E2%80%AFAM.png?size=large 2x" data-title="Screenshot 2025-02-16 at 12.01.00 AM" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.00.49%E2%80%AFAM.png" alt="Screenshot 2025-02-16 at 12.00.49 AM" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.00.49%E2%80%AFAM.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.00.49%E2%80%AFAM.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.00.49%E2%80%AFAM.png?size=large 2x" data-title="Screenshot 2025-02-16 at 12.00.49 AM" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
 </div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
@@ -136,9 +381,9 @@ $$</li>
       </div></div><div class="post-info-line">
         <div class="post-info-md"><span><a href="/posts/eeccd09/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
         <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="https://example.org/posts/eeccd09/" data-title="CS184 HW1 Writeup" data-hashtags="CS184"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://example.org/posts/eeccd09/" data-hashtag="CS184"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://example.org/posts/eeccd09/" data-title="CS184 HW1 Writeup"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/posts/eeccd09/" data-title="CS184 HW1 Writeup" data-hashtags="CS184"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/eeccd09/" data-hashtag="CS184"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/eeccd09/" data-title="CS184 HW1 Writeup"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
   </span>
         </div>
       </div></div>
@@ -162,5 +407,6 @@ $$</li>
         </div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">This website works best with JavaScript enabled.</div>
   </noscript>
-</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"version":"v0.3.17-8b402129"};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"version":"v0.3.17-8b402129"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script></body>
 </html>
