@@ -43,6 +43,7 @@ repost:
 # Write up for HW1
 
 > Group members: Xize Duan, Phoenix Ye.
+> Link to the page itself: [https://alexdwastaken.github.io/Blog/posts/eeccd09/](https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html)
 
 ## Overview
 
