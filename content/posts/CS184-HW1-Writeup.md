@@ -44,7 +44,7 @@ repost:
 > **Group members: Xize Duan, Phoenix Ye.**
 > **Link to the page itself: [https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html](https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html)**
 
-## Overview
+# Overview
 
 Our project implemented core rasterization and texture mapping techniques. 
 - For triangle rasterization, we used cross-product-based point-in-triangle tests with row-based optimization, improving render time from 0.0078s to 0.0067s. 
@@ -53,7 +53,7 @@ Our project implemented core rasterization and texture mapping techniques.
 - For texture mapping, we implemented both nearest neighbor (fast but jagged) and bilinear sampling (smoother but slower). 
 - Level sampling with mipmaps addressed aliasing at different scales. Key challenges included optimizing rasterization, correct coordinate scaling for supersampling, and handling texture mapping edge cases.
 
-## Question 1
+# Question 1
 
 To rasterize a triangle, what we fisrt did is to perform a point-in-triangle test. The test is accomplished by performing a cross product $(p_1-p_0)\times (p_2-p_1) \cdot k$. If the result is negative, then the winding order is clockwise, otherwise counterclockwise. The final result will never be zero for a well-defined triangle.
 We fisrt assume a counter-clockwise winding order.
