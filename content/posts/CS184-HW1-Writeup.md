@@ -71,6 +71,11 @@ The next thing we do is to enumerate across every row in the bounding box of the
 
 We timed the rendering time of the dragon picture. The naive method which we enumerated every pixel in the bounding box took around 0.0078 second on average, and the one which we kept track of whether we have left the triangle took 0.0067 second on average.
 
+Here is a png screenshot of `basic/test4.svg` with the default viewing parameters and with the pixel inspector centered on an interesting part of the scene.
+
+<img src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.38.37%E2%80%AFAM.png" alt="Screenshot 2025-02-16 at 12.38.37 AM" style="zoom:50%;" />
+
+
 # Question 2
 
 In summary, the supersampling algorithm improves image quality by working in a higher-resolution space and then averaging down to the final image. The modifications sums up to three steps—using a larger sample buffer, scaling coordinates, and adding a resolve step.
