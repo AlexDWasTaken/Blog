@@ -37,15 +37,21 @@ repost:
   enable: true
   url:
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
 # Write up for HW1
 
-> Group members: Xize Duan, Phoenix Ye.
-> Link to the page itself: [https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html](https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html)
+> **Group members: Xize Duan, Phoenix Ye.**
+> **Link to the page itself: [https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html](https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html)**
 
 ## Overview
+
+Our project implemented core rasterization and texture mapping techniques. 
+- For triangle rasterization, we used cross-product-based point-in-triangle tests with row-based optimization, improving render time from 0.0078s to 0.0067s. 
+- Supersampling was implemented by scaling coordinates by the square root of the sample rate and averaging down. We enabled shape manipulation through matrix-based transforms, demonstrated with animated exercising figures. 
+- Barycentric coordinates are calculated from area ratios and used to interpolate colors. 
+- For texture mapping, we implemented both nearest neighbor (fast but jagged) and bilinear sampling (smoother but slower). 
+- Level sampling with mipmaps addressed aliasing at different scales. Key challenges included optimizing rasterization, correct coordinate scaling for supersampling, and handling texture mapping edge cases.
 
 ## Question 1
 
