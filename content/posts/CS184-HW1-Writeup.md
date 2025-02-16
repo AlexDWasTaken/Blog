@@ -5,7 +5,7 @@ date: 2025-02-08T00:05:27-08:00
 slug: eeccd09
 draft: false
 author:
-  name: DY
+  name: Xize Duan
   link:
   email:
   avatar:
