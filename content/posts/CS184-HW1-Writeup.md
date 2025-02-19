@@ -49,7 +49,7 @@ repost:
 Our project implemented core rasterization and texture mapping techniques. 
 - For triangle rasterization, we used cross-product-based point-in-triangle tests with row-based optimization, improving render time from 0.0078s to 0.0067s. 
 - Supersampling was implemented by scaling coordinates by the square root of the sample rate and averaging down. We enabled shape manipulation through matrix-based transforms, demonstrated with animated exercising figures. 
-- Barycentric coordinates are calculated from area ratios and used to interpolate colors. 
+- Barycentric coordinates are calculated from distance ratios and can be intepreted as area ratios. It can be used to interpolate colors. 
 - For texture mapping, we implemented both nearest neighbor (fast but jagged) and bilinear sampling (smoother but slower). 
 - Level sampling with mipmaps addressed aliasing at different scales. Key challenges included optimizing rasterization, correct coordinate scaling for supersampling, and handling texture mapping edge cases.
 
@@ -86,11 +86,11 @@ For each triangle, we write this into a bigger version of the sample buffer. Whe
 
 Below are two examples of the rendering results of `basic/test4.svg` under different parameters.
 
-| Samplerate = 1                                               | Samplerate = 4                                               | Samplerate = 4                                               |
+| Samplerate = 1                                               | Samplerate = 4                                               | Samplerate = 16                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | ![Q2_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1.png) | ![Q2_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4.png) | ![Q2_16](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16.png) |
 
-| Samplerate = 1                                               | Samplerate = 4                                               | Samplerate = 4                                               |
+| Samplerate = 1                                               | Samplerate = 4                                               | Samplerate = 16                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | ![Q2_1-2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1-2.png) | ![Q2_4-2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4-2.png) | ![Q2_16-2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16-2.png) |
 
@@ -118,7 +118,7 @@ Barycentric coordinates are a way of describing a point's position inside a tria
 
 
 
-Berycentric coordinates can effectively be used for intropolation. For a point with coordinates ($\lambda_A, \lambda_B, \lambda_C$), its color can be intepreted as ($\lambda_A \cdot c_A+ \lambda_B \cdot c_B, \lambda_C\cdot c_C$). See the picture below for a illustration of a triangle interpolated with berycentric coordinates.
+Berycentric coordinates can effectively be used for intropolation. For a point with coordinates ($\lambda_A, \lambda_B, \lambda_C$), its color can be intepreted as ($\lambda_A \cdot c_A+ \lambda_B \cdot c_B +\lambda_C\cdot c_C$). See the picture below for a illustration of a triangle interpolated with berycentric coordinates. In real implementation though, we calculate the coordinates by calculating distance, which is more efficient.
 
 <img src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ4_demonestration.png" alt="Q4_demonestration" style="zoom:50%;" />
 
