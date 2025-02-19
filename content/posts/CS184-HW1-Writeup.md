@@ -55,6 +55,8 @@ Our project implemented core rasterization and texture mapping techniques.
 
 <div style="page-break-after: always;"></div>
 
+****
+
 # Question 1
 
 To rasterize a triangle, what we fisrt did is to perform a point-in-triangle test. The test is accomplished by performing a cross product $(p_1-p_0)\times (p_2-p_1) \cdot k$. If the result is negative, then the winding order is clockwise, otherwise counterclockwise. The final result will never be zero for a well-defined triangle.
@@ -78,6 +80,8 @@ Here is a png screenshot of `basic/test4.svg` with the default viewing parameter
 <img src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.38.37%E2%80%AFAM.png" alt="Screenshot 2025-02-16 at 12.38.37 AM" style="zoom:50%;" />
 
 <div style="page-break-after: always;"></div>
+
+****
 
 # Question 2
 
@@ -103,6 +107,8 @@ We observed that, as the sample rate goes up, the thin angle becomes less sharp 
 
 <div style="page-break-after: always;"></div>
 
+****
+
 # Question 3
 
 We implemented the transform functions by generating corresponding transform matrix. We altered the svg so that the little people is now doing exercies by stretching their arms.
@@ -114,6 +120,8 @@ The SVG file can be downloaded here. [Q3_svg](https://raw.githubusercontent.com/
 ![Q3_svg](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/my_robot.svg)
 
 <div style="page-break-after: always;"></div>
+
+****
 
 # Question 4
 
@@ -136,6 +144,8 @@ Here is a png screenshot of `svg/basic/test7.svg` with default viewing parameter
 <img src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ4_color_wheel.jpg" alt="Q4_color_wheel" style="zoom:50%;" />
 
 <div style="page-break-after: always;"></div>
+
+****
 
 # Question 5
 
@@ -200,6 +210,8 @@ There will be a large difference when textures are magnified or skewed, in which
 
 
 <div style="page-break-after: always;"></div>
+
+****
 
 # Question 6
 
