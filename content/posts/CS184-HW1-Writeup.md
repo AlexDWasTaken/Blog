@@ -53,6 +53,8 @@ Our project implemented core rasterization and texture mapping techniques.
 - For texture mapping, we implemented both nearest neighbor (fast but jagged) and bilinear sampling (smoother but slower). 
 - Level sampling with mipmaps addressed aliasing at different scales. Key challenges included optimizing rasterization, correct coordinate scaling for supersampling, and handling texture mapping edge cases.
 
+<div style="page-break-after: always;"></div>
+
 # Question 1
 
 To rasterize a triangle, what we fisrt did is to perform a point-in-triangle test. The test is accomplished by performing a cross product $(p_1-p_0)\times (p_2-p_1) \cdot k$. If the result is negative, then the winding order is clockwise, otherwise counterclockwise. The final result will never be zero for a well-defined triangle.
@@ -75,6 +77,7 @@ Here is a png screenshot of `basic/test4.svg` with the default viewing parameter
 
 <img src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.38.37%E2%80%AFAM.png" alt="Screenshot 2025-02-16 at 12.38.37 AM" style="zoom:50%;" />
 
+<div style="page-break-after: always;"></div>
 
 # Question 2
 
@@ -98,6 +101,8 @@ We observed that, as the sample rate goes up, the thin angle becomes less sharp 
 
 
 
+<div style="page-break-after: always;"></div>
+
 # Question 3
 
 We implemented the transform functions by generating corresponding transform matrix. We altered the svg so that the little people is now doing exercies by stretching their arms.
@@ -107,6 +112,8 @@ We implemented the transform functions by generating corresponding transform mat
 The SVG file can be downloaded here. [Q3_svg](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/my_robot.svg)
 
 ![Q3_svg](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/my_robot.svg)
+
+<div style="page-break-after: always;"></div>
 
 # Question 4
 
@@ -127,6 +134,8 @@ Berycentric coordinates can effectively be used for intropolation. For a point w
 Here is a png screenshot of `svg/basic/test7.svg` with default viewing parameters and sample rate 1.
 
 <img src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ4_color_wheel.jpg" alt="Q4_color_wheel" style="zoom:50%;" />
+
+<div style="page-break-after: always;"></div>
 
 # Question 5
 
@@ -188,6 +197,9 @@ The difference of the two methods can be summed as follows:
 For better quality, bilinear sampling is preferred, especially when textures are scaled. 
 
 There will be a large difference when textures are magnified or skewed, in which nearest sampling will result in jaggies; also when there are high-frequency details, nearest will cause aliasing and bilinear will be a little better. In general, bilinear filtering improves visual quality in cases of scaling and transformation, while nearest sampling retains sharp texel boundaries but can lead to noticeable artifacts.
+
+
+<div style="page-break-after: always;"></div>
 
 # Question 6
 
