@@ -184,53 +184,56 @@ During the development of the Loop subdivision:
   - Initially sharp features tend to round off after subdivision.  
   - When testing on a cube (using `dae/cube.dae`), we noticed that after several iterations the cube sometimes becomes slightly asymmetric. By pre-processing the cube (performing targeted edge flips and splits) to increase the number of triangles per face, the subdivision converged to a more symmetric shape.
 
+Below are the screenshots documenting the progress of loop subdivision on three different models. Each set shows the mesh at 0 through 4 subdivisions, demonstrating how the mesh becomes smoother and more detailed with each iteration, both for the original one and the edge-split one.
 
-Below are the screenshots documenting the progress of loop subdivision on three different models. Each set shows the mesh at 0 through 4 subdivisions, demonstrating how the mesh becomes smoother and more detailed with each iteration.
+### Examples
 
-### Torus (edgeCollapse.dae)
-![Torus - 0 Subdivision](part6/part6.1.png)
-Torus model at 0 subdivisions (original mesh).
+#### Torus (Original)
 
-![Torus - 1 Subdivision](part6/part6.2.png)
-Torus model after 1 iteration of loop subdivision.
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![7381741116289_.pic](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7381741116289_.pic.jpg) | ![7391741116302_.pic](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7391741116302_.pic.jpg) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![7401741116312_.pic](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7401741116312_.pic.jpg) | ![7411741116321_.pic](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7411741116321_.pic.jpg) |
 
-![Torus - 2 Subdivision](part6/part6.3.png)
-Torus model after 2 iterations of loop subdivision.
+#### Cube (Original)
 
-![Torus - 3 Subdivision](part6/part6.4.png)
-Torus model after 3 iterations of loop subdivision.
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![7381741116289_.pic](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.17%E2%80%AFAM.png) | ![Screenshot 2025-03-04 at 11.34.51 AM](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.51%E2%80%AFAM.png) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![Screenshot 2025-03-04 at 11.35.08 AM](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.08%E2%80%AFAM.png) | ![Screenshot 2025-03-04 at 11.35.29 AM](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.29%E2%80%AFAM.png) |
 
-![Torus - 4 Subdivision](part6/part6.5.png)
-Torus model after 4 iterations of loop subdivision.
+#### Icosahedron (Original)
 
-### Cube (edgeFlip.dae)
-![Cube - 0 Subdivision](part6/part6.6.png)
-Cube model at 0 subdivisions (original mesh).
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![image-20250304113936836](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113936836.png) | ![image-20250304113949604](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113949604.png) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![image-20250304114010997](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114010997.png) | ![image-20250304114021704](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114021704.png) |
 
-![Cube - 1 Subdivision](part6/part6.7.png)
-Cube model after 1 iteration of loop subdivision.
+#### Torus (edgeCollapse.dae)
 
-![Cube - 2 Subdivision](part6/part6.8.png)
-Cube model after 2 iterations of loop subdivision.
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Torus - 0 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.1.png) | ![Torus - 1 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.2.png) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![Torus - 2 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.3.png) | ![Torus - 3 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.4.png) |
 
-![Cube - 3 Subdivision](part6/part6.9.png)
-Cube model after 3 iterations of loop subdivision.
 
-![Cube - 4 Subdivision](part6/part6.10.png)
-Cube model after 4 iterations of loop subdivision.
 
-### Icosahedron (edgeSplit.dae)
-![Icosahedron - 0 Subdivision](part6/part6.11.png)
-Icosahedron model at 0 subdivisions (original mesh).
+#### Cube (edgeFlip.dae)
 
-![Icosahedron - 1 Subdivision](part6/part6.12.png)
-Icosahedron model after 1 iteration of loop subdivision.
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Cube - 0 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.6.png) | ![Cube - 1 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.7.png) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![Cube - 3 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.8.png) | ![Cube - 3 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.9.png) |
 
-![Icosahedron - 2 Subdivision](part6/part6.13.png)
-Icosahedron model after 2 iterations of loop subdivision.
+#### Icosahedron (edgeSplit.dae)
 
-![Icosahedron - 3 Subdivision](part6/part6.14.png)
-Icosahedron model after 3 iterations of loop subdivision.
-
-![Icosahedron - 4 Subdivision](part6/part6.15.png)
-Icosahedron model after 4 iterations of loop subdivision.
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Icosahedron - 0 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.11.png) | ![Icosahedron - 1 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.12.png) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![Icosahedron - 2 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.13.png) | ![Icosahedron - 3 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.14.png) |
