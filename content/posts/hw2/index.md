@@ -28,10 +28,6 @@ math: true
 lightgallery: false
 password:
 message:
-repost:
-  enable: true
-  url:
-
 ---
 
 # Section I: Bezier Curves and Surfaces
@@ -116,7 +112,7 @@ Phone Shading
 ![Without Wire](part3/part3.3.png)
 Without Wire
 
-## Part4: Edge Flip
+## Part 4: Edge Flip
 In Part 4, we use the half-edge data structure to apply the **edge flip** operation to a triangular mesh. When two adjacent triangles share an edge, the procedure "flips" that edge, substituting the other diagonal of the quadrilateral the two triangles make for the shared edge. When two triangles (a, b, c) and (c, b, d) share the edge (b, c), for instance, the flip swaps out this edge, creating the new triangles (a, d, c) and (a, b, d respectively).
 
 Our implementation of `HalfedgeMesh::flipEdge(...)` follows these steps: First, the function checks if the given edge is a boundary edge. If it is, no flip is performed. Then, the algorithm collects all the relevant half-edges for the two adjacent triangles. After that, the core of the flip operation involves reassigning the pointers. Finally, since no new elements are created or removed, all pointer updates are local and done in constant time, ensuring the integrity of the mesh data structure.
