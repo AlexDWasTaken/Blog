@@ -168,7 +168,7 @@ My implementation follows these steps:
 - After splitting, We process the edges again: if an edge is new and connects one new vertex with one old vertex, we flip it. This ensures that only the proper edges (depicted as blue in the assignment diagram) are flipped while preserving the original boundary of the subdivided triangles.
 - Finally, all vertices are updated with their new positions, and the `isNew` flags are reset.
 
-### 3. Debugging and Observations
+### Debugging and Observations
 
 During the development of the Loop subdivision:
   - We drew diagrams of local mesh configurations to carefully track the pointer reassignments during edge splits and flips.
