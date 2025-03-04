@@ -1,7 +1,7 @@
 ---
-title: CS184 HW1 Writeup
+title: CS184 HW2 Writeup
 subtitle:
-date: 2025-02-08T00:05:27-08:00
+date: 2025-03-04T00:05:27-08:00
 slug: 189hw2
 draft: false
 description:
