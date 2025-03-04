@@ -234,7 +234,7 @@ Below are the screenshots documenting the progress of loop subdivision on three 
 | 2 iterations                                                 | 3 iterations                                                 |
 | ![Icosahedron - 2 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.13.png) | ![Icosahedron - 3 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.14.png) |
 
-### Appendix
+## Appendix
 
 In completing this assignment, we utilized ChatGPT O3-mini-high for language refinement, grammar correction, and structural adjustments. Additionally, we used it to improve the clarity of Markdown formatting to ensure better organization and readability.
 
