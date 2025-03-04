@@ -129,7 +129,7 @@ Without Flip
 ![With Flip](part4/part4.2.png)
 With Some Flips
 
-## Debug Journey
+### Debug Journey
 During the implementation, We encountered an issue where flipping an edge twice sometimes created a hole in the mesh. To resolve this, we first sketched the local configuration of the two triangles on paper, labeling all half-edges, vertices, and faces. Then we employed provided debugging macros (like `CHECK_VERTEX` and `CHECK_CLOSED`) to ensure that, after the flip, all pointers correctly pointed to the expected elements. So after the corrections, the edge flip operation consistently maintained mesh integrity even after multiple flips, as verified by both visual inspection and debug checks.
 
 ## Part 5: Edge Split
@@ -159,7 +159,7 @@ With some Flips and Splits
 ### Debugging Journey
 During the development of the edge split operation, We encountered challenges related to pointer reassignments due to the increased number of new elements created. To debug: We drew detailed diagrams of the local neighborhood of the target edge, labeling each half-edge, vertex, and face. This helped me verify the correct reassignment of pointers. We repeatedly performed edge splits and then followed up with edge flips to test the robustness of the operation, ensuring that no holes or misconnected elements appeared in the mesh.
 
-# Part 6: Loop Subdivision for Mesh Upsampling
+## Part 6: Loop Subdivision for Mesh Upsampling
 In this part, we upscale a coarse polygon mesh using Loop subdivision. The goal is to convert a low-resolution mesh into a higher-resolution one.
 
 My implementation follows these steps:
@@ -172,7 +172,7 @@ My implementation follows these steps:
 - After splitting, We process the edges again: if an edge is new and connects one new vertex with one old vertex, we flip it. This ensures that only the proper edges (depicted as blue in the assignment diagram) are flipped while preserving the original boundary of the subdivided triangles.
 - Finally, all vertices are updated with their new positions, and the `isNew` flags are reset.
 
-## 3. Debugging and Observations
+### 3. Debugging and Observations
 
 During the development of the Loop subdivision:
   - We drew diagrams of local mesh configurations to carefully track the pointer reassignments during edge splits and flips.
