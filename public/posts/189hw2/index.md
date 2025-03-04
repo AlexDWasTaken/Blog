@@ -1,43 +1,10 @@
----
-title: CS184 HW2 Writeup
-subtitle:
-date: 2025-03-04T00:05:27-08:00
-slug: 189hw2
-draft: false
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - CS184
-categories:
-  - CS184
-hiddenFromHomePage: false
-hiddenFromSearch: false
-hiddenFromRelated: false
-hiddenFromFeed: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: true
-lightgallery: false
-password:
-message:
-repost:
-  enable: true
-  url:
+# CS184 HW2 Writeup
 
----
 
 # Section I: Bezier Curves and Surfaces
 
-> https://alexdwastaken.github.io/Blog/posts/189hw2/
-> **Group members: Phoenix Ye, Xize Duan**
+&gt; https://alexdwastaken.github.io/Blog/posts/189hw2/
+&gt; **Group members: Phoenix Ye, Xize Duan**
 
 ## Part 1: Bezier Curves with 1D de Casteljau Subdivision
 This part requires to implement the de Casteljau algorithm for computing a point on a Bezier curve. Given a set of 2D control points and a scalar parameter `t` (with `0 ≤ t ≤ 1`), we recursively interpolate between adjacent control points until converging to a single point on the curve. The GUI allows stepping through each iteration to display the intermediate control points, and the final converged point will be clearly highlighted.
@@ -45,7 +12,7 @@ This part requires to implement the de Casteljau algorithm for computing a point
 In this part, we implemented the function `BezierCurve::evaluateStep`, which:
 - Reserves space for a new vector of points.
 - Iterates through the input control points, performing linear interpolation for each pair using the formula:
-  $\mathbf{p}'_i = (1-t)\,\mathbf{p}_i + t\,\mathbf{p} _{i+1}$
+  $\mathbf{p}&#39;_i = (1-t)\,\mathbf{p}_i &#43; t\,\mathbf{p} _{i&#43;1}$
 - Returns the resulting vector of interpolated points.
 
 By repeatedly calling `evaluateStep`, the algorithm gradually reduces the number of points until only one point remains, which is the evaluated point on the Bezier curve.
@@ -79,7 +46,7 @@ In this part, we evaluate Bezier surfaces by extending the de Casteljau algorith
 We implemented the solution in the `BezierPatch` class by defining three key functions:
 
 - **`evaluateStep(points, t)`**: This function takes a vector of 3D points and a scalar `t` as input and returns a new vector of points, each computed by linearly interpolating between consecutive points using the formula  
-  $\mathbf{p}'_i = (1-t) \cdot \mathbf{p}_i + t \cdot \mathbf{p} _{i+1}.$
+  $\mathbf{p}&#39;_i = (1-t) \cdot \mathbf{p}_i &#43; t \cdot \mathbf{p} _{i&#43;1}.$
   
 - **`evaluate1D(points, t)`**: This function recursively calls `evaluateStep` on the vector of points until only one point remains. That single point is the evaluated point on the corresponding 1D Bezier curve.
 
@@ -97,12 +64,12 @@ In Part 3, we are required to compute a smooth, unit normal at each vertex of a 
 
 Our implementation of `Vertex::normal()` proceeds as follows:
 - Initialize an accumulator vector (`accumNormal`) to (0, 0, 0).
-- Retrieve the vertex's half-edge (using `halfedge()`), which serves as the starting point for traversal.
-- Loop over all incident faces by following the `twin()->next()` chain until we return to the starting half-edge.
+- Retrieve the vertex&#39;s half-edge (using `halfedge()`), which serves as the starting point for traversal.
+- Loop over all incident faces by following the `twin()-&gt;next()` chain until we return to the starting half-edge.
 - For each face (excluding those on a boundary), calculate its area using:
   $\text{Area} = 0.5 \times \| (p_1 - p_0) \times (p_2 - p_0) \|$
   where $( p_0 )$ is the position of the vertex, $( p_1 )$ and $( p_2 )$ are positions of the other two vertices of the face.
-- Multiply the face's normal by the computed area and add it to the accumulator.
+- Multiply the face&#39;s normal by the computed area and add it to the accumulator.
 - Finally, normalize the accumulated vector to produce the unit vertex normal.
 
 The following screenshots are images of teapot.dae with and without phong shading and without the wire framing.
@@ -117,7 +84,7 @@ Phone Shading
 Without Wire
 
 ## Part4: Edge Flip
-In Part 4, we use the half-edge data structure to apply the **edge flip** operation to a triangular mesh. When two adjacent triangles share an edge, the procedure "flips" that edge, substituting the other diagonal of the quadrilateral the two triangles make for the shared edge. When two triangles (a, b, c) and (c, b, d) share the edge (b, c), for instance, the flip swaps out this edge, creating the new triangles (a, d, c) and (a, b, d respectively).
+In Part 4, we use the half-edge data structure to apply the **edge flip** operation to a triangular mesh. When two adjacent triangles share an edge, the procedure &#34;flips&#34; that edge, substituting the other diagonal of the quadrilateral the two triangles make for the shared edge. When two triangles (a, b, c) and (c, b, d) share the edge (b, c), for instance, the flip swaps out this edge, creating the new triangles (a, d, c) and (a, b, d respectively).
 
 Our implementation of `HalfedgeMesh::flipEdge(...)` follows these steps: First, the function checks if the given edge is a boundary edge. If it is, no flip is performed. Then, the algorithm collects all the relevant half-edges for the two adjacent triangles. After that, the core of the flip operation involves reassigning the pointers. Finally, since no new elements are created or removed, all pointer updates are local and done in constant time, ensuring the integrity of the mesh data structure.
 
@@ -165,9 +132,9 @@ In this part, we upscale a coarse polygon mesh using Loop subdivision. The goal 
 My implementation follows these steps:
 
 - For every edge, We first set its `isNew` flag to false. Then, we compute a new position for the midpoint:
-  - Use the weighted average formula $\frac{3}{8}(v_0+v_1) + \frac{1}{8}(v_2+v_3)$.
-  - Use the simple midpoint $0.5 \times (v_0 + v_1)$.
-- For each vertex, if it is a boundary vertex, we gather its two boundary neighbors and update its new position using $0.75 \times \text{originalPos} + 0.125 \times (\text{neighbor1} + \text{neighbor2})$. Otherwise, for interior vertices, We sum the positions of all neighboring vertices (traversed via the half-edge loop), calculate a weight based on the vertex degree, and compute the new position accordingly.
+  - Use the weighted average formula $\frac{3}{8}(v_0&#43;v_1) &#43; \frac{1}{8}(v_2&#43;v_3)$.
+  - Use the simple midpoint $0.5 \times (v_0 &#43; v_1)$.
+- For each vertex, if it is a boundary vertex, we gather its two boundary neighbors and update its new position using $0.75 \times \text{originalPos} &#43; 0.125 \times (\text{neighbor1} &#43; \text{neighbor2})$. Otherwise, for interior vertices, We sum the positions of all neighboring vertices (traversed via the half-edge loop), calculate a weight based on the vertex degree, and compute the new position accordingly.
 - We then iterate over all original edges (those whose endpoints are not marked as new) and split each edge, assigning the precomputed midpoint as the new vertex position.
 - After splitting, We process the edges again: if an edge is new and connects one new vertex with one old vertex, we flip it. This ensures that only the proper edges (depicted as blue in the assignment diagram) are flipped while preserving the original boundary of the subdivided triangles.
 - Finally, all vertices are updated with their new positions, and the `isNew` flags are reset.
@@ -234,3 +201,10 @@ Icosahedron model after 3 iterations of loop subdivision.
 
 ![Icosahedron - 4 Subdivision](part6/part6.15.png)
 Icosahedron model after 4 iterations of loop subdivision.
+
+
+---
+
+> Author:   
+> URL: http://localhost:1313/Blog/posts/189hw2/  
+

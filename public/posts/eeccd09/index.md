@@ -3,12 +3,23 @@
 
 # Write up for HW1
 
-&gt; Group members: Xize Duan, Phoenix Ye.
-&gt; Link to the page itself: [https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html](https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html)
+&gt; **Group members: Xize Duan, Phoenix Ye.**
+&gt; **Link to the page itself: [https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html](https://alexdwastaken.github.io/Blog/posts/eeccd09/index.html)**
 
-## Overview
+# Overview
 
-## Question 1
+Our project implemented core rasterization and texture mapping techniques. 
+- For triangle rasterization, we used cross-product-based point-in-triangle tests with row-based optimization, improving render time from 0.0078s to 0.0067s. 
+- Supersampling was implemented by scaling coordinates by the square root of the sample rate and averaging down. We enabled shape manipulation through matrix-based transforms, demonstrated with animated exercising figures. 
+- Barycentric coordinates are calculated from distance ratios and can be intepreted as area ratios. It can be used to interpolate colors. 
+- For texture mapping, we implemented both nearest neighbor (fast but jagged) and bilinear sampling (smoother but slower). 
+- Level sampling with mipmaps addressed aliasing at different scales. Key challenges included optimizing rasterization, correct coordinate scaling for supersampling, and handling texture mapping edge cases.
+
+&lt;div style=&#34;page-break-after: always;&#34;&gt;&lt;/div&gt;
+
+****
+
+# Question 1
 
 To rasterize a triangle, what we fisrt did is to perform a point-in-triangle test. The test is accomplished by performing a cross product $(p_1-p_0)\times (p_2-p_1) \cdot k$. If the result is negative, then the winding order is clockwise, otherwise counterclockwise. The final result will never be zero for a well-defined triangle.
 We fisrt assume a counter-clockwise winding order.
@@ -26,6 +37,14 @@ The next thing we do is to enumerate across every row in the bounding box of the
 
 We timed the rendering time of the dragon picture. The naive method which we enumerated every pixel in the bounding box took around 0.0078 second on average, and the one which we kept track of whether we have left the triangle took 0.0067 second on average.
 
+Here is a png screenshot of `basic/test4.svg` with the default viewing parameters and with the pixel inspector centered on an interesting part of the scene.
+
+&lt;img src=&#34;https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-02-16%20at%2012.38.37%E2%80%AFAM.png&#34; alt=&#34;Screenshot 2025-02-16 at 12.38.37 AM&#34; style=&#34;zoom:50%;&#34; /&gt;
+
+&lt;div style=&#34;page-break-after: always;&#34;&gt;&lt;/div&gt;
+
+****
+
 # Question 2
 
 In summary, the supersampling algorithm improves image quality by working in a higher-resolution space and then averaging down to the final image. The modifications sums up to three steps—using a larger sample buffer, scaling coordinates, and adding a resolve step.
@@ -36,17 +55,21 @@ For each triangle, we write this into a bigger version of the sample buffer. Whe
 
 Below are two examples of the rendering results of `basic/test4.svg` under different parameters.
 
-| Samplerate = 1                                               | Samplerate = 4                                               | Samplerate = 4                                               |
+| Samplerate = 1                                               | Samplerate = 4                                               | Samplerate = 16                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | ![Q2_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1.png) | ![Q2_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4.png) | ![Q2_16](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16.png) |
 
-| Samplerate = 1                                               | Samplerate = 4                                               | Samplerate = 4                                               |
+| Samplerate = 1                                               | Samplerate = 4                                               | Samplerate = 16                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | ![Q2_1-2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_1-2.png) | ![Q2_4-2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_4-2.png) | ![Q2_16-2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ2_16-2.png) |
 
 We observed that, as the sample rate goes up, the thin angle becomes less sharp but more continuous, and better represents the &#34;real&#34; triangle. This is because a higher sample rate increases the resolution of the sampled data, allowing for a more accurate approximation of the true shape of the triangle. At lower sample rates, the sampled points are more sparsely distributed, leading to a jagged or stepped representation of sharp angles. As the sample rate increases, more points are captured along the edges, smoothing out the transitions and reducing aliasing effects, which results in a more continuous and precise representation of the original shape.
 
 
+
+&lt;div style=&#34;page-break-after: always;&#34;&gt;&lt;/div&gt;
+
+****
 
 # Question 3
 
@@ -58,6 +81,10 @@ The SVG file can be downloaded here. [Q3_svg](https://raw.githubusercontent.com/
 
 ![Q3_svg](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/my_robot.svg)
 
+&lt;div style=&#34;page-break-after: always;&#34;&gt;&lt;/div&gt;
+
+****
+
 # Question 4
 
 ## Explanation
@@ -68,7 +95,7 @@ Barycentric coordinates are a way of describing a point&#39;s position inside a 
 
 
 
-Berycentric coordinates can effectively be used for intropolation. For a point with coordinates ($\lambda_A, \lambda_B, \lambda_C$), its color can be intepreted as ($\lambda_A \cdot c_A&#43; \lambda_B \cdot c_B, \lambda_C\cdot c_C$). See the picture below for a illustration of a triangle interpolated with berycentric coordinates.
+Berycentric coordinates can effectively be used for intropolation. For a point with coordinates ($\lambda_A, \lambda_B, \lambda_C$), its color can be intepreted as ($\lambda_A \cdot c_A&#43; \lambda_B \cdot c_B &#43;\lambda_C\cdot c_C$). See the picture below for a illustration of a triangle interpolated with berycentric coordinates. In real implementation though, we calculate the coordinates by calculating distance, which is more efficient.
 
 &lt;img src=&#34;https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ4_demonestration.png&#34; alt=&#34;Q4_demonestration&#34; style=&#34;zoom:50%;&#34; /&gt;
 
@@ -77,6 +104,10 @@ Berycentric coordinates can effectively be used for intropolation. For a point w
 Here is a png screenshot of `svg/basic/test7.svg` with default viewing parameters and sample rate 1.
 
 &lt;img src=&#34;https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsQ4_color_wheel.jpg&#34; alt=&#34;Q4_color_wheel&#34; style=&#34;zoom:50%;&#34; /&gt;
+
+&lt;div style=&#34;page-break-after: always;&#34;&gt;&lt;/div&gt;
+
+****
 
 # Question 5
 
@@ -139,6 +170,11 @@ For better quality, bilinear sampling is preferred, especially when textures are
 
 There will be a large difference when textures are magnified or skewed, in which nearest sampling will result in jaggies; also when there are high-frequency details, nearest will cause aliasing and bilinear will be a little better. In general, bilinear filtering improves visual quality in cases of scaling and transformation, while nearest sampling retains sharp texel boundaries but can lead to noticeable artifacts.
 
+
+&lt;div style=&#34;page-break-after: always;&#34;&gt;&lt;/div&gt;
+
+****
+
 # Question 6
 
 ## Explanation
@@ -175,5 +211,5 @@ Here is a set of comparison of for sampling methods where we mainly focused on a
 ---
 
 > Author: Xize Duan  
-> URL: http://localhost:1313/posts/eeccd09/  
+> URL: http://localhost:1313/Blog/posts/eeccd09/  
 
