@@ -29,9 +29,6 @@ lightgallery: false
 password:
 message:
 ---
-
-# Section I: Bezier Curves and Surfaces
-
 > https://alexdwastaken.github.io/Blog/posts/189hw2/
 > **Group members: Phoenix Ye, Xize Duan**
 
@@ -42,6 +39,8 @@ We also worked with triangle meshes using the half-edge data structure, computin
 Additionally, we implemented edge flipping and splitting to modify mesh topology while maintaining connectivity. 
 Finally, we applied Loop subdivision to refine meshes, achieving smoother and higher-resolution results. Through this project, we gained a deeper understanding of geometric modeling, mesh operations, 
 and the importance of efficient data structures in computer graphics. The final results successfully demonstrate smooth curve generation, surface evaluation, and mesh refinement, with visually improved models and correct algorithmic implementations.
+
+# Section I: Bezier Curves and Surfaces
 
 ## Part 1: Bezier Curves with 1D de Casteljau Subdivision
 This part requires to implement the de Casteljau algorithm for computing a point on a Bezier curve. Given a set of 2D control points and a scalar parameter `t` (with `0 ≤ t ≤ 1`), we recursively interpolate between adjacent control points until converging to a single point on the curve. The GUI allows stepping through each iteration to display the intermediate control points, and the final converged point will be clearly highlighted.
