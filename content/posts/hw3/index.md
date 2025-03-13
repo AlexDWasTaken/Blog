@@ -43,11 +43,17 @@ message:
 
 ## Overview
 
-Part 1: We implemented ray generation and scene intersection, creating rays through pixels with random sampling, transforming between coordinate spaces, and developing intersection algorithms for triangles and spheres.
-Part 2: We built a Bounding Volume Hierarchy (BVH) that accelerated ray-scene intersection by organizing geometry in a tree structure, reducing complexity from O(n) to O(log n) and dramatically improving render times.
-Part 3: We implemented direct illumination with diffuse BSDFs and compared uniform hemisphere sampling with importance sampling, demonstrating that the latter produces cleaner images with better handling of light sources.
-Part 4: We extended our renderer to simulate global illumination with multiple light bounces, implementing recursive ray tracing and Russian Roulette path termination to capture realistic light transport throughout scenes.
-Part 5: We implemented adaptive sampling that varies sample count based on pixel variance, using statistical confidence intervals to allocate computational resources efficiently while maintaining image quality.
+In Part 1, We implemented ray generation and scene intersection, creating rays through pixels with random sampling, transforming between coordinate spaces, and developing intersection algorithms for triangles and spheres.
+
+In Part 2, We built a Bounding Volume Hierarchy (BVH) that accelerated ray-scene intersection by organizing geometry in a tree structure, reducing complexity from O(n) to O(log n) and dramatically improving render times.
+
+In Part 3, We implemented direct illumination with diffuse BSDFs and compared uniform hemisphere sampling with importance sampling, demonstrating that the latter produces cleaner images with better handling of light sources.
+
+In Part 4, We extended our renderer to simulate global illumination with multiple light bounces, implementing recursive ray tracing and Russian Roulette path termination to capture realistic light transport throughout scenes.
+
+In Part 5, We implemented adaptive sampling that varies sample count based on pixel variance, using statistical confidence intervals to allocate computational resources efficiently while maintaining image quality.
+
+Overall, we learned how to trace a ray, how to build a BVH and how to calculate illumination recursively. It's a rewarding experience both in graphics and in C++.
 
 ## Part1: Ray Generation and Scene Intersection
 
