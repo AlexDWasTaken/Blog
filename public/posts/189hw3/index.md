@@ -2,6 +2,8 @@
 
 
 
+
+
 # CS184 Homework 3 Write-Up
 
 &gt; https://alexdwastaken.github.io/Blog/posts/189hw3/
@@ -43,7 +45,7 @@ Here are some of the example renders.
 
 BVH partitions the objects into different bounding boxes organized in a tree structure to accelerate ray-scene intersection, and it&#39;s very useful in ray tracing because it shrinks the complexity from $O(n)$ to $O(\log n)$ with a good policy.
 
-**Construction**
+### Construction
 
 In our implementation, bvh is seperated along the longest axis with median centroid. The first step is to determine whether the node is a leaf node by comparing the current `element_count` with `max_leaf_size`. If it already is, fill in `start` and `end` field and return directly.
 
@@ -69,7 +71,7 @@ auto rightEnd = end;
 
 where `mid` presents two times instead of one `mid` and one `mid&#43;&#43;`. We guess this is related to the implementation of iterators.
 
-**Intersection**
+### Intersection
 
 Intersecting the bounding box is simple. We just record the last &#39;in&#39; time and first &#39;out&#39; time. If the &#39;in&#39; time is before &#39;out&#39; time, then a intersection is detected, and we can return accordingly.
 
@@ -77,7 +79,7 @@ One of the function only asks us to test whether there is a intersection; to sol
 
 We did not encounter any problem when realizing the intersection functions.
 
- **Results**
+ ### Results
 
 Here are some example images of large scenes with normal shading.
 
@@ -97,6 +99,173 @@ Here we analyze the rendering time with and without bvh. Here are the data:
 The results demonstrate the significant impact of BVH acceleration on rendering performance. Without BVH, rendering times increase dramatically with scene complexity, with the Bunny scene failing to complete due to excessive computations. In contrast, BVH-based rendering consistently achieves great speedups, reducing rendering times by orders of magnitude. Even when factoring in BVH construction time, the total cost remains negligible. For example, in the Cow scene, rendering time drops from 80.99s to just 0.0888s, while BVH construction takes only 0.0036s. This highlights BVH&#39;s effectiveness in reducing ray intersection tests and optimizing traversal, making it indispensable for efficient ray tracing in complex scenes.
 
 ## Part 3: Direct Illumination
+
+In this part, we will start simulating light transport in the scene, and render images with realistic shading. We walked through implementing BSDF, zero bounce illumination and one bounce illumination. We also compared uniform hemisphere sampling with direct importance sampling.
+
+### BSDF
+
+To implement diffuse BSDF, we only need to plug the reflectance into the formula. We attatch the code, which should be self-explanatory.
+
+```c&#43;&#43;
+Vector3D DiffuseBSDF::f(const Vector3D wo, const Vector3D wi) {
+  return reflectance * (1.0 / PI);
+}
+
+Vector3D DiffuseBSDF::sample_f(const Vector3D wo, Vector3D *wi, double *pdf) {
+  *pdf = 1.0 / PI;
+  *wi = sampler.get_sample(pdf);
+  return f(wo, *wi);
+}
+```
+
+### Zero Bounce
+
+This part is equally simple once we figured out how to get light: get BSDF from the `Intersection` object, and get emission by calling `get_emission()` from the BSDF.
+
+```c&#43;&#43;
+Vector3D PathTracer::zero_bounce_radiance(const Ray &amp;r,
+                                          const Intersection &amp;isect) {
+  return isect.bsdf-&gt;get_emission();
+}
+```
+
+### One Bounce with Uniform Hemisphere Sampling
+
+We looped through `num_samples` to create monte carlo estimate according to the illumination psudocode from the lecture.
+
+We want to particularly highlight how the coordinate transformation works. When getting sample from `hemisphereSampler-&gt;get_sample()`, what we have is a local coordinate, and what we have to do is to conver it to global coordinate by `o2w`. After that, we cast ray and obtain emission and probability. Note that $\cos \theta$ can be directly computed by the $z$ coordinate of the local coordinate system. After that, normalize by $\frac{2\pi}{\text{samples}}$ .
+
+A detail is to set `sample_ray.min_t = EPS_D`. This is to prevent floating point error, where the light intersects the surface itself. We attach the key part of the code here:
+
+```c&#43;&#43;
+if (bvh-&gt;intersect(sample_ray, &amp;light_isect)) {
+      Vector3D L_i = light_isect.bsdf-&gt;get_emission();
+      Vector3D f = isect.bsdf-&gt;f(w_out, wi);
+      double cos_theta = wi.z; // wi is already in local coordinates where N = (0,0,1)
+      L_out &#43;= f * L_i * cos_theta;
+    }
+```
+
+### One Bounce with Importance Sampling
+
+Instead of uniformly sampling all possible directions, importance sampling strategically samples based on the probability distribution of the light sources or the BSDF, reducing noise and improving convergence. We explain how this works by comparing with uniform hemisphere sampling.
+
+The key difference between the two methods lies in how samples are chosen. In direct hemisphere sampling, the algorithm selects random directions uniformly over the hemisphere above the surface. This approach does not consider whether the sampled directions actually lead to light sources, leading to many unnecessary samples. In contrast, importance sampling directly selects sample directions based on the distribution of light sources (`L_i = light-&gt;sample_L(hit_p, &amp;wi, &amp;distToLight, &amp;pdf)`). By sampling only directions that contribute significantly to illumination, importance sampling reduces variance and improves efficiency. Also, importance sampling uses the idea of &#34;shadow rays&#34;, as the rays that do not reach the light source is equivalent to the ray is in the shadow.
+
+Since direct hemisphere sampling distributes samples uniformly, it normalizes the accumulated radiance by multiplying by $\frac{2\pi}{\text{samples}}$, assuming an even distribution. However, importance sampling assigns each sample a probability density function (PDF) based on the likelihood of choosing that direction. This allows the algorithm to correctly weigh contributions, ensuring that the results remain unbiased while achieving faster convergence with fewer samples. **Note that we do not re-normalize by 2$\pi$ again as the PDF already tells us the probability! (A lot of bugs encountered by adding unecessary normalization!)**
+
+Also, note that delta light only needs to be handled once. Delta light will almost never be sampled in uniform hemisphere sampling but is supported with importanc sampling.
+
+Here are the key part of the code:
+
+```c&#43;&#43;
+
+      if (!bvh-&gt;intersect(shadow_ray, &amp;shadow_isect)) {
+        Vector3D f = isect.bsdf-&gt;f(w_out, wi_local);
+        double cos_theta = wi_local.z;
+        
+        // Add contribution if cos_theta is positive
+        if (cos_theta &gt; 0) {
+          L_out &#43;= f * L_i * cos_theta / pdf / samples;
+        }
+```
+
+### Results
+
+Here are some samples rendered with both implementations.
+
+|            | Bunny                                                        | Balls                                                        | Bench (Point light, not supported by uniform sampling)       |
+| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Uniform    | ![Part3_Showoff_CBbunny-H](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBbunny-H.png) | ![Part3_Showoff_CBspheres_lambertian-H](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBspheres_lambertian-H.png) | ![Part3_Showoff_bench-H-ns](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_bench-H-ns.png) |
+| Importance | ![Part3_Showoff_CBbunny](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBbunny.png) | ![Part3_Showoff_CBspheres_lambertian](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBspheres_lambertian.png) | ![Part3_Showoff_bench](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_bench.png) |
+
+Here is one particular scene with at least one area light and compare the noise levels in soft shadows when rendering with 1, 4, 16, and 64 light rays. We can see that as the light rays goes up, the noise level goes down even we are still using one sample per pixel.
+
+| Light Rays | 1                                                            | 4                                                            | 16                                                           | 64                                                           |
+| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Results    | ![Part3_Complight_CBbunny_l_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_1.png) | ![Part3_Complight_CBbunny_l_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_4.png) | ![Part3_Complight_CBbunny_l_16](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_16.png) | ![Part3_Complight_CBbunny_l_64](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_64.png) |
+
+Here we provide a short analysis between uniform hemisphere sampling and lighting sampling. In the uniform hemisphere sampling results (top row), the images exhibit high levels of noise due to the random selection of sample directions, many of which do not contribute effectively to lighting. Additionally, the bench scene is entirely black because uniform sampling fails to capture point light sources, which require targeted sampling. In contrast, the importance sampling results (bottom row) are significantly cleaner, with less noise and better-defined shadows, as more samples are concentrated in relevant light directions. The bench scene is also correctly illuminated, demonstrating the effectiveness of light sampling in handling point lights. This comparison clearly illustrates that importance sampling leads to higher-quality renderings.
+
+## Part 4: Global Illumination
+
+In this part, we implemented the feature that calculates the bounces of lights.
+
+### Sampling with Diffuse BSDF
+
+To implement the sample function of diffuse BSDF, we only need to plug the reflectance into the formula. We attatch the code, which should be self-explanatory.
+
+```c&#43;&#43;
+Vector3D DiffuseBSDF::sample_f(const Vector3D wo, Vector3D *wi, double *pdf) {
+  *wi = sampler.get_sample();  // Sample from the hemisphere
+  *pdf = 1.0 / (2.0 * PI);     // Uniform hemisphere sampling PDF
+  return f(wo, *wi);           // Return BSDF evaluation
+}
+```
+
+### Global Illumination with N bounces
+
+The function, `at_least_one_bounce_radiance`, computes indirect lighting in a path tracer by recursively tracing bounces of light. We first constructs an orthonormal coordinate system (`o2w`) based on the surface normal and converts the world-space outgoing direction to local space.
+
+The intersection point is calculated, and if the ray has reached the maximum depth, we can returns direct lighting (`one_bounce_radiance`). Otherwise, it samples a new incoming direction (`wi`) using the BSDF and transforms it into world space. If the probability density (`pdf`) is too small, it returns either direct lighting or zero, depending on `isAccumBounces`.
+
+A new bounce ray is then generated and traced into the scene. If no new intersection is found, we can returns either direct lighting or zero. Otherwise, we recursively computes the indirect lighting from the next intersection. The final radiance is scaled by the BSDF value, the cosine term, and the probability density. If `isAccumBounces` is true, direct lighting is added before returning the result.
+
+### Russian Roulette termination
+
+To ensure an unbiased estimation, we used russian roulette termination. Russian Roulette is a technique we use in path tracing to probabilistically terminate rays and reduce computation while maintaining an unbiased estimate of radiance. Instead of following every ray indefinitely, we randomly decide whether to terminate a path or continue tracing it based on a termination probability.When a ray reaches a certain depth, we flip a weighted coin with a probability `terminate_prob`. If the coin flip indicates termination, we stop tracing the path. However, if the ray continues, we compensate for the potential loss of energy by scaling the contribution of the remaining paths by $ \frac{1}{1 - \text{terminateProb}} $. This ensures that the average radiance remains unbiased despite some paths being cut short.
+
+By using Russian Roulette, we prevent unnecessary calculations for rays that contribute little to the final image while ensuring that important light paths are still accounted for. This helps balance efficiency and accuracy in rendering.
+
+### Results
+
+Here are some results rendered with global illumination.
+
+| CBSpheres                                                    | Dragon                                                       | Bunny                                                        | CBbunny                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Part4_showoff_CBspheres_lambertian](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_CBspheres_lambertian.png) | ![Part4_showoff_dragon](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_dragon.png) | ![Part4_showoff_bunny](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_bunny.png) | ![Part4_comp_bunny_rr_m_100](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100.png) |
+
+Here are some comparisonw with only direct and only indirect illumination.
+
+| ![Part4_Only_Direct_Balls](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Balls.png) | ![Part4_Only_Direct_Bunny](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Bunny.png) |      |      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ---- | ---- |
+| ![Part4_Indirect_Balls](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Balls.png) | ![Part4_Indirect_Bunny](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Bunny.png) |      |      |
+
+*CBbunny.dae* with different rendering bounces.
+
+| isAccumBounces | 0                                                            | 1                                                            | 2                                                            | 3                                                            | 4                                                            | 5                                                            |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| True           | ![Part4_bunny_o_1_m_0](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_0.png) | ![Part4_bunny_o_1_m_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_1.png) | ![Part4_bunny_o_1_m_2_](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_2_.png) | ![Part4_bunny_o_1_m_3](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_3.png) | ![Part4_bunny_o_1_m_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_4.png) | ![Part4_bunny_o_1_m_5](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_5.png) |
+| False          | ![Part4_bunny_o_0_m_0](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_0.png) | ![Part4_bunny_o_0_m_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_1.png) | ![Part4_bunny_o_0_m_2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_2.png) | ![Part4_bunny_o_0_m_3](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_3.png) | ![Part4_bunny_o_0_m_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_4.png) | ![Part4_bunny_o_0_m_5](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_5.png) |
+
+Russian Roulette with max_ray_depth
+
+| Max_ray_depth | 0                                                            | 1                                                            | 2                                                            | 3                                                            | 4                                                            | 100                                                          |
+| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Result        | ![Part4_comp_bunny_rr_m_0](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_0.png) | ![Part4_comp_bunny_rr_m_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_1.png) | ![Part4_comp_bunny_rr_m_2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_2.png) | ![Part4_comp_bunny_rr_m_3](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_3.png) | ![Part4_comp_bunny_rr_m_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_4.png) | ![Part4_comp_bunny_rr_m_100_](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100_.png) |
+
+sample-per-pixel rates
+
+| Rates | 1                                                            | 2                                                            | 4                                                            | 8                                                            | 16                                                           | 64                                                           | 1024                                                         |
+| ----- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+|       | ![Part4_comp_walle_ss_s_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1.png) | ![Part4_comp_walle_ss_s_2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_2.png) | ![Part4_comp_walle_ss_s_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_4.png) | ![Part4_comp_walle_ss_s_8](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_8.png) | ![Part4_comp_walle_ss_s_16](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_16.png) | ![Part4_comp_walle_ss_s_64](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_64.png) | ![Part4_comp_walle_ss_s_1024](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1024.png) |
+
+
+
+## Part 5 Adaptive Sampling
+
+Instead of using a fixed number of samples for all pixels, we adjust the sampling count depending on how quickly the pixel’s estimated radiance stabilizes, improving efficiency without sacrificing image quality.
+
+In implementation, we start by tracing a set number of rays per pixel (`ns_aa`), accumulating their radiance values. After every `samplesPerBatch` samples, we compute the mean and variance of the accumulated illuminance. The variance helps us determine if the pixel&#39;s radiance estimate has converged. We then calculate a confidence interval (`I`) using a 95% confidence level, which tells us how much uncertainty remains in our estimate.
+
+If the confidence interval `I` is within `maxTolerance` of the mean, we assume the pixel&#39;s radiance has stabilized and stop taking more samples, saving computation. Otherwise, we continue sampling until reaching the maximum allowed samples. This adaptive approach ensures that smooth areas of the image converge quickly, while more complex regions with high variance receive more samples to reduce noise. Finally, we update the sample count buffer and store the averaged radiance in the pixel buffer.
+
+### Results
+
+| Bench                                                        | Bunny                                                        |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Part5_bench_rate](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bench_rate.png) | ![Part5_bunny_rate](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bunny_rate.png) |
+| ![Part5_bench](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bench.png) | ![Part5_bunny](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bunny.png) |
 
 
 

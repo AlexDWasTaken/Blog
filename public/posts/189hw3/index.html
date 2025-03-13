@@ -12,7 +12,7 @@
   <meta itemprop="description" content="CS184 Homework 3 Write-Up https://alexdwastaken.github.io/Blog/posts/189hw3/ Group members: Xize Duan, Phoenix Ye">
   <meta itemprop="datePublished" content="2025-03-13T00:05:27-08:00">
   <meta itemprop="dateModified" content="2025-03-13T00:05:27-08:00">
-  <meta itemprop="wordCount" content="971">
+  <meta itemprop="wordCount" content="2469">
   <meta itemprop="keywords" content="CS184"><meta property="og:url" content="http://localhost:1313/Blog/posts/189hw3/">
   <meta property="og:site_name" content="Xize&#39;s CS184 Blog">
   <meta property="og:title" content="CS184 HW3 Writeup">
@@ -41,7 +41,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/Blog\/posts\/189hw3\/"
-    },"genre": "posts","keywords": "CS184","wordcount":  971 ,
+    },"genre": "posts","keywords": "CS184","wordcount":  2469 ,
     "url": "http:\/\/localhost:1313\/Blog\/posts\/189hw3\/","datePublished": "2025-03-13T00:05:27-08:00","dateModified": "2025-03-13T00:05:27-08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -84,7 +84,7 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>CS184 HW3 Writeup</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="post-meta-line"><span title="published on 2025-03-13 00:05:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-03-13">2025-03-13</time></span>&nbsp;<span title="971 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1000 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>5 minutes</span>&nbsp;</div>
+      Anonymous</span></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="post-meta-line"><span title="published on 2025-03-13 00:05:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-03-13">2025-03-13</time></span>&nbsp;<span title="2469 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 2500 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>12 minutes</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -94,8 +94,35 @@
   <ul>
     <li><a href="#overview">Overview</a></li>
     <li><a href="#part1-ray-generation-and-scene-intersection">Part1: Ray Generation and Scene Intersection</a></li>
-    <li><a href="#part-2-bounding-volume-hierarchy">Part 2: Bounding Volume Hierarchy</a></li>
-    <li><a href="#part-3-direct-illumination">Part 3: Direct Illumination</a></li>
+    <li><a href="#part-2-bounding-volume-hierarchy">Part 2: Bounding Volume Hierarchy</a>
+      <ul>
+        <li><a href="#construction">Construction</a></li>
+        <li><a href="#intersection">Intersection</a></li>
+        <li><a href="#results">Results</a></li>
+      </ul>
+    </li>
+    <li><a href="#part-3-direct-illumination">Part 3: Direct Illumination</a>
+      <ul>
+        <li><a href="#bsdf">BSDF</a></li>
+        <li><a href="#zero-bounce">Zero Bounce</a></li>
+        <li><a href="#one-bounce-with-uniform-hemisphere-sampling">One Bounce with Uniform Hemisphere Sampling</a></li>
+        <li><a href="#one-bounce-with-importance-sampling">One Bounce with Importance Sampling</a></li>
+        <li><a href="#results-1">Results</a></li>
+      </ul>
+    </li>
+    <li><a href="#part-4-global-illumination">Part 4: Global Illumination</a>
+      <ul>
+        <li><a href="#sampling-with-diffuse-bsdf">Sampling with Diffuse BSDF</a></li>
+        <li><a href="#global-illumination-with-n-bounces">Global Illumination with N bounces</a></li>
+        <li><a href="#russian-roulette-termination">Russian Roulette termination</a></li>
+        <li><a href="#results-2">Results</a></li>
+      </ul>
+    </li>
+    <li><a href="#part-5-adaptive-sampling">Part 5 Adaptive Sampling</a>
+      <ul>
+        <li><a href="#results-3">Results</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><h2 id="cs184-homework-3-write-up" class="heading-element"><span>CS184 Homework 3 Write-Up</span>
@@ -150,8 +177,11 @@
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h2><p>BVH partitions the objects into different bounding boxes organized in a tree structure to accelerate ray-scene intersection, and it&rsquo;s very useful in ray tracing because it shrinks the complexity from $O(n)$ to $O(\log n)$ with a good policy.</p>
-<p><strong>Construction</strong></p>
-<p>In our implementation, bvh is seperated along the longest axis with median centroid. The first step is to determine whether the node is a leaf node by comparing the current <code>element_count</code> with <code>max_leaf_size</code>. If it already is, fill in <code>start</code> and <code>end</code> field and return directly.</p>
+<h3 id="construction" class="heading-element"><span>Construction</span>
+  <a href="#construction" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>In our implementation, bvh is seperated along the longest axis with median centroid. The first step is to determine whether the node is a leaf node by comparing the current <code>element_count</code> with <code>max_leaf_size</code>. If it already is, fill in <code>start</code> and <code>end</code> field and return directly.</p>
 <p>If the node is not a leaf node, then we find its median and partition accordingly (with a functional programming style!)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -182,12 +212,18 @@
 </span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">rightEnd</span> <span class="o">=</span> <span class="n">end</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>where <code>mid</code> presents two times instead of one <code>mid</code> and one <code>mid++</code>. We guess this is related to the implementation of iterators.</p>
-<p><strong>Intersection</strong></p>
-<p>Intersecting the bounding box is simple. We just record the last &lsquo;in&rsquo; time and first &lsquo;out&rsquo; time. If the &lsquo;in&rsquo; time is before &lsquo;out&rsquo; time, then a intersection is detected, and we can return accordingly.</p>
+<h3 id="intersection" class="heading-element"><span>Intersection</span>
+  <a href="#intersection" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Intersecting the bounding box is simple. We just record the last &lsquo;in&rsquo; time and first &lsquo;out&rsquo; time. If the &lsquo;in&rsquo; time is before &lsquo;out&rsquo; time, then a intersection is detected, and we can return accordingly.</p>
 <p>One of the function only asks us to test whether there is a intersection; to solve that, write a simple recursion: if it is a leaf node, simply test every object inside; if not, return <code>has_intersection(ray, node-&gt;l) || has_intersection(ray, node-&gt;r)</code>. Another function asks us to record the hit position as well, in this case, just record the position in the <code>Intersection</code> object is fine.</p>
 <p>We did not encounter any problem when realizing the intersection functions.</p>
-<p><strong>Results</strong></p>
-<p>Here are some example images of large scenes with normal shading.</p>
+<h3 id="results" class="heading-element"><span>Results</span>
+  <a href="#results" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Here are some example images of large scenes with normal shading.</p>
 <table>
   <thead>
       <tr>
@@ -246,7 +282,356 @@
   <a href="#part-3-direct-illumination" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2></div><div class="post-footer" id="post-footer">
+</h2><p>In this part, we will start simulating light transport in the scene, and render images with realistic shading. We walked through implementing BSDF, zero bounce illumination and one bounce illumination. We also compared uniform hemisphere sampling with direct importance sampling.</p>
+<h3 id="bsdf" class="heading-element"><span>BSDF</span>
+  <a href="#bsdf" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>To implement diffuse BSDF, we only need to plug the reflectance into the formula. We attatch the code, which should be self-explanatory.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">Vector3D</span> <span class="n">DiffuseBSDF</span><span class="o">::</span><span class="n">f</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector3D</span> <span class="n">wo</span><span class="p">,</span> <span class="k">const</span> <span class="n">Vector3D</span> <span class="n">wi</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">reflectance</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">PI</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Vector3D</span> <span class="n">DiffuseBSDF</span><span class="o">::</span><span class="n">sample_f</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector3D</span> <span class="n">wo</span><span class="p">,</span> <span class="n">Vector3D</span> <span class="o">*</span><span class="n">wi</span><span class="p">,</span> <span class="kt">double</span> <span class="o">*</span><span class="n">pdf</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="n">pdf</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">PI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="n">wi</span> <span class="o">=</span> <span class="n">sampler</span><span class="p">.</span><span class="n">get_sample</span><span class="p">(</span><span class="n">pdf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">f</span><span class="p">(</span><span class="n">wo</span><span class="p">,</span> <span class="o">*</span><span class="n">wi</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="zero-bounce" class="heading-element"><span>Zero Bounce</span>
+  <a href="#zero-bounce" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>This part is equally simple once we figured out how to get light: get BSDF from the <code>Intersection</code> object, and get emission by calling <code>get_emission()</code> from the BSDF.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">Vector3D</span> <span class="n">PathTracer</span><span class="o">::</span><span class="n">zero_bounce_radiance</span><span class="p">(</span><span class="k">const</span> <span class="n">Ray</span> <span class="o">&amp;</span><span class="n">r</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                          <span class="k">const</span> <span class="n">Intersection</span> <span class="o">&amp;</span><span class="n">isect</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">isect</span><span class="p">.</span><span class="n">bsdf</span><span class="o">-&gt;</span><span class="n">get_emission</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="one-bounce-with-uniform-hemisphere-sampling" class="heading-element"><span>One Bounce with Uniform Hemisphere Sampling</span>
+  <a href="#one-bounce-with-uniform-hemisphere-sampling" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>We looped through <code>num_samples</code> to create monte carlo estimate according to the illumination psudocode from the lecture.</p>
+<p>We want to particularly highlight how the coordinate transformation works. When getting sample from <code>hemisphereSampler-&gt;get_sample()</code>, what we have is a local coordinate, and what we have to do is to conver it to global coordinate by <code>o2w</code>. After that, we cast ray and obtain emission and probability. Note that $\cos \theta$ can be directly computed by the $z$ coordinate of the local coordinate system. After that, normalize by $\frac{2\pi}{\text{samples}}$ .</p>
+<p>A detail is to set <code>sample_ray.min_t = EPS_D</code>. This is to prevent floating point error, where the light intersects the surface itself. We attach the key part of the code here:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">bvh</span><span class="o">-&gt;</span><span class="n">intersect</span><span class="p">(</span><span class="n">sample_ray</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">light_isect</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Vector3D</span> <span class="n">L_i</span> <span class="o">=</span> <span class="n">light_isect</span><span class="p">.</span><span class="n">bsdf</span><span class="o">-&gt;</span><span class="n">get_emission</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Vector3D</span> <span class="n">f</span> <span class="o">=</span> <span class="n">isect</span><span class="p">.</span><span class="n">bsdf</span><span class="o">-&gt;</span><span class="n">f</span><span class="p">(</span><span class="n">w_out</span><span class="p">,</span> <span class="n">wi</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">double</span> <span class="n">cos_theta</span> <span class="o">=</span> <span class="n">wi</span><span class="p">.</span><span class="n">z</span><span class="p">;</span> <span class="c1">// wi is already in local coordinates where N = (0,0,1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">L_out</span> <span class="o">+=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">L_i</span> <span class="o">*</span> <span class="n">cos_theta</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="one-bounce-with-importance-sampling" class="heading-element"><span>One Bounce with Importance Sampling</span>
+  <a href="#one-bounce-with-importance-sampling" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Instead of uniformly sampling all possible directions, importance sampling strategically samples based on the probability distribution of the light sources or the BSDF, reducing noise and improving convergence. We explain how this works by comparing with uniform hemisphere sampling.</p>
+<p>The key difference between the two methods lies in how samples are chosen. In direct hemisphere sampling, the algorithm selects random directions uniformly over the hemisphere above the surface. This approach does not consider whether the sampled directions actually lead to light sources, leading to many unnecessary samples. In contrast, importance sampling directly selects sample directions based on the distribution of light sources (<code>L_i = light-&gt;sample_L(hit_p, &amp;wi, &amp;distToLight, &amp;pdf)</code>). By sampling only directions that contribute significantly to illumination, importance sampling reduces variance and improves efficiency. Also, importance sampling uses the idea of &ldquo;shadow rays&rdquo;, as the rays that do not reach the light source is equivalent to the ray is in the shadow.</p>
+<p>Since direct hemisphere sampling distributes samples uniformly, it normalizes the accumulated radiance by multiplying by $\frac{2\pi}{\text{samples}}$, assuming an even distribution. However, importance sampling assigns each sample a probability density function (PDF) based on the likelihood of choosing that direction. This allows the algorithm to correctly weigh contributions, ensuring that the results remain unbiased while achieving faster convergence with fewer samples. <strong>Note that we do not re-normalize by 2$\pi$ again as the PDF already tells us the probability! (A lot of bugs encountered by adding unecessary normalization!)</strong></p>
+<p>Also, note that delta light only needs to be handled once. Delta light will almost never be sampled in uniform hemisphere sampling but is supported with importanc sampling.</p>
+<p>Here are the key part of the code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">bvh</span><span class="o">-&gt;</span><span class="n">intersect</span><span class="p">(</span><span class="n">shadow_ray</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">shadow_isect</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Vector3D</span> <span class="n">f</span> <span class="o">=</span> <span class="n">isect</span><span class="p">.</span><span class="n">bsdf</span><span class="o">-&gt;</span><span class="n">f</span><span class="p">(</span><span class="n">w_out</span><span class="p">,</span> <span class="n">wi_local</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">double</span> <span class="n">cos_theta</span> <span class="o">=</span> <span class="n">wi_local</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Add contribution if cos_theta is positive
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">cos_theta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">L_out</span> <span class="o">+=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">L_i</span> <span class="o">*</span> <span class="n">cos_theta</span> <span class="o">/</span> <span class="n">pdf</span> <span class="o">/</span> <span class="n">samples</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="results-1" class="heading-element"><span>Results</span>
+  <a href="#results-1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Here are some samples rendered with both implementations.</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Bunny</th>
+          <th>Balls</th>
+          <th>Bench (Point light, not supported by uniform sampling)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Uniform</td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBbunny-H.png" alt="Part3_Showoff_CBbunny-H" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBbunny-H.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBbunny-H.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBbunny-H.png?size=large 2x" data-title="Part3_Showoff_CBbunny-H" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBspheres_lambertian-H.png" alt="Part3_Showoff_CBspheres_lambertian-H" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBspheres_lambertian-H.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBspheres_lambertian-H.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBspheres_lambertian-H.png?size=large 2x" data-title="Part3_Showoff_CBspheres_lambertian-H" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_bench-H-ns.png" alt="Part3_Showoff_bench-H-ns" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_bench-H-ns.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_bench-H-ns.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_bench-H-ns.png?size=large 2x" data-title="Part3_Showoff_bench-H-ns" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>Importance</td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBbunny.png" alt="Part3_Showoff_CBbunny" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBbunny.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBbunny.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBbunny.png?size=large 2x" data-title="Part3_Showoff_CBbunny" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBspheres_lambertian.png" alt="Part3_Showoff_CBspheres_lambertian" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBspheres_lambertian.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBspheres_lambertian.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_CBspheres_lambertian.png?size=large 2x" data-title="Part3_Showoff_CBspheres_lambertian" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_bench.png" alt="Part3_Showoff_bench" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_bench.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_bench.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Showoff_bench.png?size=large 2x" data-title="Part3_Showoff_bench" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<p>Here is one particular scene with at least one area light and compare the noise levels in soft shadows when rendering with 1, 4, 16, and 64 light rays. We can see that as the light rays goes up, the noise level goes down even we are still using one sample per pixel.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Light Rays</th>
+          <th>1</th>
+          <th>4</th>
+          <th>16</th>
+          <th>64</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Results</td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_1.png" alt="Part3_Complight_CBbunny_l_1" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_1.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_1.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_1.png?size=large 2x" data-title="Part3_Complight_CBbunny_l_1" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_4.png" alt="Part3_Complight_CBbunny_l_4" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_4.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_4.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_4.png?size=large 2x" data-title="Part3_Complight_CBbunny_l_4" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_16.png" alt="Part3_Complight_CBbunny_l_16" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_16.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_16.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_16.png?size=large 2x" data-title="Part3_Complight_CBbunny_l_16" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_64.png" alt="Part3_Complight_CBbunny_l_64" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_64.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_64.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart3_Complight_CBbunny_l_64.png?size=large 2x" data-title="Part3_Complight_CBbunny_l_64" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<p>Here we provide a short analysis between uniform hemisphere sampling and lighting sampling. In the uniform hemisphere sampling results (top row), the images exhibit high levels of noise due to the random selection of sample directions, many of which do not contribute effectively to lighting. Additionally, the bench scene is entirely black because uniform sampling fails to capture point light sources, which require targeted sampling. In contrast, the importance sampling results (bottom row) are significantly cleaner, with less noise and better-defined shadows, as more samples are concentrated in relevant light directions. The bench scene is also correctly illuminated, demonstrating the effectiveness of light sampling in handling point lights. This comparison clearly illustrates that importance sampling leads to higher-quality renderings.</p>
+<h2 id="part-4-global-illumination" class="heading-element"><span>Part 4: Global Illumination</span>
+  <a href="#part-4-global-illumination" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In this part, we implemented the feature that calculates the bounces of lights.</p>
+<h3 id="sampling-with-diffuse-bsdf" class="heading-element"><span>Sampling with Diffuse BSDF</span>
+  <a href="#sampling-with-diffuse-bsdf" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>To implement the sample function of diffuse BSDF, we only need to plug the reflectance into the formula. We attatch the code, which should be self-explanatory.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">Vector3D</span> <span class="n">DiffuseBSDF</span><span class="o">::</span><span class="n">sample_f</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector3D</span> <span class="n">wo</span><span class="p">,</span> <span class="n">Vector3D</span> <span class="o">*</span><span class="n">wi</span><span class="p">,</span> <span class="kt">double</span> <span class="o">*</span><span class="n">pdf</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="n">wi</span> <span class="o">=</span> <span class="n">sampler</span><span class="p">.</span><span class="n">get_sample</span><span class="p">();</span>  <span class="c1">// Sample from the hemisphere
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">*</span><span class="n">pdf</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">PI</span><span class="p">);</span>     <span class="c1">// Uniform hemisphere sampling PDF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="nf">f</span><span class="p">(</span><span class="n">wo</span><span class="p">,</span> <span class="o">*</span><span class="n">wi</span><span class="p">);</span>           <span class="c1">// Return BSDF evaluation
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="global-illumination-with-n-bounces" class="heading-element"><span>Global Illumination with N bounces</span>
+  <a href="#global-illumination-with-n-bounces" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>The function, <code>at_least_one_bounce_radiance</code>, computes indirect lighting in a path tracer by recursively tracing bounces of light. We first constructs an orthonormal coordinate system (<code>o2w</code>) based on the surface normal and converts the world-space outgoing direction to local space.</p>
+<p>The intersection point is calculated, and if the ray has reached the maximum depth, we can returns direct lighting (<code>one_bounce_radiance</code>). Otherwise, it samples a new incoming direction (<code>wi</code>) using the BSDF and transforms it into world space. If the probability density (<code>pdf</code>) is too small, it returns either direct lighting or zero, depending on <code>isAccumBounces</code>.</p>
+<p>A new bounce ray is then generated and traced into the scene. If no new intersection is found, we can returns either direct lighting or zero. Otherwise, we recursively computes the indirect lighting from the next intersection. The final radiance is scaled by the BSDF value, the cosine term, and the probability density. If <code>isAccumBounces</code> is true, direct lighting is added before returning the result.</p>
+<h3 id="russian-roulette-termination" class="heading-element"><span>Russian Roulette termination</span>
+  <a href="#russian-roulette-termination" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>To ensure an unbiased estimation, we used russian roulette termination. Russian Roulette is a technique we use in path tracing to probabilistically terminate rays and reduce computation while maintaining an unbiased estimate of radiance. Instead of following every ray indefinitely, we randomly decide whether to terminate a path or continue tracing it based on a termination probability.When a ray reaches a certain depth, we flip a weighted coin with a probability <code>terminate_prob</code>. If the coin flip indicates termination, we stop tracing the path. However, if the ray continues, we compensate for the potential loss of energy by scaling the contribution of the remaining paths by $ \frac{1}{1 - \text{terminateProb}} $. This ensures that the average radiance remains unbiased despite some paths being cut short.</p>
+<p>By using Russian Roulette, we prevent unnecessary calculations for rays that contribute little to the final image while ensuring that important light paths are still accounted for. This helps balance efficiency and accuracy in rendering.</p>
+<h3 id="results-2" class="heading-element"><span>Results</span>
+  <a href="#results-2" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Here are some results rendered with global illumination.</p>
+<table>
+  <thead>
+      <tr>
+          <th>CBSpheres</th>
+          <th>Dragon</th>
+          <th>Bunny</th>
+          <th>CBbunny</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_CBspheres_lambertian.png" alt="Part4_showoff_CBspheres_lambertian" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_CBspheres_lambertian.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_CBspheres_lambertian.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_CBspheres_lambertian.png?size=large 2x" data-title="Part4_showoff_CBspheres_lambertian" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_dragon.png" alt="Part4_showoff_dragon" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_dragon.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_dragon.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_dragon.png?size=large 2x" data-title="Part4_showoff_dragon" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_bunny.png" alt="Part4_showoff_bunny" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_bunny.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_bunny.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_showoff_bunny.png?size=large 2x" data-title="Part4_showoff_bunny" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100.png" alt="Part4_comp_bunny_rr_m_100" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100.png?size=large 2x" data-title="Part4_comp_bunny_rr_m_100" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<p>Here are some comparisonw with only direct and only indirect illumination.</p>
+<table>
+  <thead>
+      <tr>
+          <th><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Balls.png" alt="Part4_Only_Direct_Balls" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Balls.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Balls.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Balls.png?size=large 2x" data-title="Part4_Only_Direct_Balls" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></th>
+          <th><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Bunny.png" alt="Part4_Only_Direct_Bunny" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Bunny.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Bunny.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Bunny.png?size=large 2x" data-title="Part4_Only_Direct_Bunny" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></th>
+          <th></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Balls.png" alt="Part4_Indirect_Balls" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Balls.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Balls.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Balls.png?size=large 2x" data-title="Part4_Indirect_Balls" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Bunny.png" alt="Part4_Indirect_Bunny" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Bunny.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Bunny.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Bunny.png?size=large 2x" data-title="Part4_Indirect_Bunny" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<p><em>CBbunny.dae</em> with different rendering bounces.</p>
+<table>
+  <thead>
+      <tr>
+          <th>isAccumBounces</th>
+          <th>0</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>True</td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_0.png" alt="Part4_bunny_o_1_m_0" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_0.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_0.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_0.png?size=large 2x" data-title="Part4_bunny_o_1_m_0" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_1.png" alt="Part4_bunny_o_1_m_1" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_1.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_1.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_1.png?size=large 2x" data-title="Part4_bunny_o_1_m_1" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_2_.png" alt="Part4_bunny_o_1_m_2_" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_2_.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_2_.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_2_.png?size=large 2x" data-title="Part4_bunny_o_1_m_2_" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_3.png" alt="Part4_bunny_o_1_m_3" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_3.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_3.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_3.png?size=large 2x" data-title="Part4_bunny_o_1_m_3" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_4.png" alt="Part4_bunny_o_1_m_4" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_4.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_4.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_4.png?size=large 2x" data-title="Part4_bunny_o_1_m_4" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_5.png" alt="Part4_bunny_o_1_m_5" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_5.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_5.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_5.png?size=large 2x" data-title="Part4_bunny_o_1_m_5" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>False</td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_0.png" alt="Part4_bunny_o_0_m_0" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_0.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_0.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_0.png?size=large 2x" data-title="Part4_bunny_o_0_m_0" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_1.png" alt="Part4_bunny_o_0_m_1" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_1.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_1.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_1.png?size=large 2x" data-title="Part4_bunny_o_0_m_1" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_2.png" alt="Part4_bunny_o_0_m_2" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_2.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_2.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_2.png?size=large 2x" data-title="Part4_bunny_o_0_m_2" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_3.png" alt="Part4_bunny_o_0_m_3" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_3.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_3.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_3.png?size=large 2x" data-title="Part4_bunny_o_0_m_3" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_4.png" alt="Part4_bunny_o_0_m_4" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_4.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_4.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_4.png?size=large 2x" data-title="Part4_bunny_o_0_m_4" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_5.png" alt="Part4_bunny_o_0_m_5" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_5.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_5.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_5.png?size=large 2x" data-title="Part4_bunny_o_0_m_5" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<p>Russian Roulette with max_ray_depth</p>
+<table>
+  <thead>
+      <tr>
+          <th>Max_ray_depth</th>
+          <th>0</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>100</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Result</td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_0.png" alt="Part4_comp_bunny_rr_m_0" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_0.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_0.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_0.png?size=large 2x" data-title="Part4_comp_bunny_rr_m_0" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_1.png" alt="Part4_comp_bunny_rr_m_1" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_1.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_1.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_1.png?size=large 2x" data-title="Part4_comp_bunny_rr_m_1" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_2.png" alt="Part4_comp_bunny_rr_m_2" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_2.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_2.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_2.png?size=large 2x" data-title="Part4_comp_bunny_rr_m_2" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_3.png" alt="Part4_comp_bunny_rr_m_3" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_3.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_3.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_3.png?size=large 2x" data-title="Part4_comp_bunny_rr_m_3" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_4.png" alt="Part4_comp_bunny_rr_m_4" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_4.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_4.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_4.png?size=large 2x" data-title="Part4_comp_bunny_rr_m_4" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100_.png" alt="Part4_comp_bunny_rr_m_100_" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100_.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100_.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100_.png?size=large 2x" data-title="Part4_comp_bunny_rr_m_100_" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<p>sample-per-pixel rates</p>
+<table>
+  <thead>
+      <tr>
+          <th>Rates</th>
+          <th>1</th>
+          <th>2</th>
+          <th>4</th>
+          <th>8</th>
+          <th>16</th>
+          <th>64</th>
+          <th>1024</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1.png" alt="Part4_comp_walle_ss_s_1" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1.png?size=large 2x" data-title="Part4_comp_walle_ss_s_1" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_2.png" alt="Part4_comp_walle_ss_s_2" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_2.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_2.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_2.png?size=large 2x" data-title="Part4_comp_walle_ss_s_2" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_4.png" alt="Part4_comp_walle_ss_s_4" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_4.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_4.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_4.png?size=large 2x" data-title="Part4_comp_walle_ss_s_4" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_8.png" alt="Part4_comp_walle_ss_s_8" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_8.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_8.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_8.png?size=large 2x" data-title="Part4_comp_walle_ss_s_8" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_16.png" alt="Part4_comp_walle_ss_s_16" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_16.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_16.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_16.png?size=large 2x" data-title="Part4_comp_walle_ss_s_16" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_64.png" alt="Part4_comp_walle_ss_s_64" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_64.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_64.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_64.png?size=large 2x" data-title="Part4_comp_walle_ss_s_64" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1024.png" alt="Part4_comp_walle_ss_s_1024" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1024.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1024.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1024.png?size=large 2x" data-title="Part4_comp_walle_ss_s_1024" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="part-5-adaptive-sampling" class="heading-element"><span>Part 5 Adaptive Sampling</span>
+  <a href="#part-5-adaptive-sampling" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Instead of using a fixed number of samples for all pixels, we adjust the sampling count depending on how quickly the pixel’s estimated radiance stabilizes, improving efficiency without sacrificing image quality.</p>
+<p>In implementation, we start by tracing a set number of rays per pixel (<code>ns_aa</code>), accumulating their radiance values. After every <code>samplesPerBatch</code> samples, we compute the mean and variance of the accumulated illuminance. The variance helps us determine if the pixel&rsquo;s radiance estimate has converged. We then calculate a confidence interval (<code>I</code>) using a 95% confidence level, which tells us how much uncertainty remains in our estimate.</p>
+<p>If the confidence interval <code>I</code> is within <code>maxTolerance</code> of the mean, we assume the pixel&rsquo;s radiance has stabilized and stop taking more samples, saving computation. Otherwise, we continue sampling until reaching the maximum allowed samples. This adaptive approach ensures that smooth areas of the image converge quickly, while more complex regions with high variance receive more samples to reduce noise. Finally, we update the sample count buffer and store the averaged radiance in the pixel buffer.</p>
+<h3 id="results-3" class="heading-element"><span>Results</span>
+  <a href="#results-3" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>Bench</th>
+          <th>Bunny</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bench_rate.png" alt="Part5_bench_rate" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bench_rate.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bench_rate.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bench_rate.png?size=large 2x" data-title="Part5_bench_rate" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bunny_rate.png" alt="Part5_bunny_rate" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bunny_rate.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bunny_rate.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bunny_rate.png?size=large 2x" data-title="Part5_bunny_rate" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bench.png" alt="Part5_bench" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bench.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bench.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bench.png?size=large 2x" data-title="Part5_bench" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bunny.png" alt="Part5_bunny" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bunny.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bunny.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart5_bunny.png?size=large 2x" data-title="Part5_bunny" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+</div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
