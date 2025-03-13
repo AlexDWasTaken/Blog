@@ -38,8 +38,16 @@ message:
 
 > https://alexdwastaken.github.io/Blog/posts/189hw3/
 > **Group members: Xize Duan, Phoenix Ye**
+> 
+> We used Claude 3.7 Sonnet for language polishing. The code and the body of the write up is completely written by us.
 
 ## Overview
+
+Part 1: We implemented ray generation and scene intersection, creating rays through pixels with random sampling, transforming between coordinate spaces, and developing intersection algorithms for triangles and spheres.
+Part 2: We built a Bounding Volume Hierarchy (BVH) that accelerated ray-scene intersection by organizing geometry in a tree structure, reducing complexity from O(n) to O(log n) and dramatically improving render times.
+Part 3: We implemented direct illumination with diffuse BSDFs and compared uniform hemisphere sampling with importance sampling, demonstrating that the latter produces cleaner images with better handling of light sources.
+Part 4: We extended our renderer to simulate global illumination with multiple light bounces, implementing recursive ray tracing and Russian Roulette path termination to capture realistic light transport throughout scenes.
+Part 5: We implemented adaptive sampling that varies sample count based on pixel variance, using statistical confidence intervals to allocate computational resources efficiently while maintaining image quality.
 
 ## Part1: Ray Generation and Scene Intersection
 
