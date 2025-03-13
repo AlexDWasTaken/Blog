@@ -241,9 +241,9 @@ To implement the sample function of diffuse BSDF, we only need to plug the refle
 
 ```c++
 Vector3D DiffuseBSDF::sample_f(const Vector3D wo, Vector3D *wi, double *pdf) {
-  *wi = sampler.get_sample();  // Sample from the hemisphere
-  *pdf = 1.0 / (2.0 * PI);     // Uniform hemisphere sampling PDF
-  return f(wo, *wi);           // Return BSDF evaluation
+  *wi = sampler.get_sample();
+  *pdf = (wi->z) / (PI); //cosine weighted
+  return f(wo, *wi);
 }
 ```
 
