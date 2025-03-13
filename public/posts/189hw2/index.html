@@ -6,17 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>CS184 HW2 Writeup - Xize&#39;s CS184 Blog</title><meta name="author" content="">
-<meta name="description" content="Section I: Bezier Curves and Surfaces https://alexdwastaken.github.io/Blog/posts/189hw2/ Group members: Phoenix Ye, Xize Duan
+<meta name="description" content=" https://alexdwastaken.github.io/Blog/posts/189hw2/ Group members: Phoenix Ye, Xize Duan
+Overview In this project, we implemented Bezier curves and surfaces using the de Casteljau algorithm, allowing us to evaluate curves through recursive interpolation and extend this approach to surfaces. We also worked with triangle meshes using the half-edge data structure, computing smooth vertex normals for improved shading. Additionally, we implemented edge flipping and splitting to modify mesh topology while maintaining connectivity. Finally, we applied Loop subdivision to refine meshes, achieving smoother and higher-resolution results. Through this project, we gained a deeper understanding of geometric modeling, mesh operations, and the importance of efficient data structures in computer graphics. The final results successfully demonstrate smooth curve generation, surface evaluation, and mesh refinement, with visually improved models and correct algorithmic implementations.
 "><meta name="keywords" content='CS184'>
   <meta itemprop="name" content="CS184 HW2 Writeup">
-  <meta itemprop="description" content="Section I: Bezier Curves and Surfaces https://alexdwastaken.github.io/Blog/posts/189hw2/ Group members: Phoenix Ye, Xize Duan">
+  <meta itemprop="description" content="https://alexdwastaken.github.io/Blog/posts/189hw2/ Group members: Phoenix Ye, Xize Duan
+Overview In this project, we implemented Bezier curves and surfaces using the de Casteljau algorithm, allowing us to evaluate curves through recursive interpolation and extend this approach to surfaces. We also worked with triangle meshes using the half-edge data structure, computing smooth vertex normals for improved shading. Additionally, we implemented edge flipping and splitting to modify mesh topology while maintaining connectivity. Finally, we applied Loop subdivision to refine meshes, achieving smoother and higher-resolution results. Through this project, we gained a deeper understanding of geometric modeling, mesh operations, and the importance of efficient data structures in computer graphics. The final results successfully demonstrate smooth curve generation, surface evaluation, and mesh refinement, with visually improved models and correct algorithmic implementations.">
   <meta itemprop="datePublished" content="2025-03-04T00:05:27-08:00">
   <meta itemprop="dateModified" content="2025-03-04T00:05:27-08:00">
-  <meta itemprop="wordCount" content="1797">
+  <meta itemprop="wordCount" content="1938">
   <meta itemprop="keywords" content="CS184"><meta property="og:url" content="http://localhost:1313/Blog/posts/189hw2/">
   <meta property="og:site_name" content="Xize&#39;s CS184 Blog">
   <meta property="og:title" content="CS184 HW2 Writeup">
-  <meta property="og:description" content="Section I: Bezier Curves and Surfaces https://alexdwastaken.github.io/Blog/posts/189hw2/ Group members: Phoenix Ye, Xize Duan">
+  <meta property="og:description" content="https://alexdwastaken.github.io/Blog/posts/189hw2/ Group members: Phoenix Ye, Xize Duan
+Overview In this project, we implemented Bezier curves and surfaces using the de Casteljau algorithm, allowing us to evaluate curves through recursive interpolation and extend this approach to surfaces. We also worked with triangle meshes using the half-edge data structure, computing smooth vertex normals for improved shading. Additionally, we implemented edge flipping and splitting to modify mesh topology while maintaining connectivity. Finally, we applied Loop subdivision to refine meshes, achieving smoother and higher-resolution results. Through this project, we gained a deeper understanding of geometric modeling, mesh operations, and the importance of efficient data structures in computer graphics. The final results successfully demonstrate smooth curve generation, surface evaluation, and mesh refinement, with visually improved models and correct algorithmic implementations.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -26,11 +29,12 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="CS184 HW2 Writeup">
-  <meta name="twitter:description" content="Section I: Bezier Curves and Surfaces https://alexdwastaken.github.io/Blog/posts/189hw2/ Group members: Phoenix Ye, Xize Duan">
+  <meta name="twitter:description" content="https://alexdwastaken.github.io/Blog/posts/189hw2/ Group members: Phoenix Ye, Xize Duan
+Overview In this project, we implemented Bezier curves and surfaces using the de Casteljau algorithm, allowing us to evaluate curves through recursive interpolation and extend this approach to surfaces. We also worked with triangle meshes using the half-edge data structure, computing smooth vertex normals for improved shading. Additionally, we implemented edge flipping and splitting to modify mesh topology while maintaining connectivity. Finally, we applied Loop subdivision to refine meshes, achieving smoother and higher-resolution results. Through this project, we gained a deeper understanding of geometric modeling, mesh operations, and the importance of efficient data structures in computer graphics. The final results successfully demonstrate smooth curve generation, surface evaluation, and mesh refinement, with visually improved models and correct algorithmic implementations.">
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/Blog/posts/189hw2/" title="CS184 HW2 Writeup - Xize&#39;s CS184 Blog" /><link rel="prev" type="text/html" href="http://localhost:1313/Blog/posts/eeccd09/" title="CS184 HW1 Writeup" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/Blog/posts/189hw2/index.md" title="CS184 HW2 Writeup - Xize's CS184 Blog"><link rel="stylesheet" href="/Blog/css/style.min.css"><link rel="preload" href="/Blog/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/Blog/posts/189hw2/" title="CS184 HW2 Writeup - Xize&#39;s CS184 Blog" /><link rel="prev" type="text/html" href="http://localhost:1313/Blog/posts/eeccd09/" title="CS184 HW1 Writeup" /><link rel="next" type="text/html" href="http://localhost:1313/Blog/posts/189hw3/" title="CS184 HW3 Writeup" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/Blog/posts/189hw2/index.md" title="CS184 HW2 Writeup - Xize's CS184 Blog"><link rel="stylesheet" href="/Blog/css/style.min.css"><link rel="preload" href="/Blog/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/Blog/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/Blog/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/Blog/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -41,7 +45,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/Blog\/posts\/189hw2\/"
-    },"genre": "posts","keywords": "CS184","wordcount":  1797 ,
+    },"genre": "posts","keywords": "CS184","wordcount":  1938 ,
     "url": "http:\/\/localhost:1313\/Blog\/posts\/189hw2\/","datePublished": "2025-03-04T00:05:27-08:00","dateModified": "2025-03-04T00:05:27-08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -81,10 +85,10 @@
 </header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="Repost" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>CS184 HW2 Writeup</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>CS184 HW2 Writeup</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="post-meta-line"><span title="published on 2025-03-04 00:05:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-03-04">2025-03-04</time></span>&nbsp;<span title="1797 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1800 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>9 minutes</span>&nbsp;</div>
+      Anonymous</span></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="post-meta-line"><span title="published on 2025-03-04 00:05:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-03-04">2025-03-04</time></span>&nbsp;<span title="1938 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 2000 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>10 minutes</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -92,39 +96,61 @@
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
+    <li><a href="#overview">Overview</a></li>
+  </ul>
+
+  <ul>
     <li><a href="#part-1-bezier-curves-with-1d-de-casteljau-subdivision">Part 1: Bezier Curves with 1D de Casteljau Subdivision</a></li>
     <li><a href="#part-2-bezier-surfaces-with-separable-1d-de-casteljau">Part 2: Bezier surfaces with separable 1D de Casteljau</a></li>
   </ul>
 
   <ul>
     <li><a href="#part-3-area-weighted-vertex-normals">Part 3: Area-Weighted Vertex Normals</a></li>
-    <li><a href="#part4-edge-flip">Part4: Edge Flip</a></li>
-    <li><a href="#debug-journey">Debug Journey</a></li>
+    <li><a href="#part-4-edge-flip">Part 4: Edge Flip</a>
+      <ul>
+        <li><a href="#debug-journey">Debug Journey</a></li>
+      </ul>
+    </li>
     <li><a href="#part-5-edge-split">Part 5: Edge Split</a>
       <ul>
         <li><a href="#debugging-journey">Debugging Journey</a></li>
       </ul>
     </li>
-  </ul>
-
-  <ul>
-    <li><a href="#3-debugging-and-observations">3. Debugging and Observations</a>
+    <li><a href="#part-6-loop-subdivision-for-mesh-upsampling">Part 6: Loop Subdivision for Mesh Upsampling</a>
       <ul>
-        <li><a href="#torus-edgecollapsedae">Torus (edgeCollapse.dae)</a></li>
-        <li><a href="#cube-edgeflipdae">Cube (edgeFlip.dae)</a></li>
-        <li><a href="#icosahedron-edgesplitdae">Icosahedron (edgeSplit.dae)</a></li>
+        <li><a href="#debugging-and-observations">Debugging and Observations</a></li>
+        <li><a href="#examples">Examples</a>
+          <ul>
+            <li><a href="#torus-original">Torus (Original)</a></li>
+            <li><a href="#cube-original">Cube (Original)</a></li>
+            <li><a href="#icosahedron-original">Icosahedron (Original)</a></li>
+            <li><a href="#torus-edgecollapsedae">Torus (edgeCollapse.dae)</a></li>
+            <li><a href="#cube-edgeflipdae">Cube (edgeFlip.dae)</a></li>
+            <li><a href="#icosahedron-edgesplitdae">Icosahedron (edgeSplit.dae)</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
+    <li><a href="#appendix">Appendix</a></li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><h2 id="section-i-bezier-curves-and-surfaces" class="heading-element"><span>Section I: Bezier Curves and Surfaces</span>
+      </div><div class="content" id="content"><blockquote>
+<p><a href="https://alexdwastaken.github.io/Blog/posts/189hw2/"target="_blank" rel="external nofollow noopener noreferrer">https://alexdwastaken.github.io/Blog/posts/189hw2/</a>
+<strong>Group members: Phoenix Ye, Xize Duan</strong></p></blockquote>
+<h2 id="overview" class="heading-element"><span>Overview</span>
+  <a href="#overview" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In this project, we implemented Bezier curves and surfaces using the de Casteljau algorithm, allowing us to evaluate curves through recursive interpolation and extend this approach to surfaces.
+We also worked with triangle meshes using the half-edge data structure, computing smooth vertex normals for improved shading.
+Additionally, we implemented edge flipping and splitting to modify mesh topology while maintaining connectivity.
+Finally, we applied Loop subdivision to refine meshes, achieving smoother and higher-resolution results. Through this project, we gained a deeper understanding of geometric modeling, mesh operations,
+and the importance of efficient data structures in computer graphics. The final results successfully demonstrate smooth curve generation, surface evaluation, and mesh refinement, with visually improved models and correct algorithmic implementations.</p>
+<h2 id="section-i-bezier-curves-and-surfaces" class="heading-element"><span>Section I: Bezier Curves and Surfaces</span>
   <a href="#section-i-bezier-curves-and-surfaces" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><blockquote>
-<p><a href="https://alexdwastaken.github.io/Blog/posts/189hw2/"target="_blank" rel="external nofollow noopener noreferrer">https://alexdwastaken.github.io/Blog/posts/189hw2/</a>
-<strong>Group members: Phoenix Ye, Xize Duan</strong></p></blockquote>
-<h2 id="part-1-bezier-curves-with-1d-de-casteljau-subdivision" class="heading-element"><span>Part 1: Bezier Curves with 1D de Casteljau Subdivision</span>
+</h2><h2 id="part-1-bezier-curves-with-1d-de-casteljau-subdivision" class="heading-element"><span>Part 1: Bezier Curves with 1D de Casteljau Subdivision</span>
   <a href="#part-1-bezier-curves-with-1d-de-casteljau-subdivision" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
@@ -200,8 +226,8 @@ Flat Shading</p>
 Phone Shading</p>
 <p><img loading="lazy" src="/Blog/posts/189hw2/part3/part3.3.png" alt="Without Wire" srcset="/Blog/posts/189hw2/part3/part3.3.png?size=small, /Blog/posts/189hw2/part3/part3.3.png?size=medium 1.5x, /Blog/posts/189hw2/part3/part3.3.png?size=large 2x" data-title="Without Wire" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
 Without Wire</p>
-<h2 id="part4-edge-flip" class="heading-element"><span>Part4: Edge Flip</span>
-  <a href="#part4-edge-flip" class="heading-mark">
+<h2 id="part-4-edge-flip" class="heading-element"><span>Part 4: Edge Flip</span>
+  <a href="#part-4-edge-flip" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h2><p>In Part 4, we use the half-edge data structure to apply the <strong>edge flip</strong> operation to a triangular mesh. When two adjacent triangles share an edge, the procedure &ldquo;flips&rdquo; that edge, substituting the other diagonal of the quadrilateral the two triangles make for the shared edge. When two triangles (a, b, c) and (c, b, d) share the edge (b, c), for instance, the flip swaps out this edge, creating the new triangles (a, d, c) and (a, b, d respectively).</p>
@@ -211,11 +237,11 @@ Without Wire</p>
 Without Flip</p>
 <p><img loading="lazy" src="/Blog/posts/189hw2/part4/part4.2.png" alt="With Flip" srcset="/Blog/posts/189hw2/part4/part4.2.png?size=small, /Blog/posts/189hw2/part4/part4.2.png?size=medium 1.5x, /Blog/posts/189hw2/part4/part4.2.png?size=large 2x" data-title="With Flip" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
 With Some Flips</p>
-<h2 id="debug-journey" class="heading-element"><span>Debug Journey</span>
+<h3 id="debug-journey" class="heading-element"><span>Debug Journey</span>
   <a href="#debug-journey" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>During the implementation, We encountered an issue where flipping an edge twice sometimes created a hole in the mesh. To resolve this, we first sketched the local configuration of the two triangles on paper, labeling all half-edges, vertices, and faces. Then we employed provided debugging macros (like <code>CHECK_VERTEX</code> and <code>CHECK_CLOSED</code>) to ensure that, after the flip, all pointers correctly pointed to the expected elements. So after the corrections, the edge flip operation consistently maintained mesh integrity even after multiple flips, as verified by both visual inspection and debug checks.</p>
+</h3><p>During the implementation, We encountered an issue where flipping an edge twice sometimes created a hole in the mesh. To resolve this, we first sketched the local configuration of the two triangles on paper, labeling all half-edges, vertices, and faces. Then we employed provided debugging macros (like <code>CHECK_VERTEX</code> and <code>CHECK_CLOSED</code>) to ensure that, after the flip, all pointers correctly pointed to the expected elements. So after the corrections, the edge flip operation consistently maintained mesh integrity even after multiple flips, as verified by both visual inspection and debug checks.</p>
 <h2 id="part-5-edge-split" class="heading-element"><span>Part 5: Edge Split</span>
   <a href="#part-5-edge-split" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
@@ -265,11 +291,11 @@ With some Flips and Splits</p>
 <li>After splitting, We process the edges again: if an edge is new and connects one new vertex with one old vertex, we flip it. This ensures that only the proper edges (depicted as blue in the assignment diagram) are flipped while preserving the original boundary of the subdivided triangles.</li>
 <li>Finally, all vertices are updated with their new positions, and the <code>isNew</code> flags are reset.</li>
 </ul>
-<h2 id="3-debugging-and-observations" class="heading-element"><span>3. Debugging and Observations</span>
-  <a href="#3-debugging-and-observations" class="heading-mark">
+<h3 id="debugging-and-observations" class="heading-element"><span>Debugging and Observations</span>
+  <a href="#debugging-and-observations" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>During the development of the Loop subdivision:</p>
+</h3><p>During the development of the Loop subdivision:</p>
 <ul>
 <li>
 <p>We drew diagrams of local mesh configurations to carefully track the pointer reassignments during edge splits and flips.</p>
@@ -287,49 +313,173 @@ With some Flips and Splits</p>
 </ul>
 </li>
 </ul>
-<p>Below are the screenshots documenting the progress of loop subdivision on three different models. Each set shows the mesh at 0 through 4 subdivisions, demonstrating how the mesh becomes smoother and more detailed with each iteration.</p>
-<h3 id="torus-edgecollapsedae" class="heading-element"><span>Torus (edgeCollapse.dae)</span>
+<p>Below are the screenshots documenting the progress of loop subdivision on three different models. Each set shows the mesh at 0 through 4 subdivisions, demonstrating how the mesh becomes smoother and more detailed with each iteration. We can compare the original one with the split, flip and collapse one.</p>
+<h3 id="examples" class="heading-element"><span>Examples</span>
+  <a href="#examples" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="torus-original" class="heading-element"><span>Torus (Original)</span>
+  <a href="#torus-original" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><table>
+  <thead>
+      <tr>
+          <th>0 iterations</th>
+          <th>1 iteration</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7381741116289_.pic.jpg" alt="7381741116289_.pic" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7381741116289_.pic.jpg?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7381741116289_.pic.jpg?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7381741116289_.pic.jpg?size=large 2x" data-title="7381741116289_.pic" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7391741116302_.pic.jpg" alt="7391741116302_.pic" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7391741116302_.pic.jpg?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7391741116302_.pic.jpg?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7391741116302_.pic.jpg?size=large 2x" data-title="7391741116302_.pic" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>2 iterations</td>
+          <td>3 iterations</td>
+      </tr>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7401741116312_.pic.jpg" alt="7401741116312_.pic" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7401741116312_.pic.jpg?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7401741116312_.pic.jpg?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7401741116312_.pic.jpg?size=large 2x" data-title="7401741116312_.pic" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7411741116321_.pic.jpg" alt="7411741116321_.pic" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7411741116321_.pic.jpg?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7411741116321_.pic.jpg?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7411741116321_.pic.jpg?size=large 2x" data-title="7411741116321_.pic" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="cube-original" class="heading-element"><span>Cube (Original)</span>
+  <a href="#cube-original" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><table>
+  <thead>
+      <tr>
+          <th>0 iterations</th>
+          <th>1 iteration</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.17%E2%80%AFAM.png" alt="7381741116289_.pic" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.17%E2%80%AFAM.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.17%E2%80%AFAM.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.17%E2%80%AFAM.png?size=large 2x" data-title="7381741116289_.pic" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.51%E2%80%AFAM.png" alt="Screenshot 2025-03-04 at 11.34.51 AM" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.51%E2%80%AFAM.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.51%E2%80%AFAM.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.51%E2%80%AFAM.png?size=large 2x" data-title="Screenshot 2025-03-04 at 11.34.51 AM" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>2 iterations</td>
+          <td>3 iterations</td>
+      </tr>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.08%E2%80%AFAM.png" alt="Screenshot 2025-03-04 at 11.35.08 AM" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.08%E2%80%AFAM.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.08%E2%80%AFAM.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.08%E2%80%AFAM.png?size=large 2x" data-title="Screenshot 2025-03-04 at 11.35.08 AM" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.29%E2%80%AFAM.png" alt="Screenshot 2025-03-04 at 11.35.29 AM" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.29%E2%80%AFAM.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.29%E2%80%AFAM.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.29%E2%80%AFAM.png?size=large 2x" data-title="Screenshot 2025-03-04 at 11.35.29 AM" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="icosahedron-original" class="heading-element"><span>Icosahedron (Original)</span>
+  <a href="#icosahedron-original" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><table>
+  <thead>
+      <tr>
+          <th>0 iterations</th>
+          <th>1 iteration</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113936836.png" alt="image-20250304113936836" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113936836.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113936836.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113936836.png?size=large 2x" data-title="image-20250304113936836" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113949604.png" alt="image-20250304113949604" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113949604.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113949604.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113949604.png?size=large 2x" data-title="image-20250304113949604" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>2 iterations</td>
+          <td>3 iterations</td>
+      </tr>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114010997.png" alt="image-20250304114010997" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114010997.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114010997.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114010997.png?size=large 2x" data-title="image-20250304114010997" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114021704.png" alt="image-20250304114021704" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114021704.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114021704.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114021704.png?size=large 2x" data-title="image-20250304114021704" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="torus-edgecollapsedae" class="heading-element"><span>Torus (edgeCollapse.dae)</span>
   <a href="#torus-edgecollapsedae" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.1.png" alt="Torus - 0 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.1.png?size=small, /Blog/posts/189hw2/part6/part6.1.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.1.png?size=large 2x" data-title="Torus - 0 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Torus model at 0 subdivisions (original mesh).</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.2.png" alt="Torus - 1 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.2.png?size=small, /Blog/posts/189hw2/part6/part6.2.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.2.png?size=large 2x" data-title="Torus - 1 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Torus model after 1 iteration of loop subdivision.</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.3.png" alt="Torus - 2 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.3.png?size=small, /Blog/posts/189hw2/part6/part6.3.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.3.png?size=large 2x" data-title="Torus - 2 Subdivision" style="--width: 2144px;--aspect-ratio: 2144 / 1560;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Torus model after 2 iterations of loop subdivision.</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.4.png" alt="Torus - 3 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.4.png?size=small, /Blog/posts/189hw2/part6/part6.4.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.4.png?size=large 2x" data-title="Torus - 3 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Torus model after 3 iterations of loop subdivision.</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.5.png" alt="Torus - 4 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.5.png?size=small, /Blog/posts/189hw2/part6/part6.5.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.5.png?size=large 2x" data-title="Torus - 4 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Torus model after 4 iterations of loop subdivision.</p>
-<h3 id="cube-edgeflipdae" class="heading-element"><span>Cube (edgeFlip.dae)</span>
+</h4><table>
+  <thead>
+      <tr>
+          <th>0 iterations</th>
+          <th>1 iteration</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.1.png" alt="Torus - 0 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.1.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.1.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.1.png?size=large 2x" data-title="Torus - 0 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.2.png" alt="Torus - 1 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.2.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.2.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.2.png?size=large 2x" data-title="Torus - 1 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>2 iterations</td>
+          <td>3 iterations</td>
+      </tr>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.3.png" alt="Torus - 2 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.3.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.3.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.3.png?size=large 2x" data-title="Torus - 2 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.4.png" alt="Torus - 3 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.4.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.4.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.4.png?size=large 2x" data-title="Torus - 3 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="cube-edgeflipdae" class="heading-element"><span>Cube (edgeFlip.dae)</span>
   <a href="#cube-edgeflipdae" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.6.png" alt="Cube - 0 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.6.png?size=small, /Blog/posts/189hw2/part6/part6.6.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.6.png?size=large 2x" data-title="Cube - 0 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Cube model at 0 subdivisions (original mesh).</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.7.png" alt="Cube - 1 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.7.png?size=small, /Blog/posts/189hw2/part6/part6.7.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.7.png?size=large 2x" data-title="Cube - 1 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Cube model after 1 iteration of loop subdivision.</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.8.png" alt="Cube - 2 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.8.png?size=small, /Blog/posts/189hw2/part6/part6.8.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.8.png?size=large 2x" data-title="Cube - 2 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Cube model after 2 iterations of loop subdivision.</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.9.png" alt="Cube - 3 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.9.png?size=small, /Blog/posts/189hw2/part6/part6.9.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.9.png?size=large 2x" data-title="Cube - 3 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Cube model after 3 iterations of loop subdivision.</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.10.png" alt="Cube - 4 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.10.png?size=small, /Blog/posts/189hw2/part6/part6.10.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.10.png?size=large 2x" data-title="Cube - 4 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Cube model after 4 iterations of loop subdivision.</p>
-<h3 id="icosahedron-edgesplitdae" class="heading-element"><span>Icosahedron (edgeSplit.dae)</span>
+</h4><table>
+  <thead>
+      <tr>
+          <th>0 iterations</th>
+          <th>1 iteration</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.6.png" alt="Cube - 0 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.6.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.6.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.6.png?size=large 2x" data-title="Cube - 0 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.7.png" alt="Cube - 1 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.7.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.7.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.7.png?size=large 2x" data-title="Cube - 1 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>2 iterations</td>
+          <td>3 iterations</td>
+      </tr>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.8.png" alt="Cube - 3 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.8.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.8.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.8.png?size=large 2x" data-title="Cube - 3 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.9.png" alt="Cube - 3 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.9.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.9.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.9.png?size=large 2x" data-title="Cube - 3 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="icosahedron-edgesplitdae" class="heading-element"><span>Icosahedron (edgeSplit.dae)</span>
   <a href="#icosahedron-edgesplitdae" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.11.png" alt="Icosahedron - 0 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.11.png?size=small, /Blog/posts/189hw2/part6/part6.11.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.11.png?size=large 2x" data-title="Icosahedron - 0 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Icosahedron model at 0 subdivisions (original mesh).</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.12.png" alt="Icosahedron - 1 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.12.png?size=small, /Blog/posts/189hw2/part6/part6.12.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.12.png?size=large 2x" data-title="Icosahedron - 1 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Icosahedron model after 1 iteration of loop subdivision.</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.13.png" alt="Icosahedron - 2 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.13.png?size=small, /Blog/posts/189hw2/part6/part6.13.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.13.png?size=large 2x" data-title="Icosahedron - 2 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Icosahedron model after 2 iterations of loop subdivision.</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.14.png" alt="Icosahedron - 3 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.14.png?size=small, /Blog/posts/189hw2/part6/part6.14.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.14.png?size=large 2x" data-title="Icosahedron - 3 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Icosahedron model after 3 iterations of loop subdivision.</p>
-<p><img loading="lazy" src="/Blog/posts/189hw2/part6/part6.15.png" alt="Icosahedron - 4 Subdivision" srcset="/Blog/posts/189hw2/part6/part6.15.png?size=small, /Blog/posts/189hw2/part6/part6.15.png?size=medium 1.5x, /Blog/posts/189hw2/part6/part6.15.png?size=large 2x" data-title="Icosahedron - 4 Subdivision" style="--width: 2056px;--aspect-ratio: 2056 / 1472;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
-Icosahedron model after 4 iterations of loop subdivision.</p>
+</h4><table>
+  <thead>
+      <tr>
+          <th>0 iterations</th>
+          <th>1 iteration</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.11.png" alt="Icosahedron - 0 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.11.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.11.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.11.png?size=large 2x" data-title="Icosahedron - 0 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.12.png" alt="Icosahedron - 1 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.12.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.12.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.12.png?size=large 2x" data-title="Icosahedron - 1 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+      <tr>
+          <td>2 iterations</td>
+          <td>3 iterations</td>
+      </tr>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.13.png" alt="Icosahedron - 2 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.13.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.13.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.13.png?size=large 2x" data-title="Icosahedron - 2 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.14.png" alt="Icosahedron - 3 Subdivision" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.14.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.14.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.14.png?size=large 2x" data-title="Icosahedron - 3 Subdivision" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="appendix" class="heading-element"><span>Appendix</span>
+  <a href="#appendix" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In completing this assignment, we utilized ChatGPT O3-mini-high for language refinement, grammar correction, and structural adjustments. Additionally, we used it to improve the clarity of Markdown formatting to ensure better organization and readability.</p>
+<p>Through this process, we gained a deeper understanding of Markdown formatting, including how to use headers, lists, and emphasis for clearer structuring. Moreover, we improved my ability to concisely express ideas, making our writing more precise and polished.</p>
 </div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
@@ -350,7 +500,7 @@ Icosahedron model after 4 iterations of loop subdivision.</p>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/Blog/">Home</a></span>
     </section>
-  </div><div class="post-nav"><a href="/Blog/posts/eeccd09/" class="post-nav-item" rel="prev" title="CS184 HW1 Writeup"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>CS184 HW1 Writeup</a></div>
+  </div><div class="post-nav"><a href="/Blog/posts/eeccd09/" class="post-nav-item" rel="prev" title="CS184 HW1 Writeup"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>CS184 HW1 Writeup</a><a href="/Blog/posts/189hw3/" class="post-nav-item" rel="next" title="CS184 HW3 Writeup">CS184 HW3 Writeup<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article>
 

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en-us">
+  <head><script src="/Blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Blog/livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>CS184 HW3 Writeup - Xize&#39;s CS184 Blog</title><meta name="author" content="">
+<meta name="description" content="CS184 Homework 3 Write-Up https://alexdwastaken.github.io/Blog/posts/189hw3/ Group members: Xize Duan, Phoenix Ye
+"><meta name="keywords" content='CS184'>
+  <meta itemprop="name" content="CS184 HW3 Writeup">
+  <meta itemprop="description" content="CS184 Homework 3 Write-Up https://alexdwastaken.github.io/Blog/posts/189hw3/ Group members: Xize Duan, Phoenix Ye">
+  <meta itemprop="datePublished" content="2025-03-13T00:05:27-08:00">
+  <meta itemprop="dateModified" content="2025-03-13T00:05:27-08:00">
+  <meta itemprop="wordCount" content="971">
+  <meta itemprop="keywords" content="CS184"><meta property="og:url" content="http://localhost:1313/Blog/posts/189hw3/">
+  <meta property="og:site_name" content="Xize&#39;s CS184 Blog">
+  <meta property="og:title" content="CS184 HW3 Writeup">
+  <meta property="og:description" content="CS184 Homework 3 Write-Up https://alexdwastaken.github.io/Blog/posts/189hw3/ Group members: Xize Duan, Phoenix Ye">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-13T00:05:27-08:00">
+    <meta property="article:modified_time" content="2025-03-13T00:05:27-08:00">
+    <meta property="article:tag" content="CS184">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CS184 HW3 Writeup">
+  <meta name="twitter:description" content="CS184 Homework 3 Write-Up https://alexdwastaken.github.io/Blog/posts/189hw3/ Group members: Xize Duan, Phoenix Ye">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/Blog/posts/189hw3/" title="CS184 HW3 Writeup - Xize&#39;s CS184 Blog" /><link rel="prev" type="text/html" href="http://localhost:1313/Blog/posts/189hw2/" title="CS184 HW2 Writeup" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/Blog/posts/189hw3/index.md" title="CS184 HW3 Writeup - Xize's CS184 Blog"><link rel="stylesheet" href="/Blog/css/style.min.css"><link rel="preload" href="/Blog/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/Blog/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/Blog/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/Blog/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "CS184 HW3 Writeup",
+    "inLanguage": "en-us",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/Blog\/posts\/189hw3\/"
+    },"genre": "posts","keywords": "CS184","wordcount":  971 ,
+    "url": "http:\/\/localhost:1313\/Blog\/posts\/189hw3\/","datePublished": "2025-03-13T00:05:27-08:00","dateModified": "2025-03-13T00:05:27-08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Author"
+      },"description": ""
+  }
+  </script><script src="/Blog/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/Blog/" title="Xize&#39;s CS184 Blog"><span class="header-title-text">Xize&#39;s CS184 Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/Blog/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a class="menu-link" href="/Blog/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a class="menu-link" href="/Blog/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/Blog/" title="Xize&#39;s CS184 Blog"><span class="header-title-text">Xize&#39;s CS184 Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="menu-item"><a class="menu-link" href="/Blog/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item"><a class="menu-link" href="/Blog/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item"><a class="menu-link" href="/Blog/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>CS184 HW3 Writeup</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="post-meta-line"><span title="published on 2025-03-13 00:05:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-03-13">2025-03-13</time></span>&nbsp;<span title="971 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1000 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>5 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#part1-ray-generation-and-scene-intersection">Part1: Ray Generation and Scene Intersection</a></li>
+    <li><a href="#part-2-bounding-volume-hierarchy">Part 2: Bounding Volume Hierarchy</a></li>
+    <li><a href="#part-3-direct-illumination">Part 3: Direct Illumination</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="cs184-homework-3-write-up" class="heading-element"><span>CS184 Homework 3 Write-Up</span>
+  <a href="#cs184-homework-3-write-up" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p><a href="https://alexdwastaken.github.io/Blog/posts/189hw3/"target="_blank" rel="external nofollow noopener noreferrer">https://alexdwastaken.github.io/Blog/posts/189hw3/</a>
+<strong>Group members: Xize Duan, Phoenix Ye</strong></p></blockquote>
+<h2 id="overview" class="heading-element"><span>Overview</span>
+  <a href="#overview" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="part1-ray-generation-and-scene-intersection" class="heading-element"><span>Part1: Ray Generation and Scene Intersection</span>
+  <a href="#part1-ray-generation-and-scene-intersection" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In this part, we generated rays according to the positions on the screen space, and did perspecive projections to transform these rays into camera space. We first generated pixel sample points on $(x, y) \in [0, w] \times [0, h]$ ,  and generated two randoms samples from $X, Y \sim\text{Unif}(0, 1)$, and eventually got random pixel samples $(x+X, y+Y)$. After that, we generate rays from the origin and test intersections along the rays.</p>
+<p>The first key is to distinguish the different space present in this case</p>
+<ul>
+<li><strong>Pixel space, image space, sensor space</strong> and <strong>camera space</strong> are different.</li>
+<li>By normalizing 2D <strong>pixel space</strong>, we get the <strong>image spac</strong>e.</li>
+<li>The <strong>image space</strong> can be transformed into the <strong>sensor space</strong> by aliging the borders (since both are rectangular shapes). Specifically, (0, 0) goes to $(-\tan (0.5 \cdot hfov), -\tan(0.5.vhov))$ and $(1, 1)$ goes to $(\tan (0.5 \cdot hfov), \tan(0.5.vhov))$.</li>
+<li>The <strong>sensor space</strong> sits on $(0, 0, -1)$ of the <strong>camera space</strong> and is perpendicular to $z$ direction. Appending (-1) to a new dimension of the sensor space gives the position of the point in camera space.</li>
+<li>A ray is casted from the origin to the <strong>camera space</strong> sample point.</li>
+</ul>
+<p>The second key is to cast rays, and properly set the ray up.</p>
+<ul>
+<li>Ray equation is $\vec o + t \vec d$, and to ensure the consistency of each ray, $\vec d$ has to be normalized! (a lot of bugs encountered!)</li>
+<li>There are two fields <code>ray.min_t</code> <code>ray.max_t</code>. These are used to determine where the ray stars and when it ends. This caused a lot of bugs.</li>
+<li><code>c2w</code> matrix converts camera space to world space. We do not have to invert this! (a lot of bugs encountered!)</li>
+</ul>
+<p>To test the triangle intersection, we adopt the algorithm proposed in class. A short idea is to obtain the intersection of the ray and the plane, and calculate the berycentric coordinates with respect to the triangle. The coordinates can be calculated by doing cross products (since the cross product of two edges equals to the area of the triangle created by the two edges, and we can obtain berycentric coordinates by area). If the berycentric coordinates $\alpha, \beta$ and $\gamma$ are all positive, then the point lies in the triangle. An detail of implementation is that we can use dot product of components to avoid re-calculating same things.</p>
+<p>To test the sphere intersection, we solved a quadratic function for <code>t1</code> and <code>t2</code>. The important thing is to <strong>set <code>ray.min_t</code> <code>ray.max_t</code> after every valid intersection!; If not, we cannot detect the occlusion relation of an object correctly</strong>. Becuase we didn&rsquo;t set the <code>t</code> values correctly, the balls won&rsquo;t render because triangle is tested last.</p>
+<p>Here are some of the example renders.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Example 1: Empty</th>
+          <th>Example 2: Spheres</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart1_CBempty.png" alt="Part1_CBempty" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart1_CBempty.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart1_CBempty.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart1_CBempty.png?size=large 2x" data-title="Part1_CBempty" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart1_CBspheres.png" alt="Part1_CBspheres" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart1_CBspheres.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart1_CBspheres.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart1_CBspheres.png?size=large 2x" data-title="Part1_CBspheres" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="part-2-bounding-volume-hierarchy" class="heading-element"><span>Part 2: Bounding Volume Hierarchy</span>
+  <a href="#part-2-bounding-volume-hierarchy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>BVH partitions the objects into different bounding boxes organized in a tree structure to accelerate ray-scene intersection, and it&rsquo;s very useful in ray tracing because it shrinks the complexity from $O(n)$ to $O(\log n)$ with a good policy.</p>
+<p><strong>Construction</strong></p>
+<p>In our implementation, bvh is seperated along the longest axis with median centroid. The first step is to determine whether the node is a leaf node by comparing the current <code>element_count</code> with <code>max_leaf_size</code>. If it already is, fill in <code>start</code> and <code>end</code> field and return directly.</p>
+<p>If the node is not a leaf node, then we find its median and partition accordingly (with a functional programming style!)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">nth_element</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="n">splitDim</span><span class="p">](</span><span class="k">const</span> <span class="n">Primitive</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">Primitive</span><span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">a</span><span class="o">-&gt;</span><span class="n">get_bbox</span><span class="p">().</span><span class="n">centroid</span><span class="p">()[</span><span class="n">splitDim</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">get_bbox</span><span class="p">().</span><span class="n">centroid</span><span class="p">()[</span><span class="n">splitDim</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>This function partitions without sorting completely. After that, we create new BVH nodes and construct with the left half and right half, and link the new nodes to <code>l</code> and <code>r</code>.</p>
+<p>A detail here is about the inclusiveness of &lsquo;start&rsquo; and &rsquo;end&rsquo;. In our implementation, we have to use</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">leftStart</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">leftEnd</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">rightStart</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">rightEnd</span> <span class="o">=</span> <span class="n">end</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>where <code>mid</code> presents two times instead of one <code>mid</code> and one <code>mid++</code>. We guess this is related to the implementation of iterators.</p>
+<p><strong>Intersection</strong></p>
+<p>Intersecting the bounding box is simple. We just record the last &lsquo;in&rsquo; time and first &lsquo;out&rsquo; time. If the &lsquo;in&rsquo; time is before &lsquo;out&rsquo; time, then a intersection is detected, and we can return accordingly.</p>
+<p>One of the function only asks us to test whether there is a intersection; to solve that, write a simple recursion: if it is a leaf node, simply test every object inside; if not, return <code>has_intersection(ray, node-&gt;l) || has_intersection(ray, node-&gt;r)</code>. Another function asks us to record the hit position as well, in this case, just record the position in the <code>Intersection</code> object is fine.</p>
+<p>We did not encounter any problem when realizing the intersection functions.</p>
+<p><strong>Results</strong></p>
+<p>Here are some example images of large scenes with normal shading.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Dragon</th>
+          <th>Lucy</th>
+          <th>Maxplanck</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_dragon.png" alt="Part2_dragon" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_dragon.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_dragon.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_dragon.png?size=large 2x" data-title="Part2_dragon" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_lucy.png" alt="Part2_lucy" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_lucy.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_lucy.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_lucy.png?size=large 2x" data-title="Part2_lucy" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+          <td><img loading="lazy" src="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_maxplanck.png" alt="Part2_maxplanck" srcset="https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_maxplanck.png?size=small, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_maxplanck.png?size=medium 1.5x, https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart2_maxplanck.png?size=large 2x" data-title="Part2_maxplanck" style="background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></td>
+      </tr>
+  </tbody>
+</table>
+<p>Here we analyze the rendering time with and without bvh. Here are the data:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Scene</th>
+          <th>Primitives</th>
+          <th>Without BVH (Render)</th>
+          <th>With BVH (Render + Build BVH)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Gems</td>
+          <td>252</td>
+          <td>12.4182s</td>
+          <td>0.2220s+0.0001s</td>
+      </tr>
+      <tr>
+          <td>Empty</td>
+          <td>12</td>
+          <td>0.5307s</td>
+          <td>0.1796s + 0.0000s</td>
+      </tr>
+      <tr>
+          <td>Cow</td>
+          <td>5856</td>
+          <td>80.9856s</td>
+          <td>0.0888s+0.0036s</td>
+      </tr>
+      <tr>
+          <td>Bunny</td>
+          <td>28588</td>
+          <td>Stuck</td>
+          <td>0.1170s+0.3080s</td>
+      </tr>
+  </tbody>
+</table>
+<p>The results demonstrate the significant impact of BVH acceleration on rendering performance. Without BVH, rendering times increase dramatically with scene complexity, with the Bunny scene failing to complete due to excessive computations. In contrast, BVH-based rendering consistently achieves great speedups, reducing rendering times by orders of magnitude. Even when factoring in BVH construction time, the total cost remains negligible. For example, in the Cow scene, rendering time drops from 80.99s to just 0.0888s, while BVH construction takes only 0.0036s. This highlights BVH&rsquo;s effectiveness in reducing ray intersection tests and optimizing traversal, making it indispensable for efficient ray tracing in complex scenes.</p>
+<h2 id="part-3-direct-illumination" class="heading-element"><span>Part 3: Direct Illumination</span>
+  <a href="#part-3-direct-illumination" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2025-03-13 00:05:27">Updated on 2025-03-13&nbsp;</span>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/Blog/posts/189hw3/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/Blog/posts/189hw3/" data-title="CS184 HW3 Writeup" data-hashtags="CS184"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/Blog/posts/189hw3/" data-hashtag="CS184"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/Blog/posts/189hw3/" data-title="CS184 HW3 Writeup"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/Blog/tags/cs184/" class="post-tag" title="Tags - CS184">CS184</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/Blog/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/Blog/posts/189hw2/" class="post-nav-item" rel="prev" title="CS184 HW2 Writeup"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>CS184 HW2 Writeup</a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.143.1"><img class="hugo-icon" src="/Blog/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.17-8b402129"><img class="fixit-icon" src="/Blog/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="/Blog/"></a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/Blog/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/Blog/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/Blog/lib/cookieconsent/cookieconsent.min.css"><script src="/Blog/lib/sharer/sharer.min.js" async defer></script><script src="/Blog/lib/katex/katex.min.js" defer></script><script src="/Blog/lib/katex/auto-render.min.js" defer></script><script src="/Blog/lib/katex/mhchem.min.js" defer></script><script src="/Blog/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"version":"v0.3.17-8b402129"};console.log('Page config:', window.config);</script><script src="/Blog/js/theme.min.js" defer></script></body>
+</html>

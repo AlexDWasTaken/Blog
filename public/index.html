@@ -11,8 +11,8 @@
     <title>Xize&#39;s CS184 Blog</title><meta name="author" content="">
 <meta name="description" content="">
   <meta itemprop="name" content="Xize&#39;s CS184 Blog">
-  <meta itemprop="datePublished" content="2025-03-04T00:05:27-08:00">
-  <meta itemprop="dateModified" content="2025-03-04T00:05:27-08:00"><meta property="og:url" content="http://localhost:1313/Blog/">
+  <meta itemprop="datePublished" content="2025-03-13T00:05:27-08:00">
+  <meta itemprop="dateModified" content="2025-03-13T00:05:27-08:00"><meta property="og:url" content="http://localhost:1313/Blog/">
   <meta property="og:site_name" content="Xize&#39;s CS184 Blog">
   <meta property="og:title" content="Xize&#39;s CS184 Blog">
   <meta property="og:locale" content="en_us">
@@ -60,15 +60,30 @@
       </ul>
     </nav>
   </div>
-</header><main class="container"><div class="page home posts"><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><span title="Repost" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><a href="/Blog/posts/189hw2/">CS184 HW2 Writeup</a>
+</header><main class="container"><div class="page home posts"><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/Blog/posts/189hw3/">CS184 HW3 Writeup</a>
   </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span>&nbsp;<span class="post-publish" title='2025-03-04 00:05:27'>published on <time datetime="2025-03-04">2025-03-04</time></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="content"><h3 id="section-i-bezier-curves-and-surfaces" class="heading-element"><span>Section I: Bezier Curves and Surfaces</span>
-  <a href="#section-i-bezier-curves-and-surfaces" class="heading-mark">
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2025-03-13 00:05:27'>published on <time datetime="2025-03-13">2025-03-13</time></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="content"><h3 id="cs184-homework-3-write-up" class="heading-element"><span>CS184 Homework 3 Write-Up</span>
+  <a href="#cs184-homework-3-write-up" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><blockquote>
+<p><a href="https://alexdwastaken.github.io/Blog/posts/189hw3/"target="_blank" rel="external nofollow noopener noreferrer">https://alexdwastaken.github.io/Blog/posts/189hw3/</a>
+<strong>Group members: Xize Duan, Phoenix Ye</strong></p></div><div class="post-footer">
+    <a href="/Blog/posts/189hw3/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/Blog/tags/cs184/' class="post-tag">CS184</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/Blog/posts/189hw2/">CS184 HW2 Writeup</a>
+  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span>&nbsp;<span class="post-publish" title='2025-03-04 00:05:27'>published on <time datetime="2025-03-04">2025-03-04</time></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="content"><blockquote>
 <p><a href="https://alexdwastaken.github.io/Blog/posts/189hw2/"target="_blank" rel="external nofollow noopener noreferrer">https://alexdwastaken.github.io/Blog/posts/189hw2/</a>
-<strong>Group members: Phoenix Ye, Xize Duan</strong></p></div><div class="post-footer">
+<strong>Group members: Phoenix Ye, Xize Duan</strong></p></blockquote>
+<h3 id="overview" class="heading-element"><span>Overview</span>
+  <a href="#overview" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>In this project, we implemented Bezier curves and surfaces using the de Casteljau algorithm, allowing us to evaluate curves through recursive interpolation and extend this approach to surfaces.
+We also worked with triangle meshes using the half-edge data structure, computing smooth vertex normals for improved shading.
+Additionally, we implemented edge flipping and splitting to modify mesh topology while maintaining connectivity.
+Finally, we applied Loop subdivision to refine meshes, achieving smoother and higher-resolution results. Through this project, we gained a deeper understanding of geometric modeling, mesh operations,
+and the importance of efficient data structures in computer graphics. The final results successfully demonstrate smooth curve generation, surface evaluation, and mesh refinement, with visually improved models and correct algorithmic implementations.</p></div><div class="post-footer">
     <a href="/Blog/posts/189hw2/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/Blog/tags/cs184/' class="post-tag">CS184</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><span title="Repost" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><a href="/Blog/posts/eeccd09/">CS184 HW1 Writeup</a>
   </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>

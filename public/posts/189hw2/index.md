@@ -1,10 +1,17 @@
 # CS184 HW2 Writeup
 
-
-# Section I: Bezier Curves and Surfaces
-
 &gt; https://alexdwastaken.github.io/Blog/posts/189hw2/
 &gt; **Group members: Phoenix Ye, Xize Duan**
+
+## Overview
+
+In this project, we implemented Bezier curves and surfaces using the de Casteljau algorithm, allowing us to evaluate curves through recursive interpolation and extend this approach to surfaces. 
+We also worked with triangle meshes using the half-edge data structure, computing smooth vertex normals for improved shading. 
+Additionally, we implemented edge flipping and splitting to modify mesh topology while maintaining connectivity. 
+Finally, we applied Loop subdivision to refine meshes, achieving smoother and higher-resolution results. Through this project, we gained a deeper understanding of geometric modeling, mesh operations, 
+and the importance of efficient data structures in computer graphics. The final results successfully demonstrate smooth curve generation, surface evaluation, and mesh refinement, with visually improved models and correct algorithmic implementations.
+
+# Section I: Bezier Curves and Surfaces
 
 ## Part 1: Bezier Curves with 1D de Casteljau Subdivision
 This part requires to implement the de Casteljau algorithm for computing a point on a Bezier curve. Given a set of 2D control points and a scalar parameter `t` (with `0 ≤ t ≤ 1`), we recursively interpolate between adjacent control points until converging to a single point on the curve. The GUI allows stepping through each iteration to display the intermediate control points, and the final converged point will be clearly highlighted.
@@ -83,7 +90,7 @@ Phone Shading
 ![Without Wire](part3/part3.3.png)
 Without Wire
 
-## Part4: Edge Flip
+## Part 4: Edge Flip
 In Part 4, we use the half-edge data structure to apply the **edge flip** operation to a triangular mesh. When two adjacent triangles share an edge, the procedure &#34;flips&#34; that edge, substituting the other diagonal of the quadrilateral the two triangles make for the shared edge. When two triangles (a, b, c) and (c, b, d) share the edge (b, c), for instance, the flip swaps out this edge, creating the new triangles (a, d, c) and (a, b, d respectively).
 
 Our implementation of `HalfedgeMesh::flipEdge(...)` follows these steps: First, the function checks if the given edge is a boundary edge. If it is, no flip is performed. Then, the algorithm collects all the relevant half-edges for the two adjacent triangles. After that, the core of the flip operation involves reassigning the pointers. Finally, since no new elements are created or removed, all pointer updates are local and done in constant time, ensuring the integrity of the mesh data structure.
@@ -96,7 +103,7 @@ Without Flip
 ![With Flip](part4/part4.2.png)
 With Some Flips
 
-## Debug Journey
+### Debug Journey
 During the implementation, We encountered an issue where flipping an edge twice sometimes created a hole in the mesh. To resolve this, we first sketched the local configuration of the two triangles on paper, labeling all half-edges, vertices, and faces. Then we employed provided debugging macros (like `CHECK_VERTEX` and `CHECK_CLOSED`) to ensure that, after the flip, all pointers correctly pointed to the expected elements. So after the corrections, the edge flip operation consistently maintained mesh integrity even after multiple flips, as verified by both visual inspection and debug checks.
 
 ## Part 5: Edge Split
@@ -126,7 +133,7 @@ With some Flips and Splits
 ### Debugging Journey
 During the development of the edge split operation, We encountered challenges related to pointer reassignments due to the increased number of new elements created. To debug: We drew detailed diagrams of the local neighborhood of the target edge, labeling each half-edge, vertex, and face. This helped me verify the correct reassignment of pointers. We repeatedly performed edge splits and then followed up with edge flips to test the robustness of the operation, ensuring that no holes or misconnected elements appeared in the mesh.
 
-# Part 6: Loop Subdivision for Mesh Upsampling
+## Part 6: Loop Subdivision for Mesh Upsampling
 In this part, we upscale a coarse polygon mesh using Loop subdivision. The goal is to convert a low-resolution mesh into a higher-resolution one.
 
 My implementation follows these steps:
@@ -139,7 +146,7 @@ My implementation follows these steps:
 - After splitting, We process the edges again: if an edge is new and connects one new vertex with one old vertex, we flip it. This ensures that only the proper edges (depicted as blue in the assignment diagram) are flipped while preserving the original boundary of the subdivided triangles.
 - Finally, all vertices are updated with their new positions, and the `isNew` flags are reset.
 
-## 3. Debugging and Observations
+### Debugging and Observations
 
 During the development of the Loop subdivision:
   - We drew diagrams of local mesh configurations to carefully track the pointer reassignments during edge splits and flips.
@@ -151,57 +158,65 @@ During the development of the Loop subdivision:
   - Initially sharp features tend to round off after subdivision.  
   - When testing on a cube (using `dae/cube.dae`), we noticed that after several iterations the cube sometimes becomes slightly asymmetric. By pre-processing the cube (performing targeted edge flips and splits) to increase the number of triangles per face, the subdivision converged to a more symmetric shape.
 
+Below are the screenshots documenting the progress of loop subdivision on three different models. Each set shows the mesh at 0 through 4 subdivisions, demonstrating how the mesh becomes smoother and more detailed with each iteration. We can compare the original one with the split, flip and collapse one.
 
-Below are the screenshots documenting the progress of loop subdivision on three different models. Each set shows the mesh at 0 through 4 subdivisions, demonstrating how the mesh becomes smoother and more detailed with each iteration.
+### Examples
 
-### Torus (edgeCollapse.dae)
-![Torus - 0 Subdivision](part6/part6.1.png)
-Torus model at 0 subdivisions (original mesh).
+#### Torus (Original)
 
-![Torus - 1 Subdivision](part6/part6.2.png)
-Torus model after 1 iteration of loop subdivision.
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![7381741116289_.pic](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7381741116289_.pic.jpg) | ![7391741116302_.pic](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7391741116302_.pic.jpg) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![7401741116312_.pic](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7401741116312_.pic.jpg) | ![7411741116321_.pic](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/pics7411741116321_.pic.jpg) |
 
-![Torus - 2 Subdivision](part6/part6.3.png)
-Torus model after 2 iterations of loop subdivision.
+#### Cube (Original)
 
-![Torus - 3 Subdivision](part6/part6.4.png)
-Torus model after 3 iterations of loop subdivision.
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![7381741116289_.pic](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.17%E2%80%AFAM.png) | ![Screenshot 2025-03-04 at 11.34.51 AM](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.34.51%E2%80%AFAM.png) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![Screenshot 2025-03-04 at 11.35.08 AM](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.08%E2%80%AFAM.png) | ![Screenshot 2025-03-04 at 11.35.29 AM](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsScreenshot%202025-03-04%20at%2011.35.29%E2%80%AFAM.png) |
 
-![Torus - 4 Subdivision](part6/part6.5.png)
-Torus model after 4 iterations of loop subdivision.
+#### Icosahedron (Original)
 
-### Cube (edgeFlip.dae)
-![Cube - 0 Subdivision](part6/part6.6.png)
-Cube model at 0 subdivisions (original mesh).
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![image-20250304113936836](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113936836.png) | ![image-20250304113949604](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304113949604.png) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![image-20250304114010997](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114010997.png) | ![image-20250304114021704](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsimage-20250304114021704.png) |
 
-![Cube - 1 Subdivision](part6/part6.7.png)
-Cube model after 1 iteration of loop subdivision.
+#### Torus (edgeCollapse.dae)
 
-![Cube - 2 Subdivision](part6/part6.8.png)
-Cube model after 2 iterations of loop subdivision.
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Torus - 0 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.1.png) | ![Torus - 1 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.2.png) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![Torus - 2 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.3.png) | ![Torus - 3 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.4.png) |
 
-![Cube - 3 Subdivision](part6/part6.9.png)
-Cube model after 3 iterations of loop subdivision.
 
-![Cube - 4 Subdivision](part6/part6.10.png)
-Cube model after 4 iterations of loop subdivision.
 
-### Icosahedron (edgeSplit.dae)
-![Icosahedron - 0 Subdivision](part6/part6.11.png)
-Icosahedron model at 0 subdivisions (original mesh).
+#### Cube (edgeFlip.dae)
 
-![Icosahedron - 1 Subdivision](part6/part6.12.png)
-Icosahedron model after 1 iteration of loop subdivision.
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Cube - 0 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.6.png) | ![Cube - 1 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.7.png) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![Cube - 3 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.8.png) | ![Cube - 3 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.9.png) |
 
-![Icosahedron - 2 Subdivision](part6/part6.13.png)
-Icosahedron model after 2 iterations of loop subdivision.
+#### Icosahedron (edgeSplit.dae)
 
-![Icosahedron - 3 Subdivision](part6/part6.14.png)
-Icosahedron model after 3 iterations of loop subdivision.
+| 0 iterations                                                 | 1 iteration                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Icosahedron - 0 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.11.png) | ![Icosahedron - 1 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.12.png) |
+| 2 iterations                                                 | 3 iterations                                                 |
+| ![Icosahedron - 2 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.13.png) | ![Icosahedron - 3 Subdivision](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picspart6.14.png) |
 
-![Icosahedron - 4 Subdivision](part6/part6.15.png)
-Icosahedron model after 4 iterations of loop subdivision.
+## Appendix
 
+In completing this assignment, we utilized ChatGPT O3-mini-high for language refinement, grammar correction, and structural adjustments. Additionally, we used it to improve the clarity of Markdown formatting to ensure better organization and readability.
+
+Through this process, we gained a deeper understanding of Markdown formatting, including how to use headers, lists, and emphasis for clearer structuring. Moreover, we improved my ability to concisely express ideas, making our writing more precise and polished.
 
 ---
 
