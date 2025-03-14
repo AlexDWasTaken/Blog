@@ -2,7 +2,7 @@
 
 title: CS184 HW3 Writeup
 subtitle:
-date: 2025-03-13T00:05:27-08:00
+date: 2025-03-14T00:05:27-08:00
 slug: 189hw3
 draft: false
 description:
@@ -271,30 +271,41 @@ Here are some results rendered with global illumination.
 
 Here are some comparisonw with only direct and only indirect illumination.
 
-| ![Part4_Only_Direct_Balls](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Balls.png) | ![Part4_Only_Direct_Bunny](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Only_Direct_Bunny.png) |      |      |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ---- | ---- |
-| ![Part4_Indirect_Balls](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Balls.png) | ![Part4_Indirect_Bunny](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_Indirect_Bunny.png) |      |      |
+| ![Part4_direct_CBbunny](index.assets/Part4_direct_CBbunny.png) | ![Part4_direct_dragon](index.assets/Part4_direct_dragon.png) | ![Part4_direct_CBspheres_lambertian](index.assets/Part4_direct_CBspheres_lambertian.png) | ![Part4_direct_bench](index.assets/Part4_direct_bench.png)   |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Part4_indirect_CBbunny](index.assets/Part4_indirect_CBbunny-1972253.png) | ![Part4_indirect_dragon](index.assets/Part4_indirect_dragon.png) | ![Part4_indirect_CBspheres_lambertian](index.assets/Part4_indirect_CBspheres_lambertian.png) | ![Part4_indirect_bench](index.assets/Part4_indirect_bench.png) |
 
 *CBbunny.dae* with different rendering bounces.
 
-| isAccumBounces | 0                                                            | 1                                                            | 2                                                            | 3                                                            | 4                                                            | 5                                                            |
-| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| True           | ![Part4_bunny_o_1_m_0](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_0.png) | ![Part4_bunny_o_1_m_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_1.png) | ![Part4_bunny_o_1_m_2_](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_2_.png) | ![Part4_bunny_o_1_m_3](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_3.png) | ![Part4_bunny_o_1_m_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_4.png) | ![Part4_bunny_o_1_m_5](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_1_m_5.png) |
-| False          | ![Part4_bunny_o_0_m_0](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_0.png) | ![Part4_bunny_o_0_m_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_1.png) | ![Part4_bunny_o_0_m_2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_2.png) | ![Part4_bunny_o_0_m_3](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_3.png) | ![Part4_bunny_o_0_m_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_4.png) | ![Part4_bunny_o_0_m_5](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_bunny_o_0_m_5.png) |
+| isAccumBounces | 0                                                            | 1                                                            | 2                                                            |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| False          | ![Part4_bunny_o_0_m_0](index.assets/Part4_bunny_o_0_m_0.png) | ![Part4_bunny_o_0_m_1](index.assets/Part4_bunny_o_0_m_1.png) | ![Part4_bunny_o_0_m_2](index.assets/Part4_bunny_o_0_m_2.png) |
+| True           | ![Part4_bunny_o_1_m_0](index.assets/Part4_bunny_o_1_m_0.png) | ![Part4_bunny_o_1_m_1](index.assets/Part4_bunny_o_1_m_1.png) | ![Part4_bunny_o_1_m_2](index.assets/Part4_bunny_o_1_m_2.png) |
 
-Russian Roulette with max_ray_depth
+| isAccumBounces | 3                                                            | 4                                                            | 5                                                            |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| False          | ![Part4_bunny_o_0_m_3](index.assets/Part4_bunny_o_0_m_3.png) | ![Part4_bunny_o_0_m_4](index.assets/Part4_bunny_o_0_m_4.png) | ![Part4_bunny_o_0_m_5](index.assets/Part4_bunny_o_0_m_5.png) |
+| True           | ![Part4_bunny_o_1_m_3](index.assets/Part4_bunny_o_1_m_3.png) | ![Part4_bunny_o_1_m_4](index.assets/Part4_bunny_o_1_m_4.png) | ![Part4_bunny_o_1_m_5](index.assets/Part4_bunny_o_1_m_5.png) |
 
-| Max_ray_depth | 0                                                            | 1                                                            | 2                                                            | 3                                                            | 4                                                            | 100                                                          |
-| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Result        | ![Part4_comp_bunny_rr_m_0](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_0.png) | ![Part4_comp_bunny_rr_m_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_1.png) | ![Part4_comp_bunny_rr_m_2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_2.png) | ![Part4_comp_bunny_rr_m_3](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_3.png) | ![Part4_comp_bunny_rr_m_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_4.png) | ![Part4_comp_bunny_rr_m_100_](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100_.png) |
+**Russian Roulette with max_ray_depth**
 
-sample-per-pixel rates
+| Max_ray_depth | 0                                                            | 1                                                            | 2                                                            |
+| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Result        | ![Part4_comp_bunny_rr_m_0](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_0.png) | ![Part4_comp_bunny_rr_m_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_1.png) | ![Part4_comp_bunny_rr_m_2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_2.png) |
 
-| Rates | 1                                                            | 2                                                            | 4                                                            | 8                                                            | 16                                                           | 64                                                           | 1024                                                         |
-| ----- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-|       | ![Part4_comp_walle_ss_s_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1.png) | ![Part4_comp_walle_ss_s_2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_2.png) | ![Part4_comp_walle_ss_s_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_4.png) | ![Part4_comp_walle_ss_s_8](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_8.png) | ![Part4_comp_walle_ss_s_16](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_16.png) | ![Part4_comp_walle_ss_s_64](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_64.png) | ![Part4_comp_walle_ss_s_1024](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1024.png) |
+| Max_ray_depth | 3                                                            | 4                                                            | 100                                                          |
+| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Result        | ![Part4_comp_bunny_rr_m_3](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_3.png) | ![Part4_comp_bunny_rr_m_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_4.png) | ![Part4_comp_bunny_rr_m_100_](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100_.png) |
 
+**sample-per-pixel rates**
 
+| 1                                                            | 2                                                            | 4                                                            | 8                                                            |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Part4_comp_walle_ss_s_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1.png) | ![Part4_comp_walle_ss_s_2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_2.png) | ![Part4_comp_walle_ss_s_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_4.png) | ![Part4_comp_walle_ss_s_8](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_8.png) |
+
+| 8                                                            | 16                                                           | 64                                                           | 1024                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![Part4_comp_walle_ss_s_8](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_8.png) | ![Part4_comp_walle_ss_s_16](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_16.png) | ![Part4_comp_walle_ss_s_64](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_64.png) | ![Part4_comp_walle_ss_s_1024](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_walle_ss_s_1024.png) |
 
 ## Part 5 Adaptive Sampling
 
