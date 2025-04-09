@@ -1,41 +1,11 @@
----
+# CS184 HW4 Writeup
 
-title: CS184 HW4 Writeup
-subtitle:
-date: 2025-04-08T00:05:27-08:00
-slug: 189hw4
-draft: false
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - CS184
-categories:
-  - CS184
-hiddenFromHomePage: false
-hiddenFromSearch: false
-hiddenFromRelated: false
-hiddenFromFeed: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: true
-lightgallery: false
-password:
-message:
----
 
 
 # Homework 4: Clothism
 
-> https://alexdwastaken.github.io/Blog/posts/189hw4/
-> **Group members: Xize Duan, Phoenix Ye**
+&gt; https://alexdwastaken.github.io/Blog/posts/189hw4/
+&gt; **Group members: Xize Duan, Phoenix Ye**
 
 ## Overview
 In this project, we build a realistic cloth simulation from the ground up. First, we model the cloth as a mass-spring system, discretizing it into point masses and connecting them with structural, shearing, and bending springs (Part 1). Then, we implement numerical integration to animate these masses over time (Part 2) and handle collisions with both external objects (Part 3) and the cloth itself (Part 4). Finally, we apply various shading techniques (Part 5), including diffuse, texture, and displacement mapping, to achieve visually appealing renderings of the simulated cloth in real-time.
@@ -53,9 +23,9 @@ We populate `point_masses` by creating `num_width_points * num_height_points` ma
 
 Each point mass is marked `pinned` if its `(row, col)` index is in the pinned list.  
 Once all masses are in point_masses, we create:
-- **Structural springs**, connecting each mass to `(r, c-1)` & `(r-1, c)`.
-- **Shearing springs**, connecting diagonals `(r, c)` to `(r-1, c-1)` & `(r-1, c+1)`.
-- **Bending springs**, connecting `(r, c)` to `(r, c-2)` & `(r-2, c)`.
+- **Structural springs**, connecting each mass to `(r, c-1)` &amp; `(r-1, c)`.
+- **Shearing springs**, connecting diagonals `(r, c)` to `(r-1, c-1)` &amp; `(r-1, c&#43;1)`.
+- **Bending springs**, connecting `(r, c)` to `(r, c-2)` &amp; `(r-2, c)`.
 
 Below, we show the cloth in scene/pinned2.json from two viewing angles where you can clearly see the cloth wireframe to show the structure of our point masses and springs.
 
@@ -97,8 +67,8 @@ We use **Verlet integration** to update positions. For each point mass:
 2. Otherwise, given the current acceleration $f{a} = f{F}/m$, and damping factor $d$, we do:
     
     $$f{x}\_{new} = f{x}\_{current}
-       + (1 - d) (f{x}\_{current} - f{x}\_{previous})
-       + f{a}  \Delta t^2
+       &#43; (1 - d) (f{x}\_{current} - f{x}\_{previous})
+       &#43; f{a}  \Delta t^2
     $$
 3. Store `current_position` in `last_position` after updating.
 
@@ -160,7 +130,7 @@ In Part 3, we extend our cloth simulation to collide with external primitives—
 
 To handle collisions with a **sphere** of radius $r$ at center ${o}$:
 1. **Detection**:  
-After each time step, we check whether a point mass $f{p}$ is within the sphere: $\|{p} - {o}\| < r$
+After each time step, we check whether a point mass $f{p}$ is within the sphere: $\|{p} - {o}\| &lt; r$
 2. **Resolution**:  
 We find the intersection/tangent point on the sphere surface and we then compute a correction vector from the point mass’s `last_position` to ${t}$.  Finally, we update `position`. By doing so, the point mass ends up exactly on the sphere’s surface (slightly adjusted by friction). 
 
@@ -249,7 +219,7 @@ Low ks
 
 ## Part 5: Shaders
 
-In Part 5, we move from CPU-based rendering to **real-time GPU shaders**, leveraging **vertex shaders** (for geometry transforms) and **fragment shaders** (for per-fragment lighting and material effects). We implement several key shading models: **Diffuse Shading**, **Blinn-Phong Shading**, **Texture Mapping**, **Bump & Displacement Mapping**, **Mirror (Environment Mapped) Reflections**.
+In Part 5, we move from CPU-based rendering to **real-time GPU shaders**, leveraging **vertex shaders** (for geometry transforms) and **fragment shaders** (for per-fragment lighting and material effects). We implement several key shading models: **Diffuse Shading**, **Blinn-Phong Shading**, **Texture Mapping**, **Bump &amp; Displacement Mapping**, **Mirror (Environment Mapped) Reflections**.
 
 **Explanation of shader program**: A shader program is a small, specialized piece of code that runs on the GPU. It is typically composed of two main stages: Vertex Shader – Operates on each vertex in a 3D model. It can transform the vertex from model space to screen space (e.g., via model, view, and projection matrices) and compute any per-vertex data that want to pass along (like normals, UV coordinates, etc.). The vertex shader’s outputs are then interpolated across the surface of the triangle or polygon.
 Fragment (Pixel) Shader – Runs on each fragment, which can think of as each pixel-sized piece of the drawn surface. It uses the interpolated data from the vertex shader (position, normal, UV) and calculates the final color of that fragment. By splitting work this way, the GPU can operate in parallel: first it processes each vertex, then “fills in” the space between vertices by interpolating and running the fragment shader for every pixel covered by the triangle. This pipeline allows real-time rendering with advanced lighting and material effects at interactive frame rates.
@@ -300,7 +270,7 @@ Displacement on sphere and cloth
 ![Displacement on cloth on sphere](part5/part5.10.png)  
 Displacement on cloth on sphere
 
-In Displacement.vert, we actually move each vertex along its normal by an amount read from the height map: $p'=p+n×[h(uv)×u_height_scaling]$.
+In Displacement.vert, we actually move each vertex along its normal by an amount read from the height map: $p&#39;=p&#43;n×[h(uv)×u_height_scaling]$.
 This changes the geometry, so higher mesh resolution (-o 128 -a 128) reveals more detail.
 
 ![Bump 16 on cloth and sphere](part5/part5.11.png)  
@@ -327,3 +297,9 @@ Mirror on cloth on sphere
 In completing this assignment, we utilized ChatGPT O1 for language refinement, grammar correction, and structural adjustments. Additionally, we used it to improve the clarity of Markdown formatting to ensure better organization and readability.
 
 Through this process, we gained a deeper understanding of Markdown formatting, including how to use headers, lists, and emphasis for clearer structuring. Moreover, we improved my ability to concisely express ideas, making our writing more precise and polished.
+
+---
+
+> Author:   
+> URL: http://localhost:1313/Blog/posts/189hw4/  
+

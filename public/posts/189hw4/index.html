@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en-us">
+  <head><script src="/Blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Blog/livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>CS184 HW4 Writeup - Xize&#39;s CS184 Blog</title><meta name="author" content="">
+<meta name="description" content="Homework 4: Clothism https://alexdwastaken.github.io/Blog/posts/189hw4/ Group members: Xize Duan, Phoenix Ye
+"><meta name="keywords" content='CS184'>
+  <meta itemprop="name" content="CS184 HW4 Writeup">
+  <meta itemprop="description" content="Homework 4: Clothism https://alexdwastaken.github.io/Blog/posts/189hw4/ Group members: Xize Duan, Phoenix Ye">
+  <meta itemprop="datePublished" content="2025-04-08T00:05:27-08:00">
+  <meta itemprop="dateModified" content="2025-04-08T00:05:27-08:00">
+  <meta itemprop="wordCount" content="2169">
+  <meta itemprop="keywords" content="CS184"><meta property="og:url" content="http://localhost:1313/Blog/posts/189hw4/">
+  <meta property="og:site_name" content="Xize&#39;s CS184 Blog">
+  <meta property="og:title" content="CS184 HW4 Writeup">
+  <meta property="og:description" content="Homework 4: Clothism https://alexdwastaken.github.io/Blog/posts/189hw4/ Group members: Xize Duan, Phoenix Ye">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-08T00:05:27-08:00">
+    <meta property="article:modified_time" content="2025-04-08T00:05:27-08:00">
+    <meta property="article:tag" content="CS184">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CS184 HW4 Writeup">
+  <meta name="twitter:description" content="Homework 4: Clothism https://alexdwastaken.github.io/Blog/posts/189hw4/ Group members: Xize Duan, Phoenix Ye">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/Blog/posts/189hw4/" title="CS184 HW4 Writeup - Xize&#39;s CS184 Blog" /><link rel="prev" type="text/html" href="http://localhost:1313/Blog/posts/189hw3/" title="CS184 HW3 Writeup" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/Blog/posts/189hw4/index.md" title="CS184 HW4 Writeup - Xize's CS184 Blog"><link rel="stylesheet" href="/Blog/css/style.min.css"><link rel="preload" href="/Blog/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/Blog/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/Blog/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/Blog/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "CS184 HW4 Writeup",
+    "inLanguage": "en-us",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/Blog\/posts\/189hw4\/"
+    },"genre": "posts","keywords": "CS184","wordcount":  2169 ,
+    "url": "http:\/\/localhost:1313\/Blog\/posts\/189hw4\/","datePublished": "2025-04-08T00:05:27-08:00","dateModified": "2025-04-08T00:05:27-08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Author"
+      },"description": ""
+  }
+  </script><script src="/Blog/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/Blog/" title="Xize&#39;s CS184 Blog"><span class="header-title-text">Xize&#39;s CS184 Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/Blog/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a class="menu-link" href="/Blog/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a class="menu-link" href="/Blog/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/Blog/" title="Xize&#39;s CS184 Blog"><span class="header-title-text">Xize&#39;s CS184 Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="menu-item"><a class="menu-link" href="/Blog/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item"><a class="menu-link" href="/Blog/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item"><a class="menu-link" href="/Blog/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>CS184 HW4 Writeup</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="post-meta-line"><span title="published on 2025-04-08 00:05:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-04-08">2025-04-08</time></span>&nbsp;<span title="2169 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 2200 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>11 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#part-1-masses-and-springs">Part 1: Masses and Springs</a></li>
+    <li><a href="#part-2-simulation-via-numerical-integration">Part 2: Simulation via Numerical Integration</a></li>
+    <li><a href="#spring-constant"><strong>Spring Constant</strong></a></li>
+    <li><a href="#density"><strong>Density</strong></a></li>
+    <li><a href="#damping"><strong>Damping</strong></a></li>
+    <li><a href="#pinned-4"><strong>Pinned 4</strong></a></li>
+    <li><a href="#part-3-handling-collisions-with-other-objects">Part 3: Handling collisions with other objects</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#part-4-handling-self-collisions">Part 4: Handling self-collisions</a></li>
+    <li><a href="#1-spatial-hashing-approach">1. Spatial Hashing Approach</a></li>
+    <li><a href="#3-parameter-experiments">3. Parameter Experiments</a></li>
+    <li><a href="#part-5-shaders">Part 5: Shaders</a></li>
+    <li><a href="#blinn-phong-shading-model">Blinn-Phong Shading Model</a></li>
+    <li><a href="#custom-texture">Custom Texture</a></li>
+    <li><a href="#bump-and-displacement-maps">BUMP AND DISPLACEMENT MAPS</a></li>
+    <li><a href="#appendix">Appendix</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="homework-4-clothism" class="heading-element"><span>Homework 4: Clothism</span>
+  <a href="#homework-4-clothism" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p><a href="https://alexdwastaken.github.io/Blog/posts/189hw4/"target="_blank" rel="external nofollow noopener noreferrer">https://alexdwastaken.github.io/Blog/posts/189hw4/</a>
+<strong>Group members: Xize Duan, Phoenix Ye</strong></p></blockquote>
+<h2 id="overview" class="heading-element"><span>Overview</span>
+  <a href="#overview" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In this project, we build a realistic cloth simulation from the ground up. First, we model the cloth as a mass-spring system, discretizing it into point masses and connecting them with structural, shearing, and bending springs (Part 1). Then, we implement numerical integration to animate these masses over time (Part 2) and handle collisions with both external objects (Part 3) and the cloth itself (Part 4). Finally, we apply various shading techniques (Part 5), including diffuse, texture, and displacement mapping, to achieve visually appealing renderings of the simulated cloth in real-time.</p>
+<h2 id="part-1-masses-and-springs" class="heading-element"><span>Part 1: Masses and Springs</span>
+  <a href="#part-1-masses-and-springs" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In this part, we build a grid of point masses connected by three types of springs (structural, shearing, and bending). This establishes the foundation for our cloth simulation.</p>
+<ul>
+<li><strong>Structural</strong>: connects each mass to its immediate neighbor(s) horizontally or vertically.</li>
+<li><strong>Shearing</strong>: connects diagonally adjacent masses.</li>
+<li><strong>Bending</strong>: connects every other mass (two steps away) horizontally or vertically.</li>
+</ul>
+<p>We populate <code>point_masses</code> by creating <code>num_width_points * num_height_points</code> masses:</p>
+<ul>
+<li>If <strong>horizontal orientation</strong>, set <code>y = 1.0</code> and vary <code>(x,z)</code>.</li>
+<li>If <strong>vertical orientation</strong>, vary <code>(x,y)</code> and set a small random <code>z</code> offset (between <code>-1/1000</code> and <code>1/1000</code>).</li>
+</ul>
+<p>Each point mass is marked <code>pinned</code> if its <code>(row, col)</code> index is in the pinned list.<br>
+Once all masses are in point_masses, we create:</p>
+<ul>
+<li><strong>Structural springs</strong>, connecting each mass to <code>(r, c-1)</code> &amp; <code>(r-1, c)</code>.</li>
+<li><strong>Shearing springs</strong>, connecting diagonals <code>(r, c)</code> to <code>(r-1, c-1)</code> &amp; <code>(r-1, c+1)</code>.</li>
+<li><strong>Bending springs</strong>, connecting <code>(r, c)</code> to <code>(r, c-2)</code> &amp; <code>(r-2, c)</code>.</li>
+</ul>
+<p>Below, we show the cloth in scene/pinned2.json from two viewing angles where you can clearly see the cloth wireframe to show the structure of our point masses and springs.</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part1/part1.1.png" alt="Pinned 2 Angle 1" srcset="/Blog/posts/189hw4/part1/part1.1.png?size=small, /Blog/posts/189hw4/part1/part1.1.png?size=medium 1.5x, /Blog/posts/189hw4/part1/part1.1.png?size=large 2x" data-title="Pinned 2 Angle 1" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Pinned 2 Angle 1 depicting structure of point masses</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part1/part1.2.png" alt="Pinned 2 Angle 1" srcset="/Blog/posts/189hw4/part1/part1.2.png?size=small, /Blog/posts/189hw4/part1/part1.2.png?size=medium 1.5x, /Blog/posts/189hw4/part1/part1.2.png?size=large 2x" data-title="Pinned 2 Angle 1" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Pinned 2 Angle 2 depicting structure of point masses (After cloth falls)</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part1/part1.3.png" alt="Without any shearing constraints" srcset="/Blog/posts/189hw4/part1/part1.3.png?size=small, /Blog/posts/189hw4/part1/part1.3.png?size=medium 1.5x, /Blog/posts/189hw4/part1/part1.3.png?size=large 2x" data-title="Without any shearing constraints" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Without any shearing constraints</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part1/part1.4.png" alt="With only shearing constraints" srcset="/Blog/posts/189hw4/part1/part1.4.png?size=small, /Blog/posts/189hw4/part1/part1.4.png?size=medium 1.5x, /Blog/posts/189hw4/part1/part1.4.png?size=large 2x" data-title="With only shearing constraints" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+With only shearing constraints</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part1/part1.5.png" alt="With all constraints" srcset="/Blog/posts/189hw4/part1/part1.5.png?size=small, /Blog/posts/189hw4/part1/part1.5.png?size=medium 1.5x, /Blog/posts/189hw4/part1/part1.5.png?size=large 2x" data-title="With all constraints" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+With all constraints</p>
+<hr>
+<h2 id="part-2-simulation-via-numerical-integration" class="heading-element"><span>Part 2: Simulation via Numerical Integration</span>
+  <a href="#part-2-simulation-via-numerical-integration" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In Part 2, we animate the cloth over time by computing the forces on each point mass and then integrating to update their positions. We use:</p>
+<ul>
+<li><strong>External forces</strong></li>
+<li><strong>Spring forces</strong> (from structural, shearing, and bending springs)</li>
+<li><strong>Verlet integration</strong> to determine new positions</li>
+<li><strong>Provot’s constraint</strong> to limit spring over-stretching.</li>
+</ul>
+<p>At the start of each timestep, we reset each point mass’s <code>forces</code> to zero. Then we:</p>
+<ol>
+<li><strong>Add external forces</strong>
+<ul>
+<li>For each external acceleration in <code>external_accelerations</code>, we apply $ F = m \times a $ to every point mass.</li>
+</ul>
+</li>
+<li><strong>Add spring correction forces</strong>
+<ul>
+<li>For each spring (if enabled by the current cloth parameters), we use Hooke’s law:<br>
+${F}_{spring} = -k (|f{p_a} - f{p_b}| - L_0),\hat{d}$
+where $\hat{d}$ is the unit direction from one mass to the other, $L_0$ is <code>rest_length</code>, and $k$ is the spring constant.</li>
+<li>Bending springs are typically weaker, so we multiply $k$ by a smaller factor.</li>
+</ul>
+</li>
+</ol>
+<p>We use <strong>Verlet integration</strong> to update positions. For each point mass:</p>
+<ol>
+<li>
+<p>If it’s <strong>pinned</strong>, skip all updates (remain fixed).</p>
+</li>
+<li>
+<p>Otherwise, given the current acceleration $f{a} = f{F}/m$, and damping factor $d$, we do:</p>
+<p>$$f{x}_{new} = f{x}_{current}
++ (1 - d) (f{x}_{current} - f{x}_{previous})
++ f{a}  \Delta t^2
+$$</p>
+</li>
+<li>
+<p>Store <code>current_position</code> in <code>last_position</code> after updating.</p>
+</li>
+</ol>
+<p>We interpret the <strong>damping</strong> parameter as a percentage. For instance, if damping = 0.02 (2%), we use $1 - 0.02$ to slightly reduce the velocity term, simulating friction/energy loss.</p>
+<p>After integration, each spring is checked to ensure it’s not stretched beyond <strong>110%</strong> of its rest length. If the distance between <code>pm_a</code> and <code>pm_b</code> exceeds $1.1 \times \text{restlength}$:</p>
+<ol>
+<li>Compute the excess distance and direction.</li>
+<li>Correct half of it on each mass, unless one is pinned (then apply the entire correction to the other).</li>
+</ol>
+<p>This prevents the cloth from being unnaturally stretched.</p>
+<p>To see the cloth’s behavior under different parameters, we tested:</p>
+<h2 id="spring-constant" class="heading-element"><span><strong>Spring Constant</strong></span>
+  <a href="#spring-constant" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>We tested ks from 500 N/m to 50000N/m. At very low ks, the cloth is extremely loose and it strethes a lot and takes longer to settle into a shape. At very high ks, the cloth behaves more rigidly, barely deforms.</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part2/part2.1.png" alt="KS = 500" srcset="/Blog/posts/189hw4/part2/part2.1.png?size=small, /Blog/posts/189hw4/part2/part2.1.png?size=medium 1.5x, /Blog/posts/189hw4/part2/part2.1.png?size=large 2x" data-title="KS = 500" style="--width: 2472px;--aspect-ratio: 2472 / 1968;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Cloth with ks = 500 $N/m$</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part2/part2.2.png" alt="KS = 5000" srcset="/Blog/posts/189hw4/part2/part2.2.png?size=small, /Blog/posts/189hw4/part2/part2.2.png?size=medium 1.5x, /Blog/posts/189hw4/part2/part2.2.png?size=large 2x" data-title="KS = 5000" style="--width: 2472px;--aspect-ratio: 2472 / 1968;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Cloth with ks = 5000 $N/m$</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part2/part2.3.png" alt="KS = 5000" srcset="/Blog/posts/189hw4/part2/part2.3.png?size=small, /Blog/posts/189hw4/part2/part2.3.png?size=medium 1.5x, /Blog/posts/189hw4/part2/part2.3.png?size=large 2x" data-title="KS = 5000" style="--width: 2472px;--aspect-ratio: 2472 / 1968;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Cloth with ks = 50000 $N/m$</p>
+<h2 id="density" class="heading-element"><span><strong>Density</strong></span>
+  <a href="#density" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>We tested density from 1 $g/cm^2$ to 50 $g/cm^2$. With higher density, the cloth is heavier and falls faster under gravity. Springs may stretch more, leading to larger displacements before settling.  With lower density, it yields a lighter cloth, drifting more gently and bouncing around in collisions.</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part2/part2.4.png" alt="Density = 1" srcset="/Blog/posts/189hw4/part2/part2.4.png?size=small, /Blog/posts/189hw4/part2/part2.4.png?size=medium 1.5x, /Blog/posts/189hw4/part2/part2.4.png?size=large 2x" data-title="Density = 1" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Cloth with a density of 1 $g/cm^2$</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part2/part2.5.png" alt="Density = 15" srcset="/Blog/posts/189hw4/part2/part2.5.png?size=small, /Blog/posts/189hw4/part2/part2.5.png?size=medium 1.5x, /Blog/posts/189hw4/part2/part2.5.png?size=large 2x" data-title="Density = 15" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Cloth with a density of 15 $g/cm^2$</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part2/part2.6.png" alt="Density = 50" srcset="/Blog/posts/189hw4/part2/part2.6.png?size=small, /Blog/posts/189hw4/part2/part2.6.png?size=medium 1.5x, /Blog/posts/189hw4/part2/part2.6.png?size=large 2x" data-title="Density = 50" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Cloth with a density of 50 $g/cm^2$</p>
+<h2 id="damping" class="heading-element"><span><strong>Damping</strong></span>
+  <a href="#damping" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>We tested damping from 0.0% to 0.2%. With high damping, the cloth loses energy quickly, so it settles faster and doesn’t bounce much. With low damping, the cloth swings and bounces longer before coming to rest.</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part2/part2.7.png" alt="Damping = 0" srcset="/Blog/posts/189hw4/part2/part2.7.png?size=small, /Blog/posts/189hw4/part2/part2.7.png?size=medium 1.5x, /Blog/posts/189hw4/part2/part2.7.png?size=large 2x" data-title="Damping = 0" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Cloth with damping set at 0.0%</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part2/part2.8.png" alt="Damping = 0.2" srcset="/Blog/posts/189hw4/part2/part2.8.png?size=small, /Blog/posts/189hw4/part2/part2.8.png?size=medium 1.5x, /Blog/posts/189hw4/part2/part2.8.png?size=large 2x" data-title="Damping = 0.2" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Cloth with damping set at 0.2%</p>
+<h2 id="pinned-4" class="heading-element"><span><strong>Pinned 4</strong></span>
+  <a href="#pinned-4" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Below is a final resting shot of the cloth from <code>scene/pinned4.json</code>.</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part2/part2.9.png" alt="pinned4" srcset="/Blog/posts/189hw4/part2/part2.9.png?size=small, /Blog/posts/189hw4/part2/part2.9.png?size=medium 1.5x, /Blog/posts/189hw4/part2/part2.9.png?size=large 2x" data-title="pinned4" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<hr>
+<h2 id="part-3-handling-collisions-with-other-objects" class="heading-element"><span>Part 3: Handling collisions with other objects</span>
+  <a href="#part-3-handling-collisions-with-other-objects" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In Part 3, we extend our cloth simulation to collide with external primitives—in this case, <strong>spheres</strong> and <strong>planes</strong>. Whenever a point mass intersects or crosses these objects, we resolve the collision by “bumping” the point mass back outside the object’s surface. This prevents the cloth from passing through the object and allows it to drape realistically.</p>
+<p>To handle collisions with a <strong>sphere</strong> of radius $r$ at center ${o}$:</p>
+<ol>
+<li><strong>Detection</strong>:<br>
+After each time step, we check whether a point mass $f{p}$ is within the sphere: $|{p} - {o}| &lt; r$</li>
+<li><strong>Resolution</strong>:<br>
+We find the intersection/tangent point on the sphere surface and we then compute a correction vector from the point mass’s <code>last_position</code> to ${t}$.  Finally, we update <code>position</code>. By doing so, the point mass ends up exactly on the sphere’s surface (slightly adjusted by friction).</li>
+</ol>
+<p>For Collision with <strong>Planes</strong></p>
+<ol>
+<li><strong>Detection</strong>:
+We check if the point mass moved from one side of the plane to the other between last and current position. If the dot products with the plane’s normal differ in sign, the point mass has crossed the plane.</li>
+<li><strong>Resolution</strong>:
+We compute the intersection/tangent point $t$ where the segment crosses the plane.
+Then we bump the point mass a small offset $ϵ$ above $t$ (in the plane’s normal direction) to avoid numerical issues.
+Similar to the sphere, we use friction scaling $(1−f)$ when applying the correction vector.</li>
+</ol>
+<h2 id="results" class="heading-element"><span>Results</span>
+  <a href="#results" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Using scene/sphere.json, we pinned two corners of the cloth and dropped it onto the sphere. For Default ks = 5000, Cloth drapes over the sphere fairly stiffly but still shows some bending.
+For Lower ks = 500, Cloth is much looser and sags more around the sphere. For Higher ks = 50000, Cloth appears almost rigid, hugging the sphere with minimal visible folds.</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part3/part3.1.png" alt="collison ks = 500" srcset="/Blog/posts/189hw4/part3/part3.1.png?size=small, /Blog/posts/189hw4/part3/part3.1.png?size=medium 1.5x, /Blog/posts/189hw4/part3/part3.1.png?size=large 2x" data-title="collison ks = 500" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Collision with Sphere at ks = 500 N/m</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part3/part3.2.png" alt="collison ks = 5000" srcset="/Blog/posts/189hw4/part3/part3.2.png?size=small, /Blog/posts/189hw4/part3/part3.2.png?size=medium 1.5x, /Blog/posts/189hw4/part3/part3.2.png?size=large 2x" data-title="collison ks = 5000" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Collision with Sphere at ks = 5000 N/m</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part3/part3.3.png" alt="collison ks = 50000" srcset="/Blog/posts/189hw4/part3/part3.3.png?size=small, /Blog/posts/189hw4/part3/part3.3.png?size=medium 1.5x, /Blog/posts/189hw4/part3/part3.3.png?size=large 2x" data-title="collison ks = 50000" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Collision with Sphere at ks = 50000 N/m</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part3/part3.4.png" alt="Shaded cloth on plane" srcset="/Blog/posts/189hw4/part3/part3.4.png?size=small, /Blog/posts/189hw4/part3/part3.4.png?size=medium 1.5x, /Blog/posts/189hw4/part3/part3.4.png?size=large 2x" data-title="Shaded cloth on plane" style="--width: 2184px;--aspect-ratio: 2184 / 1792;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Shaded cloth on plane</p>
+<h2 id="part-4-handling-self-collisions" class="heading-element"><span>Part 4: Handling self-collisions</span>
+  <a href="#part-4-handling-self-collisions" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In Part 4, we address <strong>self-collisions</strong>, enabling the cloth to fold on itself realistically rather than clipping or intersecting. We implement <strong>spatial hashing</strong> to efficiently detect when point masses are too close, then apply corrective forces to keep them separated.</p>
+<h2 id="1-spatial-hashing-approach" class="heading-element"><span>1. Spatial Hashing Approach</span>
+  <a href="#1-spatial-hashing-approach" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ol>
+<li>
+<p><strong><code>hash_position(pos)</code></strong></p>
+<ul>
+<li>We partition the space into 3D boxes whose dimensions depend on <code>width</code>, <code>height</code>, and a chosen scale factor (commonly 3 × the spacing).</li>
+<li>We truncate the coordinates of <code>pos</code> to find which box it belongs to and convert that box coordinate into a unique hash value (e.g., using a combination of x, y, z indices).</li>
+</ul>
+</li>
+<li>
+<p><strong><code>build_spatial_map()</code></strong></p>
+<ul>
+<li>Clear the map from previous frames.</li>
+<li>For every <code>PointMass</code> in <code>point_masses</code>, compute its hash key using <code>hash_position</code>.</li>
+<li>Insert a pointer to that point mass into the corresponding map bucket (an array or vector of <code>PointMass*</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong><code>self_collide(pm)</code></strong></p>
+<ul>
+<li>For a given point mass <code>pm</code>, look up its hash bucket in the map.</li>
+<li>For each candidate <code>other</code> in that bucket:
+<ul>
+<li>Skip if <code>other == pm</code>.</li>
+<li>Check if the distance between <code>pm</code> and <code>other</code> is below <code>2 × thickness</code>.
+<ul>
+<li>If yes, compute the correction vector to separate <code>pm</code> from <code>other</code>.</li>
+<li>Accumulate these correction vectors, then apply the average to <code>pm.position</code>, scaled by <code>(1.0 / simulation_steps)</code>.
+<ul>
+<li>This avoids sudden large jumps in a single time step.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Integrating with <code>simulate()</code></strong></p>
+<ul>
+<li>After we do Part 2’s integration and collisions with other objects, we:
+<ol>
+<li>Call <code>build_spatial_map()</code>.</li>
+<li>For each <code>PointMass</code> (that is not pinned), call <code>self_collide(pm)</code>.</li>
+</ol>
+</li>
+<li>This ensures cloth points repel each other if they become too close.</li>
+</ul>
+</li>
+</ol>
+<p>Below are <strong>three screenshots</strong> of our cloth folding onto itself, captured at different stages of the simulation:</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part4/part4.1.png" alt="Early Self-Collision" srcset="/Blog/posts/189hw4/part4/part4.1.png?size=small, /Blog/posts/189hw4/part4/part4.1.png?size=medium 1.5x, /Blog/posts/189hw4/part4/part4.1.png?size=large 2x" data-title="Early Self-Collision" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Early Self-Collision</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part4/part4.2.png" alt="Intermediate Folding" srcset="/Blog/posts/189hw4/part4/part4.2.png?size=small, /Blog/posts/189hw4/part4/part4.2.png?size=medium 1.5x, /Blog/posts/189hw4/part4/part4.2.png?size=large 2x" data-title="Intermediate Folding" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Intermediate Folding</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part4/part4.3.png" alt="Rest Collision" srcset="/Blog/posts/189hw4/part4/part4.3.png?size=small, /Blog/posts/189hw4/part4/part4.3.png?size=medium 1.5x, /Blog/posts/189hw4/part4/part4.3.png?size=large 2x" data-title="Rest Collision" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>
+Rest Collision</p>
+<h2 id="3-parameter-experiments" class="heading-element"><span>3. Parameter Experiments</span>
+  <a href="#3-parameter-experiments" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>To see how <strong>density</strong> and <strong>ks</strong> affect folding:</p>
+<ul>
+<li><strong>Increasing Density</strong>:  When heavier cloth falls faster, creating deeper folds or stretches. The self-collision hashing must respond more aggressively as more mass collides in a shorter time.</li>
+<li><strong>Decreasing ks</strong>:  A looser cloth that sags more on itself, producing more pronounced folds. With self-collision, it keeps separated layers, though the folds are larger and floppier.</li>
+<li><strong>Increasing ks</strong>:  A stiffer cloth that folds less dramatically. Self-collision corrections still prevent intersections, but the cloth more rigidly holds shape.</li>
+</ul>
+<p><strong>Screenshots</strong></p>
+<ol>
+<li>
+<p><strong>High Density</strong><br>
+<img loading="lazy" src="/Blog/posts/189hw4/part4/part4.4.png" alt="High Density Fold" srcset="/Blog/posts/189hw4/part4/part4.4.png?size=small, /Blog/posts/189hw4/part4/part4.4.png?size=medium 1.5x, /Blog/posts/189hw4/part4/part4.4.png?size=large 2x" data-title="High Density Fold" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+High Density Fold</p>
+</li>
+<li>
+<p><strong>Low ks</strong><br>
+<img loading="lazy" src="/Blog/posts/189hw4/part4/part4.5.png" alt="Low ks" srcset="/Blog/posts/189hw4/part4/part4.5.png?size=small, /Blog/posts/189hw4/part4/part4.5.png?size=medium 1.5x, /Blog/posts/189hw4/part4/part4.5.png?size=large 2x" data-title="Low ks" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Low ks</p>
+</li>
+</ol>
+<h2 id="part-5-shaders" class="heading-element"><span>Part 5: Shaders</span>
+  <a href="#part-5-shaders" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In Part 5, we move from CPU-based rendering to <strong>real-time GPU shaders</strong>, leveraging <strong>vertex shaders</strong> (for geometry transforms) and <strong>fragment shaders</strong> (for per-fragment lighting and material effects). We implement several key shading models: <strong>Diffuse Shading</strong>, <strong>Blinn-Phong Shading</strong>, <strong>Texture Mapping</strong>, <strong>Bump &amp; Displacement Mapping</strong>, <strong>Mirror (Environment Mapped) Reflections</strong>.</p>
+<p><strong>Explanation of shader program</strong>: A shader program is a small, specialized piece of code that runs on the GPU. It is typically composed of two main stages: Vertex Shader – Operates on each vertex in a 3D model. It can transform the vertex from model space to screen space (e.g., via model, view, and projection matrices) and compute any per-vertex data that want to pass along (like normals, UV coordinates, etc.). The vertex shader’s outputs are then interpolated across the surface of the triangle or polygon.
+Fragment (Pixel) Shader – Runs on each fragment, which can think of as each pixel-sized piece of the drawn surface. It uses the interpolated data from the vertex shader (position, normal, UV) and calculates the final color of that fragment. By splitting work this way, the GPU can operate in parallel: first it processes each vertex, then “fills in” the space between vertices by interpolating and running the fragment shader for every pixel covered by the triangle. This pipeline allows real-time rendering with advanced lighting and material effects at interactive frame rates.</p>
+<h2 id="blinn-phong-shading-model" class="heading-element"><span>Blinn-Phong Shading Model</span>
+  <a href="#blinn-phong-shading-model" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>The Blinn-Phong shading model is a more refined variant of the basic Phong reflection model. It breaks down reflected light into three main components: Ambient – A constant term, simulating indirect light bouncing around the scene. Diffuse – The “Lambertian” reflection that depends on the angle between the surface normal and the light direction. It makes surfaces appear brighter when they face the light and darker as they turn away. Specular – A highlight that simulates the mirror-like reflection on shiny surfaces. In Blinn-Phong, we compute a half-vector $h$ halfway between the view direction and the light direction. The specular term depends on $max(0,n⋅h)^p$, where $p$ is a “shininess” exponent controlling how sharp or wide the highlight is.</p>
+<p>Below are screenshots of ambient only, diffuse only, specular only and combined Blinn-Phong Model.</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.1.png" alt="Ambient" srcset="/Blog/posts/189hw4/part5/part5.1.png?size=small, /Blog/posts/189hw4/part5/part5.1.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.1.png?size=large 2x" data-title="Ambient" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Ambient Only (ka = 1, kd = 0, ks = 0)</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.2.png" alt="Diffuse" srcset="/Blog/posts/189hw4/part5/part5.2.png?size=small, /Blog/posts/189hw4/part5/part5.2.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.2.png?size=large 2x" data-title="Diffuse" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Diffuse Only (ka = 0, kd = 1, ks = 0)</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.3.png" alt="Specular" srcset="/Blog/posts/189hw4/part5/part5.3.png?size=small, /Blog/posts/189hw4/part5/part5.3.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.3.png?size=large 2x" data-title="Specular" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Specular Only (ka = 0, kd = 0, ks = 0)</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.4.png" alt="Combined" srcset="/Blog/posts/189hw4/part5/part5.4.png?size=small, /Blog/posts/189hw4/part5/part5.4.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.4.png?size=large 2x" data-title="Combined" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Combined (ka = 0.2, kd = 0.5, ks = 0)</p>
+<h2 id="custom-texture" class="heading-element"><span>Custom Texture</span>
+  <a href="#custom-texture" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.5.png" alt="Custom" srcset="/Blog/posts/189hw4/part5/part5.5.png?size=small, /Blog/posts/189hw4/part5/part5.5.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.5.png?size=large 2x" data-title="Custom" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Custom Texture</p>
+<h2 id="bump-and-displacement-maps" class="heading-element"><span>BUMP AND DISPLACEMENT MAPS</span>
+  <a href="#bump-and-displacement-maps" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In Bump.frag, we perturb normals at the fragment level:
+Compute height differences $deltaU$, $deltaV$ from the height map.
+Construct a local “bump” normal in tangent space, then transform it by the TBN matrix back to world space.
+Use this modified normal in a Blinn-Phong-like lighting equation.</p>
+<p>Below are screenshots of bump mapping on the cloth and sphere</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.6.png" alt="Bump on cloth" srcset="/Blog/posts/189hw4/part5/part5.6.png?size=small, /Blog/posts/189hw4/part5/part5.6.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.6.png?size=large 2x" data-title="Bump on cloth" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Bump on cloth</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.7.png" alt="Bump on sphere" srcset="/Blog/posts/189hw4/part5/part5.7.png?size=small, /Blog/posts/189hw4/part5/part5.7.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.7.png?size=large 2x" data-title="Bump on sphere" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Bump on sphere</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.8.png" alt="Bump on sphere on cloth" srcset="/Blog/posts/189hw4/part5/part5.8.png?size=small, /Blog/posts/189hw4/part5/part5.8.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.8.png?size=large 2x" data-title="Bump on sphere on cloth" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Bump on sphere on cloth</p>
+<p>Below is a screenshot of displacement mapping on the sphere</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.9.png" alt="Displacement on sphere and cloth" srcset="/Blog/posts/189hw4/part5/part5.9.png?size=small, /Blog/posts/189hw4/part5/part5.9.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.9.png?size=large 2x" data-title="Displacement on sphere and cloth" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Displacement on sphere and cloth</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.10.png" alt="Displacement on cloth on sphere" srcset="/Blog/posts/189hw4/part5/part5.10.png?size=small, /Blog/posts/189hw4/part5/part5.10.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.10.png?size=large 2x" data-title="Displacement on cloth on sphere" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Displacement on cloth on sphere</p>
+<p>In Displacement.vert, we actually move each vertex along its normal by an amount read from the height map: $p&rsquo;=p+n×[h(uv)×u_height_scaling]$.
+This changes the geometry, so higher mesh resolution (-o 128 -a 128) reveals more detail.</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.11.png" alt="Bump 16 on cloth and sphere" srcset="/Blog/posts/189hw4/part5/part5.11.png?size=small, /Blog/posts/189hw4/part5/part5.11.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.11.png?size=large 2x" data-title="Bump 16 on cloth and sphere" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Bump(-o16 -a16) on cloth and sphere</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.12.png" alt="Bump 128 on cloth and sphere" srcset="/Blog/posts/189hw4/part5/part5.12.png?size=small, /Blog/posts/189hw4/part5/part5.12.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.12.png?size=large 2x" data-title="Bump 128 on cloth and sphere" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Bump(-o128 -a128) on cloth and sphere</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.13.png" alt="Displacement 16 on cloth and sphere" srcset="/Blog/posts/189hw4/part5/part5.13.png?size=small, /Blog/posts/189hw4/part5/part5.13.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.13.png?size=large 2x" data-title="Displacement 16 on cloth and sphere" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Displacement(-o16 -a16) on cloth and sphere</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.14.png" alt="Displacement 128 on cloth and sphere" srcset="/Blog/posts/189hw4/part5/part5.14.png?size=small, /Blog/posts/189hw4/part5/part5.14.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.14.png?size=large 2x" data-title="Displacement 128 on cloth and sphere" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Displacement(-o128 -a128) on cloth and sphere</p>
+<p>Below is a screenshot of our mirror shader on the cloth and on the sphere.</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.15.png" alt="Mirror on cloth and sphere" srcset="/Blog/posts/189hw4/part5/part5.15.png?size=small, /Blog/posts/189hw4/part5/part5.15.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.15.png?size=large 2x" data-title="Mirror on cloth and sphere" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Mirror on cloth and sphere</p>
+<p><img loading="lazy" src="/Blog/posts/189hw4/part5/part5.16.png" alt="Mirror on cloth on sphere" srcset="/Blog/posts/189hw4/part5/part5.16.png?size=small, /Blog/posts/189hw4/part5/part5.16.png?size=medium 1.5x, /Blog/posts/189hw4/part5/part5.16.png?size=large 2x" data-title="Mirror on cloth on sphere" style="--width: 2272px;--aspect-ratio: 2272 / 1880;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><br>
+Mirror on cloth on sphere</p>
+<h2 id="appendix" class="heading-element"><span>Appendix</span>
+  <a href="#appendix" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>In completing this assignment, we utilized ChatGPT O1 for language refinement, grammar correction, and structural adjustments. Additionally, we used it to improve the clarity of Markdown formatting to ensure better organization and readability.</p>
+<p>Through this process, we gained a deeper understanding of Markdown formatting, including how to use headers, lists, and emphasis for clearer structuring. Moreover, we improved my ability to concisely express ideas, making our writing more precise and polished.</p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2025-04-08 00:05:27">Updated on 2025-04-08&nbsp;</span>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/Blog/posts/189hw4/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/Blog/posts/189hw4/" data-title="CS184 HW4 Writeup" data-hashtags="CS184"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/Blog/posts/189hw4/" data-hashtag="CS184"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/Blog/posts/189hw4/" data-title="CS184 HW4 Writeup"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/Blog/tags/cs184/" class="post-tag" title="Tags - CS184">CS184</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/Blog/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/Blog/posts/189hw3/" class="post-nav-item" rel="prev" title="CS184 HW3 Writeup"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>CS184 HW3 Writeup</a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.143.1"><img class="hugo-icon" src="/Blog/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.17-8b402129"><img class="fixit-icon" src="/Blog/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="/Blog/"></a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/Blog/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/Blog/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/Blog/lib/cookieconsent/cookieconsent.min.css"><script src="/Blog/lib/sharer/sharer.min.js" async defer></script><script src="/Blog/lib/katex/katex.min.js" defer></script><script src="/Blog/lib/katex/auto-render.min.js" defer></script><script src="/Blog/lib/katex/mhchem.min.js" defer></script><script src="/Blog/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"version":"v0.3.17-8b402129"};console.log('Page config:', window.config);</script><script src="/Blog/js/theme.min.js" defer></script></body>
+</html>

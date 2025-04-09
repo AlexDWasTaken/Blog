@@ -261,11 +261,11 @@ Here are some comparisonw with only direct and only indirect illumination.
 
 | Max_ray_depth | 0                                                            | 1                                                            | 2                                                            |
 | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Result        | ![Part4_comp_bunny_rr_m_0](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_0.png) | ![Part4_comp_bunny_rr_m_1](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_1.png) | ![Part4_comp_bunny_rr_m_2](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_2.png) |
+| Result        | ![Part4_comp_bunny_rr_m_0](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_0.png) | ![Part4_comp_bunny_rr_m_1](index.assets/Part4_comp_bunny_rr_m_1.png) | ![Part4_comp_bunny_rr_m_2](index.assets/Part4_comp_bunny_rr_m_2.png) |
 
 | Max_ray_depth | 3                                                            | 4                                                            | 100                                                          |
 | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Result        | ![Part4_comp_bunny_rr_m_3](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_3.png) | ![Part4_comp_bunny_rr_m_4](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_4.png) | ![Part4_comp_bunny_rr_m_100_](https://raw.githubusercontent.com/AlexDWasTaken/blog-pics/main/picsPart4_comp_bunny_rr_m_100_.png) |
+| Result        | ![Part4_comp_bunny_rr_m_3](index.assets/Part4_comp_bunny_rr_m_3.png) | ![Part4_comp_bunny_rr_m_4](index.assets/Part4_comp_bunny_rr_m_4.png) | ![Part4_comp_bunny_rr_m_100](index.assets/Part4_comp_bunny_rr_m_100.png) |
 
 **sample-per-pixel rates**
 
