@@ -12,7 +12,7 @@
   <meta itemprop="description" content="Team 17 Report: Sound Propagation in Fluid Simulation https://alexdwastaken.github.io/Blog/posts/184proj/ Group members: Xize Duan, Allen Liu, Fangzhou Zhao, Phoenix Ye">
   <meta itemprop="datePublished" content="2025-04-08T00:05:27-08:00">
   <meta itemprop="dateModified" content="2025-04-08T00:05:27-08:00">
-  <meta itemprop="wordCount" content="1624">
+  <meta itemprop="wordCount" content="1730">
   <meta itemprop="keywords" content="CS184"><meta property="og:url" content="http://localhost:1313/Blog/posts/184proj/">
   <meta property="og:site_name" content="Xize&#39;s CS184 Blog">
   <meta property="og:title" content="CS184 Team17 Final Report">
@@ -41,7 +41,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/Blog\/posts\/184proj\/"
-    },"genre": "posts","keywords": "CS184","wordcount":  1624 ,
+    },"genre": "posts","keywords": "CS184","wordcount":  1730 ,
     "url": "http:\/\/localhost:1313\/Blog\/posts\/184proj\/","datePublished": "2025-04-08T00:05:27-08:00","dateModified": "2025-04-08T00:05:27-08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -84,7 +84,7 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>CS184 Team17 Final Report</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="post-meta-line"><span title="published on 2025-04-08 00:05:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-04-08">2025-04-08</time></span>&nbsp;<span title="1624 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1700 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>8 minutes</span>&nbsp;</div>
+      Anonymous</span></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="post-meta-line"><span title="published on 2025-04-08 00:05:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-04-08">2025-04-08</time></span>&nbsp;<span title="1730 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1800 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>9 minutes</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -107,8 +107,10 @@
         <li><a href="#videos">Videos</a></li>
         <li><a href="#audio">Audio</a></li>
         <li><a href="#optimization-performance">Optimization Performance</a></li>
+        <li><a href="#discussion">Discussion</a></li>
       </ul>
     </li>
+    <li><a href="#key-references">Key References</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><h2 id="team-17-report-sound-propagation-in-fluid-simulation" class="heading-element"><span>Team 17 Report: Sound Propagation in Fluid Simulation</span>
@@ -196,7 +198,10 @@ $$</p>
   <a href="#videos" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><table>
+</h3><blockquote>
+<p>We used google drive to host the videos. In case the videos went missing, please visit our backup link:</p>
+<p><a href="https://drive.google.com/drive/folders/1g4kHaNwtah7mQglRQMfnQPFjXXyqgHAI?usp=share_link"target="_blank" rel="external nofollow noopener noreferrer">https://drive.google.com/drive/folders/1g4kHaNwtah7mQglRQMfnQPFjXXyqgHAI?usp=share_link</a></p></blockquote>
+<table>
   <thead>
       <tr>
           <th>Fluid simulation only - Different density diffuse together</th>
@@ -292,6 +297,22 @@ $$</p>
   </a>
 </h3><p>We have to point out this optimization is <strong>only done on the calculations, not the visualizations</strong>! We can run the pure simulation without visualization very efficiently, but we did not optimize the performance of matplotlib (which is not the goal in our original proposal - we focus on simultation, not rendering). The numbers in the graph below are measured with matplotlib off.</p>
 <p><img loading="lazy" src="/Blog/posts/184proj/index.assets/AD_4nXdF_TVlVIflmgLORZ-n7lS96iugcxnodCRUKoPHSJh02GkAC0RQ9b-M_Ezz5YtB7mnNNsqrYFEn3YwAQWvoHIJWxcTC9pt2vy51kCYbFBnewFzNF9fZLOD5EVzyLXY8_Uf-9yWZLQ.png" alt="Performance Compatison" srcset="/Blog/posts/184proj/index.assets/AD_4nXdF_TVlVIflmgLORZ-n7lS96iugcxnodCRUKoPHSJh02GkAC0RQ9b-M_Ezz5YtB7mnNNsqrYFEn3YwAQWvoHIJWxcTC9pt2vy51kCYbFBnewFzNF9fZLOD5EVzyLXY8_Uf-9yWZLQ.png?size=small, /Blog/posts/184proj/index.assets/AD_4nXdF_TVlVIflmgLORZ-n7lS96iugcxnodCRUKoPHSJh02GkAC0RQ9b-M_Ezz5YtB7mnNNsqrYFEn3YwAQWvoHIJWxcTC9pt2vy51kCYbFBnewFzNF9fZLOD5EVzyLXY8_Uf-9yWZLQ.png?size=medium 1.5x, /Blog/posts/184proj/index.assets/AD_4nXdF_TVlVIflmgLORZ-n7lS96iugcxnodCRUKoPHSJh02GkAC0RQ9b-M_Ezz5YtB7mnNNsqrYFEn3YwAQWvoHIJWxcTC9pt2vy51kCYbFBnewFzNF9fZLOD5EVzyLXY8_Uf-9yWZLQ.png?size=large 2x" data-title="Performance Compatison" style="--width: 1600px;--aspect-ratio: 1600 / 1280;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<h3 id="discussion" class="heading-element"><span>Discussion</span>
+  <a href="#discussion" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h2 id="key-references" class="heading-element"><span>Key References</span>
+  <a href="#key-references" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p>We did read a lot of blogs, but here are the major ones that we actually looked in-depth or actually used. We forgot to keep track of everything :(</p>
+<p>ChatGPT is involved on suggesting effective references and we used them to understant concepts more easily.</p></blockquote>
+<p>&ldquo;Stable Fluids&rdquo; by Jos Stam (1999)</p>
+<p>“<a href="https://shahriyarshahrabi.medium.com/gentle-introduction-to-fluid-simulation-for-programmers-and-technical-artists-7c0045c40bac"target="_blank" rel="external nofollow noopener noreferrer">Gentle Introduction to Realtime Fluid Simulation for Programmers and Technical Artists</a>” by Shahriar Shahrabi</p>
+<p>Turbulence: the filtering approach by Germano, M.</p>
+<p>CS184 slides extra content on fluid simulation</p>
+<p>Wikipedia wave equation <a href="https://en.wikipedia.org/wiki/Wave_equation"target="_blank" rel="external nofollow noopener noreferrer">https://en.wikipedia.org/wiki/Wave_equation</a></p>
 </div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">

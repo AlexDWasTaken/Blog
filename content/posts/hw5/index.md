@@ -115,15 +115,9 @@ For us, none of the members of our group were very familiar with optimization al
 
 ### Videos
 
-> We used google drive to host the videos. In case the videos went missing, please visit
+> We used google drive to host the videos. In case the videos went missing, please visit our backup link:
 >
-> video_backup/Fluidsimonly_Differnt_Density.mov
->
-> video_backup/Fluidsimonly_Sound_Interactive.mov
->
-> Video_backup/Full_simulation.mov
->
-> video_backup/Pure Sound Sim.mov
+> https://drive.google.com/drive/folders/1g4kHaNwtah7mQglRQMfnQPFjXXyqgHAI?usp=share_link
 
 | Fluid simulation only - Different density diffuse together   |
 | ------------------------------------------------------------ |
@@ -168,3 +162,24 @@ So distorted that you can only here the drums with reverb!
 We have to point out this optimization is **only done on the calculations, not the visualizations**! We can run the pure simulation without visualization very efficiently, but we did not optimize the performance of matplotlib (which is not the goal in our original proposal - we focus on simultation, not rendering). The numbers in the graph below are measured with matplotlib off.
 
 ![Performance Compatison](index.assets/AD_4nXdF_TVlVIflmgLORZ-n7lS96iugcxnodCRUKoPHSJh02GkAC0RQ9b-M_Ezz5YtB7mnNNsqrYFEn3YwAQWvoHIJWxcTC9pt2vy51kCYbFBnewFzNF9fZLOD5EVzyLXY8_Uf-9yWZLQ.png)
+
+### Discussion
+
+
+
+## Key References
+
+> We did read a lot of blogs, but here are the major ones that we actually looked in-depth or actually used. We forgot to keep track of everything :(
+>
+> ChatGPT is involved on suggesting effective references and we used them to understant concepts more easily.
+
+"Stable Fluids" by Jos Stam (1999)
+
+“[Gentle Introduction to Realtime Fluid Simulation for Programmers and Technical Artists](https://shahriyarshahrabi.medium.com/gentle-introduction-to-fluid-simulation-for-programmers-and-technical-artists-7c0045c40bac)” by Shahriar Shahrabi
+
+Turbulence: the filtering approach by Germano, M.
+
+CS184 slides extra content on fluid simulation
+
+Wikipedia wave equation https://en.wikipedia.org/wiki/Wave_equation
+
