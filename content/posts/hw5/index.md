@@ -115,6 +115,16 @@ For us, none of the members of our group were very familiar with optimization al
 
 ### Videos
 
+> We used google drive to host the videos. In case the videos went missing, please visit
+>
+> video_backup/Fluidsimonly_Differnt_Density.mov
+>
+> video_backup/Fluidsimonly_Sound_Interactive.mov
+>
+> Video_backup/Full_simulation.mov
+>
+> video_backup/Pure Sound Sim.mov
+
 | Fluid simulation only - Different density diffuse together   |
 | ------------------------------------------------------------ |
 | <iframe src="https://drive.google.com/file/d/1zEQvjM4EHcQ6nR_4Rmw-FLZvQQcEyhi6/preview" width="640" height="360"></iframe> |
