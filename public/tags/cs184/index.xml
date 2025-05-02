@@ -6,8 +6,16 @@
     <description>Xize&#39;s CS184 Blog</description>
     <generator>Hugo 0.143.1 &amp; FixIt v0.3.17-8b402129</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Apr 2025 00:05:27 -0800</lastBuildDate>
+    <lastBuildDate>Fri, 02 May 2025 00:05:27 -0800</lastBuildDate>
     <atom:link href="http://localhost:1313/Blog/tags/cs184/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CS184 HW5 Writeup</title>
+      <link>http://localhost:1313/Blog/posts/189proj/</link>
+      <pubDate>Fri, 02 May 2025 00:05:27 -0800</pubDate>
+      <guid>http://localhost:1313/Blog/posts/189proj/</guid>
+      <category domain="http://localhost:1313/Blog/categories/cs184/">CS184</category>
+      <description>&lt;h2 id=&#34;homework-4-clothism&#34; class=&#34;heading-element&#34;&gt;&lt;span&gt;Homework 4: Clothism&lt;/span&gt;&#xA;  &lt;a href=&#34;#homework-4-clothism&#34; class=&#34;heading-mark&#34;&gt;&#xA;    &lt;svg class=&#34;octicon octicon-link&#34; viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://alexdwastaken.github.io/Blog/posts/189proj/&#34;target=&#34;_blank&#34; rel=&#34;external nofollow noopener noreferrer&#34;&gt;https://alexdwastaken.github.io/Blog/posts/189proj/&lt;/a&gt;&#xA;&lt;strong&gt;Group members: Xize Duan, Allen Liu, Fangzhou Zhao, Phoenix Ye&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>CS184 HW4 Writeup</title>
       <link>http://localhost:1313/Blog/posts/189hw4/</link>

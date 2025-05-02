@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en-us">
+  <head><script src="/Blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Blog/livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>CS184 Team17 Final Report - Xize&#39;s CS184 Blog</title><meta name="author" content="">
+<meta name="description" content="Team 17 Report: Sound Propagation in Fluid Simulation https://alexdwastaken.github.io/Blog/posts/184proj/ Group members: Xize Duan, Allen Liu, Fangzhou Zhao, Phoenix Ye
+"><meta name="keywords" content='CS184'>
+  <meta itemprop="name" content="CS184 Team17 Final Report">
+  <meta itemprop="description" content="Team 17 Report: Sound Propagation in Fluid Simulation https://alexdwastaken.github.io/Blog/posts/184proj/ Group members: Xize Duan, Allen Liu, Fangzhou Zhao, Phoenix Ye">
+  <meta itemprop="datePublished" content="2025-04-08T00:05:27-08:00">
+  <meta itemprop="dateModified" content="2025-04-08T00:05:27-08:00">
+  <meta itemprop="wordCount" content="1624">
+  <meta itemprop="keywords" content="CS184"><meta property="og:url" content="http://localhost:1313/Blog/posts/184proj/">
+  <meta property="og:site_name" content="Xize&#39;s CS184 Blog">
+  <meta property="og:title" content="CS184 Team17 Final Report">
+  <meta property="og:description" content="Team 17 Report: Sound Propagation in Fluid Simulation https://alexdwastaken.github.io/Blog/posts/184proj/ Group members: Xize Duan, Allen Liu, Fangzhou Zhao, Phoenix Ye">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-08T00:05:27-08:00">
+    <meta property="article:modified_time" content="2025-04-08T00:05:27-08:00">
+    <meta property="article:tag" content="CS184">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CS184 Team17 Final Report">
+  <meta name="twitter:description" content="Team 17 Report: Sound Propagation in Fluid Simulation https://alexdwastaken.github.io/Blog/posts/184proj/ Group members: Xize Duan, Allen Liu, Fangzhou Zhao, Phoenix Ye">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/Blog/posts/184proj/" title="CS184 Team17 Final Report - Xize&#39;s CS184 Blog" /><link rel="prev" type="text/html" href="http://localhost:1313/Blog/posts/189hw3/" title="CS184 HW3 Writeup" /><link rel="next" type="text/html" href="http://localhost:1313/Blog/posts/189hw4/" title="CS184 HW4 Writeup" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/Blog/posts/184proj/index.md" title="CS184 Team17 Final Report - Xize's CS184 Blog"><link rel="stylesheet" href="/Blog/css/style.min.css"><link rel="preload" href="/Blog/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/Blog/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/Blog/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/Blog/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "CS184 Team17 Final Report",
+    "inLanguage": "en-us",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/Blog\/posts\/184proj\/"
+    },"genre": "posts","keywords": "CS184","wordcount":  1624 ,
+    "url": "http:\/\/localhost:1313\/Blog\/posts\/184proj\/","datePublished": "2025-04-08T00:05:27-08:00","dateModified": "2025-04-08T00:05:27-08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Author"
+      },"description": ""
+  }
+  </script><script src="/Blog/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/Blog/" title="Xize&#39;s CS184 Blog"><span class="header-title-text">Xize&#39;s CS184 Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/Blog/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a class="menu-link" href="/Blog/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a class="menu-link" href="/Blog/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/Blog/" title="Xize&#39;s CS184 Blog"><span class="header-title-text">Xize&#39;s CS184 Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="menu-item"><a class="menu-link" href="/Blog/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item"><a class="menu-link" href="/Blog/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item"><a class="menu-link" href="/Blog/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>CS184 Team17 Final Report</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      Anonymous</span></span><span class="post-included-in">&nbsp;included in <a href="/Blog/categories/cs184/" class="post-category" title="Category - CS184"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> CS184</a></span></div><div class="post-meta-line"><span title="published on 2025-04-08 00:05:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-04-08">2025-04-08</time></span>&nbsp;<span title="1624 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1700 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>8 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#members-and-contribution">Members and Contribution</a></li>
+    <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#technical-approach">Technical Approach</a>
+      <ul>
+        <li><a href="#fluid-and-sound-simulation-xize-duan">Fluid and sound simulation (Xize Duan)</a></li>
+        <li><a href="#how-fluid-and-sound-influence-each-other-xize-duan">How fluid and sound influence each other (Xize Duan)</a></li>
+        <li><a href="#visualization-phoenix-ye">Visualization (Phoenix Ye)</a></li>
+        <li><a href="#optimization-allen-liu-fangzhou-zhao">Optimization (Allen Liu, Fangzhou Zhao)</a></li>
+      </ul>
+    </li>
+    <li><a href="#results">Results</a>
+      <ul>
+        <li><a href="#videos">Videos</a></li>
+        <li><a href="#audio">Audio</a></li>
+        <li><a href="#optimization-performance">Optimization Performance</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="team-17-report-sound-propagation-in-fluid-simulation" class="heading-element"><span>Team 17 Report: Sound Propagation in Fluid Simulation</span>
+  <a href="#team-17-report-sound-propagation-in-fluid-simulation" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p><a href="https://alexdwastaken.github.io/Blog/posts/184proj/"target="_blank" rel="external nofollow noopener noreferrer">https://alexdwastaken.github.io/Blog/posts/184proj/</a>
+<strong>Group members: Xize Duan, Allen Liu, Fangzhou Zhao, Phoenix Ye</strong></p>
+<p>Please read the online version for the best experience.</p></blockquote>
+<h2 id="members-and-contribution" class="heading-element"><span>Members and Contribution</span>
+  <a href="#members-and-contribution" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Where we started: an empty project folder.</p>
+<p>Xize Duan: Main Algorithm / Python Prototyping</p>
+<p>Fangzhou Zhao: Algorithm Optimization</p>
+<p>Allen Liu: Algorithm Optimization</p>
+<p>Phoenix Ye: Visualization</p>
+<h2 id="abstract" class="heading-element"><span>Abstract</span>
+  <a href="#abstract" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>This project presents an integrated simulation system for modeling the propagation of sound waves through fluid environments. We developed a fluid simulation based on the Navier-Stokes equations alongside a wave equation solver, enabling us to study their mutual interactions. The sound source is modeled as a thin oscillating object that exerts force on the fluid, capturing how sound influences fluid motion. Conversely, fluid perturbations are incorporated into the wave simulation to reflect how fluid dynamics affect sound propagation. The entire algorithm is accelerated using Apple GPUs. The final system visualizes the velocity field, fluid pressure field, and sound pressure field, and is capable of reading WAV files and simulating how they would sound after traveling through a 2D fluid-filled box.</p>
+<h2 id="technical-approach" class="heading-element"><span>Technical Approach</span>
+  <a href="#technical-approach" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="fluid-and-sound-simulation-xize-duan" class="heading-element"><span>Fluid and sound simulation (Xize Duan)</span>
+  <a href="#fluid-and-sound-simulation-xize-duan" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>For fluid simulation, we follow the implementation of the legendary paper &ldquo;Stable Fluids&rdquo; by Jos Stam (1999) and the blog “<a href="https://shahriyarshahrabi.medium.com/gentle-introduction-to-fluid-simulation-for-programmers-and-technical-artists-7c0045c40bac"target="_blank" rel="external nofollow noopener noreferrer">Gentle Introduction to Realtime Fluid Simulation for Programmers and Technical Artists</a>” by Shahriar Shahrabi. The idea is to realize the navier-stokes equation:
+$$
+\frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla)\mathbf{u} = -\frac{1}{\rho} \nabla p + \nu \nabla^2 \mathbf{u} + \mathbf{f}
+$$</p>
+<p>$$
+\nabla \cdot \mathbf{u} = 0
+$$</p>
+<p>in a uniform fluid grid. They are solved on a uniform grid by breaking the update process into three main steps for the velocity field:</p>
+<ol>
+<li><strong>Diffuse</strong> – Simulate viscosity by spreading velocity across neighboring cells.</li>
+<li><strong>Project</strong> – Enforce incompressibility by making the velocity field divergence-free.</li>
+<li><strong>Advect</strong> – Move velocity along the current flow to simulate transport.</li>
+</ol>
+<p>For the density (or scalar) field, we apply only diffuse and advect steps, as it does not require projection. We used the backward euler method for fluid simulation to enforce stability. Some steps require solving a sparse linear system (for example, when solving the possession equation for pressure), and we used a numerical method called Jacobi iteration to solve these.</p>
+<p>For sound simulation, we implemented the wave equation in a uniform grid. This is easier than what we have thought.
+$$
+\frac{\partial<sup>2 u}{\partial t</sup>2} = c<sup>2 \nabla</sup>2 u
+$$</p>
+<h3 id="how-fluid-and-sound-influence-each-other-xize-duan" class="heading-element"><span>How fluid and sound influence each other (Xize Duan)</span>
+  <a href="#how-fluid-and-sound-influence-each-other-xize-duan" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>First, we need to think about how sound affects the fluid. We adopted the suggestions taken in the proposal feedback to simulate an oscillating object in the middle of the fluid. We selected a thin area of the fluid and exerted force based on F=ma, where a is calculated by sound sample rate and amplitude. We visualized the pressure change and “sonified” pressures at different points and made sure the simulation worked correctly.</p>
+<p>Then we need to think about how the fluid affects the sound. Through some research and help of LLMs, we found the key is to calculate what&rsquo;s called the “pressure perturbation” which generates sound internally in a moving liquid. There are different ways like spatial filtering, temporal-spatial filtering, Helmholtz decomposition and so on, but we went with spatial filtering due to its simplicity (following Turbulence: the filtering approach by Germano, M.). The idea is to filter the fluid pressure field with a gaussian kernel, then subtract from the unfiltered kernel as the perturbation. We then incorporate the perturbation-generated sound back into the wave-equation based sound simulation.</p>
+<h3 id="visualization-phoenix-ye" class="heading-element"><span>Visualization (Phoenix Ye)</span>
+  <a href="#visualization-phoenix-ye" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>We laid out four Matplotlib axes in a 2x2 grid and used <em>imshow</em> to render the density, fluid pressure, and sound pressure field with fixed color maps and value ranges so that color scales remain consistent over time. The velocity field is drawn once with a quiver at a constant scale to avoid per-frame autoscaling. We created two smoothing buffers and in each update() call we advance the simulation, apply exponential smooth to the raw u,v arrays, and then call quiver.set_UVC() together with im.set_array(), pressure_im.set_array(), sound_im.set_array(), and fps_text.set_text() to refresh the visuals and a performance overlap (stay time, FPS, max velocity, gravity).</p>
+<p>Mouse-click and drag events are bound to callbacks that compute a Gaussian-falloff impulse centered on the click location and add it into the velocity fields, allowing interactive disturbance. Finally, FuncAnimation drives the whole animation by only redrawing the changed artists each frame.</p>
+<h3 id="optimization-allen-liu-fangzhou-zhao" class="heading-element"><span>Optimization (Allen Liu, Fangzhou Zhao)</span>
+  <a href="#optimization-allen-liu-fangzhou-zhao" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>The problems we encountered in this project were more a matter of code performance than algorithmic difficulties. Our earliest versions of the code were built primarily in python, and each step of the simulation process exists in its own NumPy routine-advect.py, diffuse.py, and project.py, respectively. In addition, the Poisson solve for pressure was wrapped in a Numba decorator that asked the JIT to run the inner loops in compiled form. Because the grids were genuine numpy.ndarray objects, the interpreter still had to manage Python objects, acquire and release the Global Interpreter Lock, and jump in and out of C every time one stage handed its result to the next. These problems largely affected the performance of our code, especially in large grid sizes. In order to claw back our code performance, we tried 2 of the following optimization methods and came up with some performance improvements visualizations.</p>
+<p><strong>Porting the exact same logic to C++:</strong></p>
+<ul>
+<li>Optimization Implementation: Instead of two-dimensional NumPy arrays, we used a single std::vector<float> for each field and computed the one-dimensional offset with a tiny inline helper. All of the heavy double loops were preceded by an OpenMP pragma that collapses the two indices and lets the runtime parcel iterations out to the ten CPU cores of our M1 Pro. The algorithm, boundary handling and solver iteration count never changed; what did change was the cost per iteration.</li>
+<li>Performance Improvements: On the same 640 × 640 case the C++ build now delivers about 41 FPS, a 5.6-fold speed-up over Python, and it holds roughly 50 FPS at 512 × 512 where the pure-Python code is already well below the 20-frame mark.</li>
+</ul>
+<p><strong>Transfering the kernels to the GPU through Apple’s Metal API:</strong></p>
+<ul>
+<li>Optimization Implementation: Each phase becomes its own compute shader: a thread receives its grid coordinates from the GPU dispatch header, checks whether the cell is on the boundary, and then performs the same arithmetic the CPU loop used to do. The host code written in Objective-C++ allocates the velocity, pressure and density buffers once in shared memory, launches the appropriate shader, and repeats the launch twenty times when an iterative solution is required. With thousands of GPU lanes working in parallel, the frame time is dominated by a fixed kernel-launch overhead rather than by the size of the grid.</li>
+<li>Performance Improvements: As the red squares in the following figure 1 indicate, the Metal version stays near 80–90 FPS from 128 × 128 all the way to 640 × 640, which translates to a 10.9 × acceleration over Python and nearly 2 × over the multi-threaded C++ code on the largest test. Only on the tiniest mesh does the GPU fall slightly behind the CPU because the launch cost outweighs the scant arithmetic on so few cells.</li>
+</ul>
+<p><strong>Lessons Learned during the optimization process:</strong></p>
+<p>For us, none of the members of our group were very familiar with optimization algorithms. In the process of completing the optimization part of this project, most of the content is the result of our continuous exploration. How to use OpenMP, how to port python programs to C++, and shader-related optimization logic were definitely some of the additional things we learned besides the fluid simulation algorithm. But more importantly, it also made us realize that in the process of completing an open project, there is a high probability that we will encounter problems that we never learned before and don&rsquo;t know how to deal with, and how to deal with these contents outside of the course is the more meaningful thing that we have learned.</p>
+<h2 id="results" class="heading-element"><span>Results</span>
+  <a href="#results" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="videos" class="heading-element"><span>Videos</span>
+  <a href="#videos" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>Fluid simulation only - Different density diffuse together</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><iframe src="https://drive.google.com/file/d/1zEQvjM4EHcQ6nR_4Rmw-FLZvQQcEyhi6/preview" width="640" height="360"></iframe></td>
+      </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+      <tr>
+          <th>Full simulation only - With a oscillating sound sorce in the middle and mouse interaction</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><iframe src="https://drive.google.com/file/d/1c0CcOC0aApM5i4DSn9zuKmGoPZ3cF8N4/preview" width="640" height="360"></iframe></td>
+      </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+      <tr>
+          <th>Sound simulation only - To demonestrate our wave equation works properly</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><iframe src="https://drive.google.com/file/d/1TvQDxz7H5RuSBOihGQtz9GrvqcWFrygR/preview" width="640" height="360"></iframe></td>
+      </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+      <tr>
+          <th>Full Simulation - Sound and fluid, everything together!</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><iframe src="https://drive.google.com/file/d/1ZxmWbSlN7DG4j1yE-zgPk_sW5x0I5SxQ/preview" width="640" height="360"></iframe></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="audio" class="heading-element"><span>Audio</span>
+  <a href="#audio" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>We are working with sound simulation - why not try to &ldquo;sonify&rdquo; the liquid pressure field and sound pressure field?</p>
+<p>(It turns out the simulation only preserve little low frequency detail and distorted all high frequency detail - we will explain why)</p>
+<p><strong>Audio 1: &ldquo;One Two Three Four Five&rdquo;</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Original Audio</th>
+          <th>Liquid Pressure Field (Corresponds to the lower left graph in the full simulation above)</th>
+          <th>Sound Pressure Field (Corresponds to the lower right graph in the full simulation above)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><audio controls><br/>  <source src="audios/12345/egaudio.wav" type="audio/wav"><br/>  Your browser does not support the audio element.<br/></audio></td>
+          <td><audio controls><br/>  <source src="audios/12345/output.wav" type="audio/wav"><br/>  Your browser does not support the audio element.<br/></audio></td>
+          <td><audio controls><br/>  <source src="audios/12345/foutput.wav" type="audio/wav"><br/>  Your browser does not support the audio element.<br/></audio></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Audio 2: &ldquo;This is team 17 from CS 184&rdquo;</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Original Audio</th>
+          <th>Liquid Pressure Field (Corresponds to the lower left graph in the full simulation above)</th>
+          <th>Sound Pressure Field (Corresponds to the lower right graph in the full simulation above)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><audio controls><br/>  <source src="audios/t17/t172.wav" type="audio/wav"><br/>  Your browser does not support the audio element.<br/></audio></td>
+          <td><audio controls><br/>  <source src="audios/t17/output.wav" type="audio/wav"><br/>  Your browser does not support the audio element.<br/></audio></td>
+          <td><audio controls><br/>  <source src="audios/t17/foutput.wav" type="audio/wav"><br/>  Your browser does not support the audio element.<br/></audio></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Audio 3: &ldquo;Never gonna give you up (copyright strike-proof version)&rdquo;</strong></p>
+<p>So distorted that you can only here the drums with reverb!</p>
+<h3 id="optimization-performance" class="heading-element"><span>Optimization Performance</span>
+  <a href="#optimization-performance" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>We have to point out this optimization is <strong>only done on the calculations, not the visualizations</strong>! We can run the pure simulation without visualization very efficiently, but we did not optimize the performance of matplotlib (which is not the goal in our original proposal - we focus on simultation, not rendering). The numbers in the graph below are measured with matplotlib off.</p>
+<p><img loading="lazy" src="/Blog/posts/184proj/index.assets/AD_4nXdF_TVlVIflmgLORZ-n7lS96iugcxnodCRUKoPHSJh02GkAC0RQ9b-M_Ezz5YtB7mnNNsqrYFEn3YwAQWvoHIJWxcTC9pt2vy51kCYbFBnewFzNF9fZLOD5EVzyLXY8_Uf-9yWZLQ.png" alt="Performance Compatison" srcset="/Blog/posts/184proj/index.assets/AD_4nXdF_TVlVIflmgLORZ-n7lS96iugcxnodCRUKoPHSJh02GkAC0RQ9b-M_Ezz5YtB7mnNNsqrYFEn3YwAQWvoHIJWxcTC9pt2vy51kCYbFBnewFzNF9fZLOD5EVzyLXY8_Uf-9yWZLQ.png?size=small, /Blog/posts/184proj/index.assets/AD_4nXdF_TVlVIflmgLORZ-n7lS96iugcxnodCRUKoPHSJh02GkAC0RQ9b-M_Ezz5YtB7mnNNsqrYFEn3YwAQWvoHIJWxcTC9pt2vy51kCYbFBnewFzNF9fZLOD5EVzyLXY8_Uf-9yWZLQ.png?size=medium 1.5x, /Blog/posts/184proj/index.assets/AD_4nXdF_TVlVIflmgLORZ-n7lS96iugcxnodCRUKoPHSJh02GkAC0RQ9b-M_Ezz5YtB7mnNNsqrYFEn3YwAQWvoHIJWxcTC9pt2vy51kCYbFBnewFzNF9fZLOD5EVzyLXY8_Uf-9yWZLQ.png?size=large 2x" data-title="Performance Compatison" style="--width: 1600px;--aspect-ratio: 1600 / 1280;background: url(/Blog/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2025-04-08 00:05:27">Updated on 2025-04-08&nbsp;</span>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/Blog/posts/184proj/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/Blog/posts/184proj/" data-title="CS184 Team17 Final Report" data-hashtags="CS184"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/Blog/posts/184proj/" data-hashtag="CS184"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/Blog/posts/184proj/" data-title="CS184 Team17 Final Report"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/Blog/tags/cs184/" class="post-tag" title="Tags - CS184">CS184</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/Blog/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/Blog/posts/189hw3/" class="post-nav-item" rel="prev" title="CS184 HW3 Writeup"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>CS184 HW3 Writeup</a><a href="/Blog/posts/189hw4/" class="post-nav-item" rel="next" title="CS184 HW4 Writeup">CS184 HW4 Writeup<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.143.1"><img class="hugo-icon" src="/Blog/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.17-8b402129"><img class="fixit-icon" src="/Blog/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="/Blog/"></a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/Blog/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/Blog/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/Blog/lib/cookieconsent/cookieconsent.min.css"><script src="/Blog/lib/sharer/sharer.min.js" async defer></script><script src="/Blog/lib/katex/katex.min.js" defer></script><script src="/Blog/lib/katex/auto-render.min.js" defer></script><script src="/Blog/lib/katex/mhchem.min.js" defer></script><script src="/Blog/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","editLockTitle":"Lock editable code block","editUnLockTitle":"Unlock editable code block","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"version":"v0.3.17-8b402129"};console.log('Page config:', window.config);</script><script src="/Blog/js/theme.min.js" defer></script></body>
+</html>
