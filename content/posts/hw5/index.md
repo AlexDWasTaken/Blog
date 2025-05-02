@@ -78,8 +78,9 @@ For the density (or scalar) field, we apply only diffuse and advect steps, as it
 
 For sound simulation, we implemented the wave equation in a uniform grid. This is easier than what we have thought.
 $$
-\frac{\partial^2 u}{\partial t^2} = c^2 \nabla^2 u
+\frac{\partial\^2 u}{\partial t\^2} = c\^2 \nabla\^2 u
 $$
+where $c$ is selected arbitrarily.
 
 ### How fluid and sound influence each other (Xize Duan)
 
@@ -137,6 +138,8 @@ For us, none of the members of our group were very familiar with optimization al
 
 ### Audio
 
+**DO NOT LISTEN WITH HEADPHONES ON!**
+
 We are working with sound simulation - why not try to "sonify" the liquid pressure field and sound pressure field?
 
 (It turns out the simulation only preserve little low frequency detail and distorted all high frequency detail - we will explain why)
@@ -155,7 +158,7 @@ We are working with sound simulation - why not try to "sonify" the liquid pressu
 
 **Audio 3: "Never gonna give you up (copyright strike-proof version) @ 44100Hz"**
 
-So distorted that you can only hear the drums with reverb!
+So distorted that you can only hear the drums with reverb! If you turn up the volume and listen closely you can still hear a little bit of higher frequencies.
 
 | Original Audio                | Liquid Pressure Field (Corresponds to the lower left graph in the full simulation above) | Sound Pressure Field (Corresponds to the lower right graph in the full simulation above) |
 | ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
