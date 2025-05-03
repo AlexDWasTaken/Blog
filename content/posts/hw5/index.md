@@ -35,11 +35,14 @@ message:
 # Team 17 Report: Sound Propagation in Fluid Simulation
 
 > https://alexdwastaken.github.io/Blog/posts/184proj/
+> 
 > **Group members: Xize Duan, Allen Liu, Fangzhou Zhao, Phoenix Ye**
 >
 > Please read the online version for the best experience.
 >
-> The content is equivalent to around 3 pages of google doc.
+> The content is equivalent to around 3.5 pages of google doc.
+>
+> Reading guide: this report is too long but we don't want to delete anything. We recommend start straight at "Results" section, then selective read the rest of the report.
 
 ## Members and Contribution
 
