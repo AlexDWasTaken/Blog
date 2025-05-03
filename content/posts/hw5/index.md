@@ -40,8 +40,6 @@ message:
 >
 > Please read the online version for the best experience.
 >
-> The content is equivalent to around 3.5 pages of google doc.
->
 > Reading guide: this report is too long but we don't want to delete anything. We recommend start straight at "Results" section, then selective read the rest of the report.
 
 ## Video Presentation
