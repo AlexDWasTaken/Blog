@@ -142,6 +142,8 @@ For us, none of the members of our group were very familiar with optimization al
 
 We are working with sound simulation - why not try to "sonify" the liquid pressure field and sound pressure field?
 
+The receiver is placed at $(u, v) = (0.75, 0.5)$. The output sound is normalized by its maximum volume.
+
 (It turns out the simulation only preserve little low frequency detail and distorted all high frequency detail - we will explain why)
 
 **Audio 1: "One Two Three Four Five"**  @ 48000Hz
