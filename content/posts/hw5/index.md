@@ -38,6 +38,8 @@ message:
 > **Group members: Xize Duan, Allen Liu, Fangzhou Zhao, Phoenix Ye**
 >
 > Please read the online version for the best experience.
+>
+> The content is equivalent to around 3 pages of google doc.
 
 ## Members and Contribution
 
