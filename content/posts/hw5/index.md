@@ -32,7 +32,7 @@ message:
 ---
 
 
-# Team 17 Report: Sound Propagation in Fluid Simulation
+# Team 19 Report: Sound Propagation in Fluid Simulation
 
 > https://alexdwastaken.github.io/Blog/posts/184proj/
 > 
